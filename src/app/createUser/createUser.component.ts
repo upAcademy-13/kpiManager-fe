@@ -9,9 +9,11 @@ import { User } from '../core/models/user';
 })
 export class CreateUserComponent implements OnInit {
   public user: User = new User();
+  
   constructor() { }
 
   ngOnInit(): void {
+    this.user.role = ""
   }
 
   submit(){
