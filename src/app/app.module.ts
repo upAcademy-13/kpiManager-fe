@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutNavBarComponent } from './layout-nav-bar/layout-nav-bar.component';
+import { LayoutFormComponent } from './layout-form/layout-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutNavBarComponent
+    LayoutNavBarComponent,
+    LayoutFormComponent
   ],
   imports: [
     BrowserModule,

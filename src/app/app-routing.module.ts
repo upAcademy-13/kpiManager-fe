@@ -1,8 +1,14 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LayoutFormComponent } from './layout-form/layout-form.component';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path:'layoutform',
+    component: LayoutFormComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
