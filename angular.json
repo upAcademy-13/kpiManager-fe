@@ -92,7 +92,6 @@
               "src/assets"
             ],
             "styles": [
-              "src/app/createUser/createUser.component.scss",
               "src/styles.scss"
             ],
             "scripts": []
