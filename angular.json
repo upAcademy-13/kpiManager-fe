@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "kpiManager": {
@@ -32,7 +32,11 @@
               "src/styles.scss",
               "node_modules/@fortawesome/fontawesome-free/css/all.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/popper.js/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -125,6 +129,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "kpiManager"
+    }
+  },
+  "defaultProject": "kpiManager",
+  "cli": {
+    "analytics": "3b7ced7f-40eb-453c-9107-bc68bedc0d5b"
+  }
 }

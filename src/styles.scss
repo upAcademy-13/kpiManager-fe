@@ -1,4 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
-body {
-    background-color: radial-gradient(#40404b, #111118) rgba(34,34,40,0.94);
+.btn-primary {
+    color: white;
+    background-color: #e46310;
+    border-color: #e46310;
+  }
+
+.btn-outline-primary {
+    color: #e46310;
+    border-color: #e46310;
+  }
+
+.btn-primary:hover{
+      background-color: #913902;
+      border-color: #913902;
+  }
+
+.btn-primary:active,
+.btn-primary:focus
+.btn-primary:visited{
+    background-color: #eca173 !important;
+    border-color: #eca173 !important;
 }
+
+.btn-outline-primary:hover{
+    background-color: #e46310;
+    border-color: #e46310;
+}
+
+.btn-outline-primary:active,
+.btn-outline-primary:focus,
+.btn-outline-primary:visited{
+    background-color:  #eca173 !important;
+    border-color:  #eca173 !important;
+}
+  
+.navbar li a:hover {
+    border-bottom: 1px solid #e46310;
+}
+
+.navbar li a:active {
+    border-bottom: 1px solid #e46310;
+}
+
+  @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
