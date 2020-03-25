@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LayoutNavBarComponent } from './layout-nav-bar.component';
 
+import { LayoutComponent } from './layout.component';
 
 const routes: Routes = [
-  { path: '', component: LayoutNavBarComponent}
+  { 
+    path: '', 
+    component: LayoutComponent 
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LayoutNavBarRoutingModule { }
+export class LayoutRoutingModule { }

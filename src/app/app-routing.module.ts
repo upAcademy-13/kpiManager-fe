@@ -11,9 +11,8 @@ const routes: Routes = [
   },
   { 
     path: 'layout', 
-    loadChildren: () => import('./layout-nav-bar/layout-nav-bar.module').then(m => m.LayoutNavBarModule),
-    canActivate: [AuthGuard]
-  },
+    loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule), 
+    canActivate: [AuthGuard] },
   {
      path: '**', 
      redirectTo: 'login' 
