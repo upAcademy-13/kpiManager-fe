@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { User } from '../core/models/user';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-user',
@@ -9,8 +10,12 @@ import { User } from '../core/models/user';
 })
 export class CreateUserComponent implements OnInit {
   public user: User = new User();
+  postData;
+  private apiUrl = '';
   
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
     this.user.role = ""
@@ -18,6 +23,12 @@ export class CreateUserComponent implements OnInit {
 
   submit(){
        console.log(this.user);
+       this.http.post<any>(this.apiUrl,this.user).subscribe(data => {
+         this.postData = data;
+       },
+       error =>{
+         this.postData= "erro";
+       });
   }
 
 }
