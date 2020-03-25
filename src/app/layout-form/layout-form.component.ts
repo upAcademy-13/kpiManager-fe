@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 
 @Component({
   selector: 'app-layout-form',
@@ -7,17 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LayoutFormComponent implements OnInit {
+
       bsInlineValue = new Date();
       bsInlineRangeValue: Date[];
-       maxDate = new Date();
+      maxDate = new Date();
+      cliente = "";
+
   constructor() { 
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
+public getValues(){
+  console.log(this.cliente);
 }
-
-
-
+   
+}

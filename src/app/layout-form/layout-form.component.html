@@ -1,16 +1,4 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css"> -->
-    <title>Hello, world!</title>
-  </head>
-  <body>
 <div class="container-100">
 <div class="central-container"> 
     <span class="contact100-form-symbol">
@@ -53,10 +41,6 @@
         <option value="3">Nuno</option>
         <option value="3">Ze Carlos</option>
         <option value="1">Manuel</option>
-
-
-        
-
     </select>
   </div>
   <div class="form-row">
@@ -68,7 +52,6 @@
         <th scope="col">Número de Interações</th> 
         <th scope="col">Cliente</th>
         <th scope="col">Tipo de Interação</th>
-
       </tr>
     </thead>
     <tbody>
@@ -77,9 +60,9 @@
         <td>Mark</td>
         <td>Pedido</td>
       </tr>
-
     </tbody>
   </table>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -96,48 +79,51 @@
           <div class="row">
 
         <div class="dropdown show col-sm">
-          <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Client</a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Cliente 1 Base de dados</a>
-            <a class="dropdown-item" href="#">Cliente 2 Base de dados</a>
-            <a class="dropdown-item" href="#">Cliente 3 Base de dados</a>
+          <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuClient" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Client</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuClient">
+            <a class="dropdown-item" value="IDClient1">Cliente 1 Base de dados</a>
+            <a class="dropdown-item" value="IDClient2">Cliente 2 Base de dados</a>
+            <a class="dropdown-item" value="IDClient3">Cliente 3 Base de dados</a>
           </div>
         </div>
+
+        {{cliente}}
+        <select name="client" [(ngModel)]="cliente" class="custom-select custom-select-lg mb-3">
+          <option selected value="">Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
 
 
         <div class="dropdown show col-sm">
-          <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Interaction List</a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Pedido</a>
-            <a class="dropdown-item" href="#">CV enviado</a>
-            <a class="dropdown-item" href="#">Entrevista</a>
-            <a class="dropdown-item" href="#">Aprovação</a>
-            <a class="dropdown-item" href="#">Proposta Aceite</a>
-            <a class="dropdown-item" href="#">Proposta Recusada</a>
-            <a class="dropdown-item" href="#">Saida</a>
-            <a class="dropdown-item" href="#">Ponto de situação</a>
-            <a class="dropdown-item" href="#">Realocação - Receber</a>
-            <a class="dropdown-item" href="#">Realocação - Dar</a>
-            <a class="dropdown-item" href="#">Reuniões Cliente</a>
-            <a class="dropdown-item" href="#">Negócio abaixo de 32%</a>
+          <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Interaction List</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuOptions">
+            <a class="dropdown-item" value="Pedido" >Pedido</a>
+            <a class="dropdown-item" value="CV enviado">CV enviado</a>
+            <a class="dropdown-item" value="Entrevist">Entrevista</a>
+            <a class="dropdown-item" value="Aprovação">Aprovação</a>
+            <a class="dropdown-item" value="Proposta Aceite">Proposta Aceite</a>
+            <a class="dropdown-item" value="Proposta Recusada">Proposta Recusada</a>
+            <a class="dropdown-item" value="Saida">Saida</a>
+            <a class="dropdown-item" value="Ponto de situação">Ponto de situação</a>
+            <a class="dropdown-item" value="Realocação - Receber">Realocação - Receber</a>
+            <a class="dropdown-item" value="Realocação - Dar">Realocação - Dar</a>
+            <a class="dropdown-item" value="Reuniões Cliente">Reuniões Cliente</a>
+            <a class="dropdown-item" value="Negócio abaixo de 32%">Negócio abaixo de 32%</a>
           </div>
         </div>
 
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" (click)="getValues()" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
 
   <div class="form-row">
     <button type="submit" class="form-btn">Enviar   <img src="assets/imagens/add-icon1.png" width="20" height="20"> </button>
@@ -146,6 +132,3 @@
 </form>
 </div>
 </div>
-
-</body>
-</html>
