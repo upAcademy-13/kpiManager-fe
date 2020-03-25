@@ -75,10 +75,12 @@
         <option value="1">Manuel</option>
 
 
+        
+
     </select>
   </div>
   <div class="form-row">
-    <button type="submit" class="form-add-btn ">Adicionar Interação   <img src="assets/imagens/add-icon1.png" width="20" height="20"> </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Add interactions <img src="assets/imagens/add-icon1.png" width="20" height="20"> </button>
   </div>
   <table class="table mt-3">
     <thead class="thead-light">
@@ -98,6 +100,63 @@
 
     </tbody>
   </table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Interaction</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+
+        <div class="dropdown show col-sm">
+          <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Client</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Cliente 1 Base de dados</a>
+            <a class="dropdown-item" href="#">Cliente 2 Base de dados</a>
+            <a class="dropdown-item" href="#">Cliente 3 Base de dados</a>
+          </div>
+        </div>
+
+
+        <div class="dropdown show col-sm">
+          <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Interaction List</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Pedido</a>
+            <a class="dropdown-item" href="#">CV enviado</a>
+            <a class="dropdown-item" href="#">Entrevista</a>
+            <a class="dropdown-item" href="#">Aprovação</a>
+            <a class="dropdown-item" href="#">Proposta Aceite</a>
+            <a class="dropdown-item" href="#">Proposta Recusada</a>
+            <a class="dropdown-item" href="#">Saida</a>
+            <a class="dropdown-item" href="#">Ponto de situação</a>
+            <a class="dropdown-item" href="#">Realocação - Receber</a>
+            <a class="dropdown-item" href="#">Realocação - Dar</a>
+            <a class="dropdown-item" href="#">Reuniões Cliente</a>
+            <a class="dropdown-item" href="#">Negócio abaixo de 32%</a>
+          </div>
+        </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 
   <div class="form-row">

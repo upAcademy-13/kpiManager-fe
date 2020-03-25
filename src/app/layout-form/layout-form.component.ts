@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './layout-form.component.html',
   styleUrls: ['./layout-form.component.scss']
 })
+
 export class LayoutFormComponent implements OnInit {
 
   constructor() { }
@@ -13,3 +14,6 @@ export class LayoutFormComponent implements OnInit {
   }
 
 }
+
+
+

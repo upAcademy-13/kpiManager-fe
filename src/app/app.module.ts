@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LayoutNavBarComponent } from './layout-nav-bar/layout-nav-bar.component';
 import { LayoutFormComponent } from './layout-form/layout-form.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
