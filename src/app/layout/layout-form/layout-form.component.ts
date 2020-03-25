@@ -11,17 +11,32 @@ export class LayoutFormComponent implements OnInit {
       bsInlineValue = new Date();
       bsInlineRangeValue: Date[];
       maxDate = new Date();
-      cliente = "";
+      selectClient: number; //id do cliente
+      selectType: number; //id do tipo de interacao
+      interactionTable=[];
+
 
   constructor() { 
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
   }
+  
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+  add(){
+    alert(this.selectClient);
+    alert(this.selectType);
+    this.interactionTable.push(this.selectClient);
+    console.log(this.interactionTable);
+  }
 
-public getValues(){
-  console.log(this.cliente);
+
+
 }
+
+
+
+
    
-}
+
