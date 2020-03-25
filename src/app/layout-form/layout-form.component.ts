@@ -6,10 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout-form.component.scss']
 })
 export class LayoutFormComponent implements OnInit {
-
-  constructor() { }
+      bsInlineValue = new Date();
+      bsInlineRangeValue: Date[];
+       maxDate = new Date();
+  constructor() { 
+    this.maxDate.setDate(this.maxDate.getDate() + 7);
+    this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
+  }
 
   ngOnInit(): void {
   }
-
 }
+  // export class DemoDatepickerInlineComponent {
+  //   bsInlineValue = new Date();
+  //   bsInlineRangeValue: Date[];
+  //   maxDate = new Date();
+   
+  //   constructor() {
+  //     this.maxDate.setDate(this.maxDate.getDate() + 7);
+  //     this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
+  //   }
+  // }

@@ -134,4 +134,25 @@ label{
   .contact100-form-symbol img {
     max-width: 49px;
   }
+
+  bs-daterangepicker-inline .theme-green .bs-datepicker-head {
+    background-color: darkorange;
+}
+
+bs-daterangepicker-inline .theme-green .bs-datepicker-body table td span.selected,
+bs-daterangepicker-inline .theme-green .bs-datepicker-body table td.selected span,
+bs-daterangepicker-inline .theme-green .bs-datepicker-body table td span[class*="select-"]:after,
+bs-daterangepicker-inline .theme-green .bs-datepicker-body table td[class*="select-"] span:after {
+  background-color: darkorange; }
+
+bs-daterangepicker-inline .theme-green .bs-datepicker-body table td.week span {
+  color: darkorange; 
+}
+bs-daterangepicker-inline .theme-green .bs-datepicker-body table td.active-week span:hover {
+    cursor: pointer;
+    background-color: darkorange;;
+    color: #fff;
+    opacity: 0.5;
+    transition: 0s; }
+
   @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
