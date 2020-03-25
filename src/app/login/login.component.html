@@ -1,0 +1,37 @@
+<div class="container text-center vertical-center">
+    <div>
+        <div>
+            <div class="row">
+                <div class="col-sm-4 col-md-6 col-lg-12">
+                    <img src="assets/imagens/logo_projecto.png" class="logo-style">
+                    <p id="title-style"><strong>KPI Manager</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-md-6 col-lg-12">
+            <div class="input-group flex-nowrap">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="addon-wrapping"><i class="fas fa-user"></i></span>
+                </div>
+                <input type="text" class="form-control input-style" placeholder="your username" aria-describedby="addon-wrapping" name="username" [(ngModel)]="user.username">
+              </div> 
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-sm-4 col-md-6 col-lg-12">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="addon-wrapping"><i class="fas fa-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control input-style" placeholder="your password" aria-describedby="addon-wrapping" name="password" [(ngModel)]="user.password">
+                  </div> 
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-md-6 col-lg-12">
+            <button class="btn btn-primary logIn-style" (click)="login()">Log In</button>
+        </div>
+    </div>
+</div>
