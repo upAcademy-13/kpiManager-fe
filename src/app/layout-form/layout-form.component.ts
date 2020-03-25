@@ -7,12 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LayoutFormComponent implements OnInit {
-
-  constructor() { }
+      bsInlineValue = new Date();
+      bsInlineRangeValue: Date[];
+       maxDate = new Date();
+  constructor() { 
+    this.maxDate.setDate(this.maxDate.getDate() + 7);
+    this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
+  }
 
   ngOnInit(): void {
   }
-
 }
 
 
