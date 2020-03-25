@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class CreateUserComponent implements OnInit {
   public user: User = new User();
   postData;
-  private apiUrl = '';
+  private apiUrl = 'http://localhost:8080/kpiManager/api/managers';
   
   constructor(
     private http: HttpClient
@@ -22,12 +22,18 @@ export class CreateUserComponent implements OnInit {
   }
 
   submit(){
+    const requestOptions: Object = {
+      /* other options here */
+      responseType: 'text'
+    }
        console.log(this.user);
-       this.http.post<any>(this.apiUrl,this.user).subscribe(data => {
+       this.http.post<any>(this.apiUrl,this.user,requestOptions).subscribe(data => {
          this.postData = "sucesso";
+         console.log(this.user);
        },
        error =>{
          this.postData= "erro";
+         console.log(error);
        });
   }
 
