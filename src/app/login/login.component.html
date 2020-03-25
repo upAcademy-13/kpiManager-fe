@@ -15,7 +15,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="addon-wrapping"><i class="fas fa-user"></i></span>
                 </div>
-                <input type="text" class="form-control input-style" placeholder="your username" aria-describedby="addon-wrapping">
+                <input type="text" class="form-control input-style" placeholder="your username" aria-describedby="addon-wrapping" name="username" [(ngModel)]="user.username">
               </div> 
         </div>
     </div>
@@ -25,13 +25,13 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="addon-wrapping"><i class="fas fa-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control input-style" placeholder="your password" aria-describedby="addon-wrapping">
+                    <input type="password" class="form-control input-style" placeholder="your password" aria-describedby="addon-wrapping" name="password" [(ngModel)]="user.password">
                   </div> 
             </div>
     </div>
     <div class="row">
         <div class="col-sm-4 col-md-6 col-lg-12">
-            <button class="btn btn-primary logIn-style" click='login()'>Log In</button>
+            <button class="btn btn-primary logIn-style" (click)="login()">Log In</button>
         </div>
     </div>
 </div>
