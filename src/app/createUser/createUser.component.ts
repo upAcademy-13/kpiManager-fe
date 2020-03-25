@@ -24,7 +24,7 @@ export class CreateUserComponent implements OnInit {
   submit(){
        console.log(this.user);
        this.http.post<any>(this.apiUrl,this.user).subscribe(data => {
-         this.postData = data;
+         this.postData = "sucesso";
        },
        error =>{
          this.postData= "erro";
