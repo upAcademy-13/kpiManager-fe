@@ -1,0 +1,58 @@
+:host{
+    background: radial-gradient(#40404b, #111118a9) rgba(34, 34, 40, 0.808);
+    color:#fff;
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+.container {
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    border: 0.5px solid white;
+    border-radius: 6px;
+    box-shadow: 0 0 40px 4px #111118;
+    background: white;
+  }
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.row {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.logo-style {
+    width: 70px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+#title-style {
+    color: #e46310;
+    font-size: x-large;
+}
+
+.input-style {
+    padding: 0 14px;
+    font-size: 13px;
+    width: 12em;
+    color: rgba(0,0,0,0.87);
+}
+
+.logIn-style {
+    background: #e46310;
+    width: 15em;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
