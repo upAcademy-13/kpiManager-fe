@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { User } from '../core/models/user';
+import { User } from '../../core/models/user';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
