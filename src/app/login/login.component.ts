@@ -22,23 +22,14 @@ export class LoginComponent implements OnInit {
     this.user.password = 'COO123';
   }
 
+  unauthorized;
   login() {
-    console.log('login', this.user);
     this.auth.login(this.user).subscribe( res => {
-      console.log('resultado', res);
+      this.router.navigate(['layout']);
+    }, 
+    error => {
+      this.unauthorized = "Username ou password incorrecta!";
     });
-
-/*     this.http.post<any>(this.apiUrl,this.user).subscribe(data => {
-      this.postData = "sucesso";
-      console.log(this.user);
-    },
-    error =>{
-      this.postData= "erro";
-      console.log(error);
-    }); */
-
-    this.router.navigate(['layout']);
-    
   }
 
 }
