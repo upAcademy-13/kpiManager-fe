@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { User } from '../../core/models/user';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -11,10 +12,11 @@ import { HttpClient } from '@angular/common/http';
 export class CreateUserComponent implements OnInit {
   public user: User = new User();
   postData;
-  private apiUrl = 'http://localhost:8080/kpiManager/api/managers';
+  private apiUrl = 'http://localhost:8080/kpiManager/api/users';
   
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -26,14 +28,12 @@ export class CreateUserComponent implements OnInit {
       /* other options here */
       responseType: 'text'
     }
-       console.log(this.user);
        this.http.post<any>(this.apiUrl,this.user,requestOptions).subscribe(data => {
          this.postData = "sucesso";
-         console.log(this.user);
+         this.router.navigate(['layout']);
        },
        error =>{
          this.postData= "erro";
-         console.log(error);
        });
   }
 
