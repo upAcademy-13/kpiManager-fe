@@ -24,9 +24,19 @@ export class LoginComponent implements OnInit {
 
   login() {
     console.log('login', this.user);
-   /*  this.auth.login(this.user).subscribe( res => {
+    this.auth.login(this.user).subscribe( res => {
       console.log('resultado', res);
+    });
+
+/*     this.http.post<any>(this.apiUrl,this.user).subscribe(data => {
+      this.postData = "sucesso";
+      console.log(this.user);
+    },
+    error =>{
+      this.postData= "erro";
+      console.log(error);
     }); */
+
     this.router.navigate(['layout']);
     
   }

@@ -8,15 +8,28 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
   private currentUser: User = new User();
- /*  private apiUrl = 'http://localhost:4200'; */  /* INTRODUZIR URL API */
+  private apiUrl = 'http://localhost:8080/kpiManager/api/users/auth?filter={"where":{"username":"COO"}}';
   
   constructor(
     private http: HttpClient
   ) { }
 
-/*   public login (user: User) {
-    return this.http.get(this.apiUrl + '?filter={"where":{"username":"COO"}}');  /* VAI RETORNAR O OBJECT USER GUARDADO NA BASE DA DADOS */
-/*   } */
+  postData;
+  public login (user: User) {
+    const requestOptions: Object = {
+      responseType: 'text'
+    }
+    return this.http.get(this.apiUrl, requestOptions);
+
+/*     return this.http.post<any>(this.apiUrl, user, requestOptions).subscribe(data => {
+      this.postData = "sucesso";
+      console.log(user);
+    },
+    error =>{
+      this.postData= "erro";
+      console.log(error);
+    }); */
+  }
 
   public setCurrentUser(user: User) {
     this.currentUser = user;
