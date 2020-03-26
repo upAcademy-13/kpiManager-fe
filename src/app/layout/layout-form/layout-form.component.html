@@ -16,8 +16,15 @@
       </div>
     </div>
   
-  
-  <div *ngIf = 'isAuthorized' class="form-group">
+
+    <p *ngFor="let role of userRole$ | async ; let i = index"> {{role.username}}</p> 
+
+    <p *ngFor="let role of currentRole ; let i = index"> {{role.username}}</p> 
+
+
+ <!--  currentUser$  | async as currentUser-->
+
+  <div *ngIf="isAuthorized" class="form-group">
     <label for="inputUnidade">Unidade:</label>
     <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
         <option selected>Selecione a unidade</option>
@@ -32,7 +39,7 @@
 
     </select>
   </div>
-  <div *ngIf = 'isAuthorized' class="form-group">
+  <div *ngIf='isAuthorized' class="form-group">
     <label for="inputAddress2">Business Manager: </label>
     <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
         <option selected>Selecione a unidade</option>
