@@ -7,12 +7,12 @@ const routes: Routes = [
   { 
     path: '', 
     component: LayoutComponent,
-    children: [
+   children: [
       {
         path:'layoutform',
         component: LayoutFormComponent
       },
-      {
+     {
         path: '', 
         redirectTo: 'layoutform',
         pathMatch: "full" 
