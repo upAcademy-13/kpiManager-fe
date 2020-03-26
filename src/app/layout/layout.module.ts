@@ -21,7 +21,8 @@ import { LayoutNavBarComponent } from './layout-nav-bar/layout-nav-bar.component
     LayoutRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+
   ]
 })
 

@@ -19,9 +19,18 @@ export class DataService {
   private statistics: DataInteraction[] = [
     {
       id: 1,
+      semana: 8,
+      unidade: 'unidade B',
+      businessManager: 'Flávio',
+      cliente: "sibs",
+      tipoDeInteracao: 'Conversa',
+      numerodeInteracoes: 3
+    },
+    {
+      id: 1,
       semana: 2,
       unidade: 'unidade A',
-      businessManager: 'Daiana',
+      businessManager: 'Joana',
       cliente: "sibs",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
@@ -30,7 +39,7 @@ export class DataService {
       id: 1,
       semana: 2,
       unidade: 'unidade A',
-      businessManager: 'Daiana',
+      businessManager: 'Carlos',
       cliente: "sibs",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
@@ -39,7 +48,7 @@ export class DataService {
       id: 1,
       semana: 2,
       unidade: 'unidade A',
-      businessManager: 'Daiana',
+      businessManager: 'Pedro',
       cliente: "sibs",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
@@ -48,7 +57,43 @@ export class DataService {
       id: 1,
       semana: 2,
       unidade: 'unidade A',
-      businessManager: 'Daiana',
+      businessManager: 'Ana',
+      cliente: "sibs",
+      tipoDeInteracao: 'Entrevista',
+      numerodeInteracoes: 3
+    },
+    {
+      id: 1,
+      semana: 2,
+      unidade: 'unidade C',
+      businessManager: 'Matheus',
+      cliente: "sibs",
+      tipoDeInteracao: 'Entrevista',
+      numerodeInteracoes: 3
+    },
+    {
+      id: 1,
+      semana: 2,
+      unidade: 'unidade D',
+      businessManager: 'Lucas',
+      cliente: "sibs",
+      tipoDeInteracao: 'Entrevista',
+      numerodeInteracoes: 3
+    },
+    {
+      id: 1,
+      semana: 2,
+      unidade: 'unidade E',
+      businessManager: 'Marcos',
+      cliente: "sibs",
+      tipoDeInteracao: 'Entrevista',
+      numerodeInteracoes: 3
+    },
+    {
+      id: 1,
+      semana: 2,
+      unidade: 'Porto',
+      businessManager: 'Amanda',
       cliente: "sibs",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
@@ -57,7 +102,7 @@ export class DataService {
       id: 1,
       semana: 2,
       unidade: 'unidade A',
-      businessManager: 'Daiana',
+      businessManager: 'Barbara',
       cliente: "sibs",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
@@ -66,7 +111,7 @@ export class DataService {
       id: 1,
       semana: 2,
       unidade: 'unidade A',
-      businessManager: 'Daiana',
+      businessManager: 'Luana',
       cliente: "sibs",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
@@ -75,7 +120,7 @@ export class DataService {
       id: 1,
       semana: 2,
       unidade: 'unidade A',
-      businessManager: 'Daiana',
+      businessManager: 'Laura',
       cliente: "sibs",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
@@ -84,57 +129,13 @@ export class DataService {
       id: 1,
       semana: 2,
       unidade: 'unidade A',
-      businessManager: 'Daiana',
-      cliente: "sibs",
-      tipoDeInteracao: 'Entrevista',
-      numerodeInteracoes: 3
-    },
-    {
-      id: 1,
-      semana: 2,
-      unidade: 'unidade A',
-      businessManager: 'Daiana',
-      cliente: "sibs",
-      tipoDeInteracao: 'Entrevista',
-      numerodeInteracoes: 3
-    },
-    {
-      id: 1,
-      semana: 2,
-      unidade: 'unidade A',
-      businessManager: 'Daiana',
-      cliente: "sibs",
-      tipoDeInteracao: 'Entrevista',
-      numerodeInteracoes: 3
-    },
-    {
-      id: 1,
-      semana: 2,
-      unidade: 'unidade A',
-      businessManager: 'Daiana',
-      cliente: "sibs",
-      tipoDeInteracao: 'Entrevista',
-      numerodeInteracoes: 3
-    },
-    {
-      id: 1,
-      semana: 2,
-      unidade: 'unidade A',
-      businessManager: 'Daiana',
-      cliente: "sibs",
-      tipoDeInteracao: 'Entrevista',
-      numerodeInteracoes: 3
-    },
-    {
-      id: 1,
-      semana: 2,
-      unidade: 'unidade A',
-      businessManager: 'Daiana',
+      businessManager: 'Bruna',
       cliente: "sibs",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
     }
   ];
+
 
   public getAllData() {
     console.log(this.statistics);

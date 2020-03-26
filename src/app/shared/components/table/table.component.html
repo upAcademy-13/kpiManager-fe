@@ -1,4 +1,4 @@
-<div class="container-100">
+<!-- <div class="container-100">
   <div class="table-reponsive">
 
     <div class="central-container ">
@@ -21,21 +21,79 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of data$ | async">
+          <tr *ngFor="let row of data$ | async ">
             <td *ngFor="let col of array" style="text-align: center;">
               {{row[col]}}
             </td>
           </tr>
         </tbody>
       </table>
-
+      <div class="d-flex justify-content-between p-2">
+         <ngx-datatable #table class="material" [columns]="columns" [columnMode]="ColumnMode.force" [headerHeight]="50"
+          [footerHeight]="50" rowHeight="auto" [limit]="10" [rows]="rows">
+        </ngx-datatable> 
 
         <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
           <option [ngValue]="2">2 itens por página</option>
           <option [ngValue]="4">4 itens por página</option>
           <option [ngValue]="6">6 itens por página</option>
         </select>
+
       </div>
+    </div>
+  </div> -->
+
+  <div class="container-100">
+    <div class="table-reponsive">
+  
+      <div class="central-container ">
+        <span class="contact100-form-symbol">
+          <img src="assets/imagens/estatistica.webp">
+        </span>
+  
+        
+        <h1 class="form-title text-center ">ESTATÍSTICAS </h1>
+       
+     <div class="col-md-8">
+      <input
+        #search
+        id="search"
+        type="text"
+        class="form-control"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="basic-addon1"
+      />
+    </div>
+  
+        <ngx-datatable class="material" [rows]=" data$ | async"  [limit]="8" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+          [rowHeight]="50" [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]">
+          <ngx-datatable-column   name="Semana">
+            <!-- <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.company}}
+            </ng-template> -->
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Unidade">
+            <!-- <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.name}}
+            </ng-template> -->
+          </ngx-datatable-column>
+          
+          <ngx-datatable-column name="Business Manager">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Cliente">
+            <!-- <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.age}}
+            </ng-template> -->
+          </ngx-datatable-column>
     
+        </ngx-datatable>
+  
+        <!-- <ngx-datatable-column   name="Company Name" prop="company"> -->
+          <!-- <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.company}}
+          </ng-template> -->
+        <!-- </ngx-datatable-column> -->
+      </div>
+    </div>
   </div>
-</div>
