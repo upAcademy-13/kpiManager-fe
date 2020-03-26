@@ -13,7 +13,8 @@ export class LayoutFormComponent implements OnInit {
       maxDate = new Date();
       selectClient: number; //id do cliente
       selectType: number; //id do tipo de interacao
-      interactionTable=[];
+      interactionTemp:object;
+      interactionTypeRow=[];
 
 
   constructor() { 
@@ -24,13 +25,17 @@ export class LayoutFormComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  add(){
-    alert(this.selectClient);
-    alert(this.selectType);
-    this.interactionTable.push(this.selectClient);
-    console.log(this.interactionTable);
+  addInteraction(){
+    this.interactionTemp = {
+      "name": this.selectClient, //vai ser o nome do cliente
+      "interaction": this.selectType //vai ser o tipo da interacao
+    }
+    this.interactionTypeRow.push(this.interactionTemp);
+    console.log(this.interactionTypeRow);
   }
-
+  delRow(i:number){
+    this.interactionTypeRow.splice(i, 1);
+  }
 
 
 }
