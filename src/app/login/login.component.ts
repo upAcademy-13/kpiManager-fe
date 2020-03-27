@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   unauthorized;
   login() {
-    this.auth.login(this.user).subscribe( (res:any) =>   {
+    this.auth.login(this.user).subscribe((res:any) =>   {
       console.log('resultado', res);
       
       this.auth.setCurrentUser(res); 
