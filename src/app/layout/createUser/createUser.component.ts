@@ -25,16 +25,16 @@ export class CreateUserComponent implements OnInit {
 
   submit(){
     const requestOptions: Object = {
-      /* other options here */
       responseType: 'text'
     }
-       this.http.post<any>(this.apiUrl,this.user,requestOptions).subscribe(data => {
-         this.postData = "sucesso";
-         this.router.navigate(['layout']);
-       },
-       error =>{
-         this.postData= "erro";
-       });
+
+    this.http.post<any>(this.apiUrl,this.user,requestOptions).subscribe(data => {
+      this.postData = "sucesso";
+      this.router.navigate(['layout']);
+    },
+    error => {
+      this.postData= "erro";
+    });
   }
 
 }
