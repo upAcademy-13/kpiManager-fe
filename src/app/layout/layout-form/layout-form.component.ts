@@ -55,17 +55,10 @@ export class LayoutFormComponent implements OnInit {
   public accessVerification() {
 
     let authorized = false;
-    //let userRole = "director"; // dummy director, this will be replaced with a query below;
-
-    // let userRole = this.http.get(this.apiUrl + '?filter={"where":{"username":"ze carlos"}}');
-
-    // For now we only need top check if this request id exists
 
     this.userRole$ = this.http.get(this.apiUrl + '?filter={"where":{"username":"ze carlos"}}');
 
     console.log(this.userRole$);
-
-    //  observable: userRole;
 
     this.userRole$.subscribe((user: any[]) => {
       console.log('userString', user);
@@ -76,7 +69,6 @@ export class LayoutFormComponent implements OnInit {
 
       this.currentRole = user;
     })
-
 
     console.log(this.currentRole);
 
