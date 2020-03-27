@@ -50,7 +50,7 @@ export class DataService {
       unidade: 'unidade A',
       businessManager: 'Pedro',
       cliente: "sibs",
-      tipoDeInteracao: 'Entrevista',
+      tipoDeInteracao: 'CV',
       numerodeInteracoes: 3
     },
     {
@@ -58,7 +58,7 @@ export class DataService {
       semana: 2,
       unidade: 'unidade A',
       businessManager: 'Ana',
-      cliente: "sibs",
+      cliente: "Santander",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
     },
@@ -76,7 +76,7 @@ export class DataService {
       semana: 2,
       unidade: 'unidade D',
       businessManager: 'Lucas',
-      cliente: "sibs",
+      cliente: "Nova base",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
     },
@@ -85,7 +85,7 @@ export class DataService {
       semana: 2,
       unidade: 'unidade E',
       businessManager: 'Marcos',
-      cliente: "sibs",
+      cliente: "cellfocus",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
     },
@@ -94,7 +94,7 @@ export class DataService {
       semana: 2,
       unidade: 'Porto',
       businessManager: 'Amanda',
-      cliente: "sibs",
+      cliente: "Novo banco",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
     },
@@ -103,7 +103,7 @@ export class DataService {
       semana: 2,
       unidade: 'unidade A',
       businessManager: 'Barbara',
-      cliente: "sibs",
+      cliente: "BNP",
       tipoDeInteracao: 'Entrevista',
       numerodeInteracoes: 3
     },
@@ -113,7 +113,7 @@ export class DataService {
       unidade: 'unidade A',
       businessManager: 'Luana',
       cliente: "sibs",
-      tipoDeInteracao: 'Entrevista',
+      tipoDeInteracao: 'Conversa',
       numerodeInteracoes: 3
     },
     {
@@ -121,8 +121,8 @@ export class DataService {
       semana: 2,
       unidade: 'unidade A',
       businessManager: 'Laura',
-      cliente: "sibs",
-      tipoDeInteracao: 'Entrevista',
+      cliente: "santander",
+      tipoDeInteracao: 'Visita',
       numerodeInteracoes: 3
     },
     {
@@ -130,18 +130,23 @@ export class DataService {
       semana: 2,
       unidade: 'unidade A',
       businessManager: 'Bruna',
-      cliente: "sibs",
-      tipoDeInteracao: 'Entrevista',
+      cliente: "BNP",
+      tipoDeInteracao: 'CV',
       numerodeInteracoes: 3
     }
   ];
 
 
-  public getAllData() {
-    console.log(this.statistics);
-    return of(this.statistics); // operador da bibli do angular do rxjs
+  // public getAllData() {
+  //   console.log(this.statistics);
+  //   return of(this.statistics); // operador da bibli do angular do rxjs
+  // }
+  // public getBooks():Observable<Book[]> {
+  //   return this.http.get<Book[]>('http://127.0.0.1:3000/Books/api/book');
+  // }
 
-
+  public getAllData():Observable<DataInteraction[]> {
+    return this.http.get<DataInteraction[]>('http://localhost:3000/statistics');
   }
 
 

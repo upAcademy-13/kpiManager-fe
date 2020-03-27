@@ -1,0 +1,123 @@
+{ 
+
+	"statistics": [
+		{
+      "id": 1,
+      "semana": 3,
+      "unidade": "unidade B",
+      "businessManager": "Flávio",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Conversa",
+      "numerodeInteracoes": 3
+    },
+	 {
+    "id": 1,
+    "semana": 9,
+    "unidade": "unidade A",
+    "businessManager": "Daiana",
+    "cliente": "sibs",
+    "tipoDeInteracao": "Conversa",
+    "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana": 8,
+      "unidade": "unidade C",
+      "businessManager": "Amanda",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Conversa",
+      "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana": 7,
+      "unidade": "unidade B",
+      "businessManager": "Laura",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Ponto de Situação",
+      "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana": 6,
+      "unidade": "unidade C",
+      "businessManager": "Ana",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Pedido",
+      "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana": 2,
+      "unidade": "unidade A",
+      "businessManager": "Pedro",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Conversa",
+      "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana": 5,
+      "unidade": "Porto",
+      "businessManager": "Diogo",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Conversa",
+      "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana":5,
+      "unidade": "Nearshore",
+      "businessManager": "Alan",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Acompanhamento",
+      "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana": 1,
+      "unidade": "unidade A",
+      "businessManager": "Vitor",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Conversa",
+      "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana": 1,
+      "unidade": "unidade E",
+      "businessManager": "Flávio",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Visita",
+      "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana": 7,
+      "unidade": "unidade G",
+      "businessManager": "Lucas",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Cv",
+      "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana": 3,
+      "unidade": "unidade B",
+      "businessManager": "Flávio",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Conversa",
+      "numerodeInteracoes": 3
+    },
+    {
+      "id": 1,
+      "semana": 4,
+      "unidade": "unidade B",
+      "businessManager": "Flávio",
+      "cliente": "sibs",
+      "tipoDeInteracao": "Entrevista",
+      "numerodeInteracoes": 3
+    }
+		
+	]
+}

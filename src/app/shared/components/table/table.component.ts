@@ -1,5 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { TableColumn, ColumnMode } from '@swimlane/ngx-datatable';
+import { FormBuilder } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-table',
@@ -10,13 +15,125 @@ import { Observable } from 'rxjs';
 
 export class TableComponent implements OnInit {
 
- 
-  // @ViewChild('search', { static: false }) search: any;
-  @Input() data$: Observable <any[]>;
-  httpClient: any;
-  public temp: Array<object> = [];
-  public rows: Array<object> = [];
-  public columns: Array<object>;
+  @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
+
+  @Input() data$: Observable<any[]>;
+
+  ColumnMode = ColumnMode;
+  temp = [];
+  rows = [];
+
+  arrFiltrado = [];
+
+  ngOnInit() {
+    //console.log(" TableComponent = ", this.data$)
+    this.rows;
+    console.log(this.rows);
+
+  }
+
+  constructor() {
+    this.fetch(data => {
+      this.temp = [...data];
+      this.rows = data;
+    });
+  }
+
+  fetch(cb) {
+    const req = new XMLHttpRequest();
+    req.open('GET', 'http://localhost:3000/statistics');
+    req.onload = () => {
+      cb(JSON.parse(req.response));
+    };
+    req.send();
+    console.log("passou req", req)
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    const temp = this.temp.filter(function (d) {
+      return d.businessManager.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+    this.rows = temp;
+    this.table.offset = 0;
+    console.log("passou", this.rows)
+  }
+
+  uFilterBM(value: string) {
+    if (value == 'myselectBM') {
+      this.rows = this.temp;
+      return;
+    }
+    const val = value;
+    const temp = this.temp.filter(function (d) {
+      return d.businessManager.indexOf(val) !== -1 || !val;
+    });
+
+    this.rows = temp;
+    this.table.offset = 0;
+  }
+
+  uFilterInteration(value: string) {
+    if (value == 'myselectInteration') {
+      this.rows = this.temp;
+      return;
+    }
+
+    const val = value;
+    const temp = this.temp.filter(function (d) {
+      return d.tipoDeInteracao.indexOf(val) !== -1 || !val;
+    });
+
+    this.rows = temp;
+    this.table.offset = 0;
+  }
+
+  uFilterClient(value: string){
+    if (value == 'myselectCliente') {
+      this.rows = this.temp;
+      return;
+    }
+
+    const val = value;
+    const temp = this.temp.filter(function (d) {
+      return d.cliente.indexOf(val) !== -1 || !val;
+    });
+
+    this.rows = temp;
+    this.table.offset = 0;
+  }
+
+  uFilterUnidade(value: string){
+    if (value == 'myselectUnidade') {
+      this.rows = this.temp;
+      return;
+    }
+
+    const val = value;
+    const temp = this.temp.filter(function (d) {
+      return d.unidade.indexOf(val) !== -1 || !val;
+    });
+
+    this.rows = temp;
+    this.table.offset = 0;
+  }
+
+  uFilterSemana(value: string){
+    if (value == 'myselectSemana') {
+      this.rows = this.temp;
+      return;
+    }
+
+    const val = value;
+    const temp = this.temp.filter(function (d) {
+      return d.semana.indexOf(val) !== -1 || !val;
+    });
+
+    this.rows = temp;
+    this.table.offset = 0;
+  }
+
+
   // @Input()  headers=[];
 
   // page = 1;
@@ -30,94 +147,7 @@ export class TableComponent implements OnInit {
   //   "numerodeInteracoes"
   // ];
 
-  // updateFilter(val: any) {
-  //   const value = val.toString().toLowerCase().trim();
-  //   // get the amount of columns in the table
-  //   const count = this.columns.length;
-  //   // get the key names of each column in the dataset
-  //   const keys = Object.keys(this.temp[0]);
-  //   // assign filtered matches to the active datatable
-  //   this.rows = this.temp.filter(item => {
-  //     // iterate through each row's column data
-  //     for (let i = 0; i < count; i++) {
-  //       // check for a match
-  //       if (
-  //         (item[keys[i]] &&
-  //           item[keys[i]]
-  //             .toString()
-  //             .toLowerCase()
-  //             .indexOf(value) !== -1) ||
-  //         !value
-  //       ) {
-  //         // found match, return true to add to result set
-  //         return true;
-  //       }
-  //     }
-  //   });
-
-  //   // Whenever the filter changes, always go back to the first page
-  //   // this.table.offset = 0;
-  // }
-
-  // findAll() {
-  //  this.httpClient.get('./assets/data/company.json').subscribe(
-  //     (data: any) => {
-  //       // cache our list
-  //       this.temp = data;
-
-  //       // push our inital complete list
-  //       this.rows = [...this.temp];
-  //     },
-  //     (err: HttpErrorResponse) => {
-  //       console.log (err.message);
-  //     }
-  //   );
-  // }
-  // constructor() { }
-
-  ngOnInit() {
-    console.log(" TableComponent = ", this.data$)
-  }
-
-  // temp = [];
-  // updateFilter(event) {
-  //   const val = event.target.value.toLowerCase();
-
-  //   // filter our data
-  //   const temp = this.temp.filter(function(d) {
-  //     return d.name.toLowerCase().indexOf(val) !== -1 || !val;
-  //   });
-
-  //   // update the rows
-  //   this.rows = temp;
-  //   console.log(this.temp)
-
-  // }
- 
-  // rows = [];
-
- 
-  // ngOnInit() {
-
-    
-  //   this.fetch((data) => {
-  //     this.data$ = data;
-  //     console.log(this.data$)
-  //   });
 
 
-  // }
 
-  
- 
-  // fetch(cb) {
-  //   const req = new XMLHttpRequest();
-  //   req.open('GET', `http://swimlane.github.io/ngx-datatable/assets/data/company.json`)
-  //   req.onload = () => {
-  //     const data = JSON.parse(req.response);
-  //     cb(data);
-  //   };
- 
-  //   req.send();
-  // }
 }
