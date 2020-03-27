@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class CreateUserComponent implements OnInit {
   public user: User = new User();
-  postData;
   private apiUrl = 'http://localhost:8080/kpiManager/api/users';
+  postData;
   
   constructor(
     private http: HttpClient,
@@ -29,11 +29,11 @@ export class CreateUserComponent implements OnInit {
     }
 
     this.http.post<any>(this.apiUrl,this.user,requestOptions).subscribe(data => {
-      this.postData = "sucesso";
+      this.postData = "Utilizador criado!";
       this.router.navigate(['layout']);
     },
     error => {
-      this.postData= "erro";
+      this.postData= "Erro! Tente novamente";
     });
   }
 

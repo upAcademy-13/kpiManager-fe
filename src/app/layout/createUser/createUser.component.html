@@ -1,7 +1,7 @@
 
     <div class="container vertical-margin">
         <div class="row w-50 m-auto bg-light rounded-lg border border-dark shadow-lg p-3 mb-5 bg-white rounded">
-            
+
             <form class="col">
                 <h1 class="text-center pt-4">Criar Utilizador</h1>
                 <div class="form-group pr-4 pl-4">
@@ -25,10 +25,9 @@
                     </select>
                 </div>
                 <button class="mb-4 ml-4" (click)="submit()">Submeter</button>
-                {{postData}}
-                </form>
+                <p style="color: red; font-size: smaller;"><strong>{{postData}}</strong></p>
+            </form>
         </div>
         
     </div>
-
     <app-layout-nav-bar></app-layout-nav-bar>

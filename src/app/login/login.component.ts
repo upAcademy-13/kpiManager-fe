@@ -25,6 +25,11 @@ export class LoginComponent implements OnInit {
   unauthorized;
   login() {
     this.auth.login(this.user).subscribe( res => {
+      console.log('resultado', res);
+      
+/*       this.user = res[0];
+      this.auth.setCurrentUser(this.user); */
+      
       this.router.navigate(['layout']);
     }, 
     error => {

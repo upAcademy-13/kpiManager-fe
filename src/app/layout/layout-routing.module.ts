@@ -10,7 +10,7 @@ const routes: Routes = [
     component: LayoutComponent 
   },
   {
-    path: 'create',
+    path: 'create', 
     component: CreateUserComponent
   }
 ];
