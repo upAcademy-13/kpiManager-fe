@@ -11,6 +11,9 @@ import { User } from 'src/app/core/models/user';
 
 export class LayoutFormComponent implements OnInit {
 
+      dateChoose = "";
+      cliente = "";
+      
   bsInlineValue = new Date();
   bsInlineRangeValue: Date[];
   maxDate = new Date();
@@ -84,10 +87,19 @@ export class LayoutFormComponent implements OnInit {
   }
 
 
+public getValues(){
+  console.log(this.cliente);
+  console.log(this.maxDate);
+  }
+
+  testarPrintDate(tcode: string){
+    console.log("Data escolhida " + tcode);
+    let newDate = tcode.split(" ");
+    let dataInicio = newDate[0]
+    let dataFinal = newDate[2]
+    console.log("Data de inicio: " + dataInicio);
+    console.log("Data final: " + dataFinal);
+  }
 }
-
-
-
-
 
 

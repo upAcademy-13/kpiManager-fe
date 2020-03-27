@@ -9,12 +9,18 @@
 <form>
     <div class="form-row"> <label for="inputSemana">Semana do ano:</label></div>
     
+
+
     <div class="row">
-      <div class="pr-3 pb-3">
-        <bs-daterangepicker-inline [bsValue]="bsInlineRangeValue"></bs-daterangepicker-inline>
+      <div class="col form-group">
+        <input #selectedDate 
+              type="text"
+              placeholder="Select Date"
+              class="form-control"
+              bsDaterangepicker
+              [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-orange'}">
       </div>
-    </div>
-  
+    </div> 
 
     <p *ngFor="let role of userRole$ | async ; let i = index"> {{role.username}}</p> 
 
@@ -112,9 +118,8 @@
     </div>
   </div>
 </div>
-
   <div class="form-row">
-    <button type="submit" class="form-btn">Enviar   <img src="assets/imagens/add-icon1.png" width="20" height="20"> </button>
+    <button (click)="testarPrintDate(selectedDate.value)" type="submit" class="form-btn">Enviar   <img src="assets/imagens/add-icon1.png" width="20" height="20"> </button>
   </div>
 
 </form>
