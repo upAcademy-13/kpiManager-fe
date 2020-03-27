@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthService {
-
+  private token:string; 
   private currentUser: User = new User();
   private apiUrl = 'http://localhost:8080/kpiManager/api/users/auth';
   
@@ -21,12 +21,15 @@ export class AuthService {
     return this.http.post(this.apiUrl, user, requestOptions);
   }
 
-  public setCurrentUser(user: User) {
-    this.currentUser = user;
+  public setCurrentUser(res: string) {
+
+    this.token = res;
   }
 
+  
   public isAuthenticated(): boolean {
-    if (this.currentUser.id) {
+ console.log(this.token);
+    if (this.token) {
       return true;
     } else {
       return false;
