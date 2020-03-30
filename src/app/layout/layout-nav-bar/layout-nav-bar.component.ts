@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-layout-nav-bar',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutNavBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private auth: AuthService
+  ) { }
 
+  tokenInfo;  
   ngOnInit(): void {
+    const token = localStorage.getItem("token");
+    this.tokenInfo = this.auth.getDecodedAccessToken(token); 
   }
 
 }

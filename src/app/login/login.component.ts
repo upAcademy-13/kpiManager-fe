@@ -27,11 +27,10 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.user).subscribe((res:any) =>   {
       console.log('resultado', res);
       
-      this.auth.setCurrentUser(res); 
-      
-      localStorage.setItem("token",res);
-      this.router.navigate(['layout']);
+      this.auth.setCurrentToken(res); 
+      localStorage.setItem("token", res);
 
+      this.router.navigate(['layout']);
     }, 
     error => {
       this.unauthorized = "Username ou password incorrecta!";

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
+import * as jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -21,14 +22,21 @@ export class AuthService {
     return this.http.post(this.apiUrl, user, requestOptions);
   }
 
-  public setCurrentUser(res: string) {
-
+  public setCurrentToken(res: string) {
     this.token = res;
   }
 
-  
+  public getDecodedAccessToken(token: string): any {
+    try{
+        return jwt_decode(token);
+    }
+    catch(Error){
+        return null;
+    }
+  }
+
   public isAuthenticated(): boolean {
- console.log(this.token);
+    console.log(this.token);
     if (this.token) {
       return true;
     } else {
