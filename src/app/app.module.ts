@@ -32,11 +32,11 @@ import { LayoutNavBarComponent } from './layout/layout-nav-bar/layout-nav-bar.co
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatGridListModule,
+   /*  MatGridListModule,
     MatCardModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule,
+    MatButtonModule, */
     LayoutModule,
 
    // ChartsModule // adicionado

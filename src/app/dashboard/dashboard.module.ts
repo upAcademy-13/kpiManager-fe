@@ -20,14 +20,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   declarations: [DashboardComponent, Grafico1Component, Grafico2Component, Grafico3Component, Grafico4Component],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    LayoutModule,
-    NgxChartsModule
+  /*   NgxChartsModule, */
+    DashboardRoutingModule
   ]
 })
 
