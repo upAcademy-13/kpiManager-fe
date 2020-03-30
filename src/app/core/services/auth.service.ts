@@ -36,8 +36,7 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    console.log(this.token);
-    if (this.token) {
+    if (localStorage.getItem("token")) {
       return true;
     } else {
       return false;

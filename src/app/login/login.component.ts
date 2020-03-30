@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user.username = 'COO';
-    this.user.password = 'COO123';
+    this.user.username = '';
+    this.user.password = '';
   }
 
   unauthorized;
