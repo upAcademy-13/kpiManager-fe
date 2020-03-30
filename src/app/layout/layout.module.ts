@@ -7,6 +7,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutNavBarComponent } from './layout-nav-bar/layout-nav-bar.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 
@@ -22,6 +23,7 @@ import { LayoutNavBarComponent } from './layout-nav-bar/layout-nav-bar.component
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxDatatableModule
 
   ]
 })

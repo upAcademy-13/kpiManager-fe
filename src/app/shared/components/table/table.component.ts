@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { TableColumn, ColumnMode } from '@swimlane/ngx-datatable';
 import { FormBuilder } from '@angular/forms';
+import { DataInteraction } from 'src/app/core/models/dataInteration';
 
 
 
@@ -23,12 +24,34 @@ export class TableComponent implements OnInit {
   temp = [];
   rows = [];
 
-  arrFiltrado = [];
+  tableColumns = [
+    {
+      prop: 'dateInteraction',
+      name: 'Semana'
+    },
+    {
+      prop: 'unit',
+      name: 'Unidade'
+    },
+    {
+      prop: 'client',
+      name: 'Cliente'
+    },
+    {
+      prop: 'person',
+      name: 'Business manager'
+    },
+    {
+      prop: 'interactionType',
+      name: 'Tipo de interação'
+    }
+  ]
+
 
   ngOnInit() {
-    //console.log(" TableComponent = ", this.data$)
+
+    console.log(" TableComponent = ", this.data$)
     this.rows;
-    console.log(this.rows);
 
   }
 
@@ -36,12 +59,14 @@ export class TableComponent implements OnInit {
     this.fetch(data => {
       this.temp = [...data];
       this.rows = data;
+      console.log(this.rows)
+
     });
   }
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', 'http://localhost:3000/statistics');
+    req.open('GET', 'http://127.0.0.1:3000/kpiManager/api/interactions/all');
     req.onload = () => {
       cb(JSON.parse(req.response));
     };
@@ -52,7 +77,7 @@ export class TableComponent implements OnInit {
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.temp.filter(function (d) {
-      return d.businessManager.toLowerCase().indexOf(val) !== -1 || !val;
+      return d.person.name.toLowerCase().indexOf(val) !== -1 || !val;
     });
     this.rows = temp;
     this.table.offset = 0;
@@ -66,7 +91,7 @@ export class TableComponent implements OnInit {
     }
     const val = value;
     const temp = this.temp.filter(function (d) {
-      return d.businessManager.indexOf(val) !== -1 || !val;
+      return d.person.name.indexOf(val) !== -1 || !val;
     });
 
     this.rows = temp;
@@ -81,14 +106,14 @@ export class TableComponent implements OnInit {
 
     const val = value;
     const temp = this.temp.filter(function (d) {
-      return d.tipoDeInteracao.indexOf(val) !== -1 || !val;
+      return d.interactionType.interactionType.indexOf(val) !== -1 || !val;
     });
 
     this.rows = temp;
     this.table.offset = 0;
   }
 
-  uFilterClient(value: string){
+  uFilterClient(value: string) {
     if (value == 'myselectCliente') {
       this.rows = this.temp;
       return;
@@ -96,14 +121,14 @@ export class TableComponent implements OnInit {
 
     const val = value;
     const temp = this.temp.filter(function (d) {
-      return d.cliente.indexOf(val) !== -1 || !val;
+      return d.client.name.indexOf(val) !== -1 || !val;
     });
 
     this.rows = temp;
     this.table.offset = 0;
   }
 
-  uFilterUnidade(value: string){
+  uFilterUnidade(value: string) {
     if (value == 'myselectUnidade') {
       this.rows = this.temp;
       return;
@@ -111,14 +136,14 @@ export class TableComponent implements OnInit {
 
     const val = value;
     const temp = this.temp.filter(function (d) {
-      return d.unidade.indexOf(val) !== -1 || !val;
+      return d.unit.nameUnit.indexOf(val) !== -1 || !val;
     });
 
     this.rows = temp;
     this.table.offset = 0;
   }
 
-  uFilterSemana(value: string){
+  uFilterSemana(value: string) {
     if (value == 'myselectSemana') {
       this.rows = this.temp;
       return;
@@ -126,7 +151,7 @@ export class TableComponent implements OnInit {
 
     const val = value;
     const temp = this.temp.filter(function (d) {
-      return d.semana.indexOf(val) !== -1 || !val;
+      return d.dateInteraction.indexOf(val) !== -1 || !val;
     });
 
     this.rows = temp;
