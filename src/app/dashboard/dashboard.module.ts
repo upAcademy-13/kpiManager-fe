@@ -13,6 +13,8 @@ import { Grafico1Component } from './micael/grafico1/grafico1.component';
 import { Grafico2Component } from './filipe/grafico2/grafico2.component';
 import { Grafico3Component } from './ana/grafico3/grafico3.component';
 import { Grafico4Component } from './vasco/grafico4/grafico4.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 @NgModule({
   declarations: [DashboardComponent, Grafico1Component, Grafico2Component, Grafico3Component, Grafico4Component],
@@ -24,7 +26,9 @@ import { Grafico4Component } from './vasco/grafico4/grafico4.component';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    LayoutModule
+    LayoutModule,
+    NgxChartsModule
   ]
 })
+
 export class DashboardModule { }
