@@ -2,6 +2,8 @@ import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { Observable, observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/core/models/user';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-layout-form',
@@ -22,6 +24,7 @@ export class LayoutFormComponent implements OnInit {
   interactionTemp: object;
   interactionTypeRow = [];
   isAuthorized: Boolean;
+  date:any;
 
   public userRole$: Observable<Object>;
   public currentRole = [];
@@ -38,6 +41,7 @@ export class LayoutFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+
   }
 
 
@@ -103,10 +107,14 @@ public getValues(){
   testarPrintDate(tcode: string){
     console.log("Data escolhida " + tcode);
     let newDate = tcode.split(" ");
-    let dataInicio = newDate[0]
-    let dataFinal = newDate[2]
+    let dataInicio = newDate[0];
+    let dataFinal = newDate[2];
     console.log("Data de inicio: " + dataInicio);
     console.log("Data final: " + dataFinal);
+    let data = moment(dataInicio, "MM-DD-YYYY");
+    console.log(data);
+    let numWeek = data.week();
+    console.log(numWeek);
   }
 }
 
