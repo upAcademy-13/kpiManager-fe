@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { LayoutNavBarComponent } from './layout-nav-bar/layout-nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -19,12 +18,13 @@ import { FormsModule } from '@angular/forms';
 // import { NgxChartsModule } from '@swimlane/ngx-charts'; // adicionado
 
 // import { ChartsModule } from 'ng2-charts'; // adicionado
+import { HttpClientModule } from '@angular/common/http';
+import { LayoutNavBarComponent } from './layout/layout-nav-bar/layout-nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    LayoutNavBarComponent,
    // NgxChartsModule, // adicionado
    // BrowserAnimationsModule // adicionado
   ],
@@ -38,8 +38,10 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatButtonModule,
     LayoutModule,
-    
+
    // ChartsModule // adicionado
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
