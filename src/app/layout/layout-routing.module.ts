@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './layout.component';
 import { CreateUserComponent } from './createUser/createUser.component';
-import { PermissionsGuard } from '../core/guards/permissions.guard';
+import { PermissionsCOOGuard } from '../core/guards/permissionsCOO.guard';
 
 const routes: Routes = [
   { 
@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'create', 
     component: CreateUserComponent,
-    canActivate: [PermissionsGuard]
+    canActivate: [PermissionsCOOGuard]
   }
 ];
 
