@@ -25,25 +25,50 @@ export class LayoutFormComponent implements OnInit {
   interactionTypeRow = [];
   isAuthorized: Boolean;
   date:any;
+  selectUnit:number;
+  teste:number;
 
   public userRole$: Observable<Object>;
   public currentRole = [];
+  public interactionTypesArray = [];
+  public clientsArray =[];
+  public unitsArray =[];
   public currentUser$: Observable<any[]>;
+  public interactionTypes$: Observable<Object>;
+  public clients$: Observable<Object>;
+  public units$: Observable<Object>;
+  public managers$: Observable<Object>;
+  public managersbyUnit$: Observable<Object>;
 
   private apiUrl: String = 'https://upacademytinder.herokuapp.com/api/users/';
+  private apiUrlKpi: String = 'http://127.0.0.1:8080/kpiManager/api/';
   // private http: HttpClient   ------ Why doesn't work here? It has something to do with context of the function or something?
+
+  private companySelect: any;
+  public btnDisable: boolean = true;
 
   constructor(private http: HttpClient) {
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
     this.isAuthorized = this.accessVerification();
+
   }
 
+  onChange(event) {
+    if(event) {
+        this.btnDisable = false;
+    }
+    this.teste = this.selectUnit;
+    console.log(this.selectUnit);
+    this.managersbyUnit$ = this.http.get(this.apiUrlKpi + 'users/'+this.selectUnit+'/managers');
+    this.managersbyUnit$.subscribe((managerByUnit: any[]) => {      
+      console.log('interactionType', managerByUnit);     
+    });
+}
 
   ngOnInit(): void {
-
+    this.getFormData();
   }
-
 
   addInteraction() {
     this.interactionTemp = {
@@ -56,7 +81,6 @@ export class LayoutFormComponent implements OnInit {
   delRow(i: number) {
     this.interactionTypeRow.splice(i, 1);
   }
-
   // I think this should be in a data.service.ts file but for now stays here
 
   public accessVerification() {
@@ -69,7 +93,6 @@ export class LayoutFormComponent implements OnInit {
     // For now we only need top check if this request id exists
 
     this.userRole$ = this.http.get(this.apiUrl + '?filter={"where":{"username":"ze carlos"}}');
-
     console.log(this.userRole$);
 
     //  observable: userRole;
@@ -81,7 +104,7 @@ export class LayoutFormComponent implements OnInit {
         this.isAuthorized = true;
       }
 
-      this.currentRole = user;
+      this.currentRole = user; //criar array com os valores armazenados 
     })
 
 
@@ -115,6 +138,26 @@ public getValues(){
     console.log(data);
     let numWeek = data.week();
     console.log(numWeek);
+  }
+
+  public getFormData() {     
+    this.interactionTypes$ = this.http.get(this.apiUrlKpi + 'interactiontype');
+    this.clients$ = this.http.get(this.apiUrlKpi + 'clients');  
+    this.units$ = this.http.get(this.apiUrlKpi + 'units'); 
+        
+    this.interactionTypes$.subscribe((interactionType: any[]) => {      
+      console.log('interactionType', interactionType); 
+      this.interactionTypesArray = interactionType;    
+    });
+    this.clients$.subscribe((client: any[]) => {      
+      console.log('interactionType', client);
+      this.clientsArray = client;     
+    });  
+    this.units$.subscribe((unit: any[]) => {      
+      console.log('interactionType', unit);
+      this.unitsArray = unit;     
+    });
+    
   }
 }
 

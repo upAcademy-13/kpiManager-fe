@@ -21,38 +21,23 @@
               [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-orange'}">
       </div>
     </div> 
-
-    <p *ngFor="let role of userRole$ | async ; let i = index"> {{role.username}}</p> 
-
+<!-- Testes
+    <p *ngFor="let role of userRole$ | async ; let i = index"> {{role.username}}</p>
     <p *ngFor="let role of currentRole ; let i = index"> {{role.username}}</p> 
+    <p *ngFor="let int of interactionTypes$ | async ; let i = index" > {{int.interactionType}}</p> -->
 
-
- <!--  currentUser$  | async as currentUser-->
 
   <div *ngIf="isAuthorized" class="form-group">
     <label for="inputUnidade">Unidade:</label>
-    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-        <option selected>Selecione a unidade</option>
-        <option value="1">Unidade_A </option>
-        <option value="2">Unidade_B </option>
-        <option value="3">Unidade_C </option>
-        <option value="3">Unidade_D </option>
-        <option value="1">Unidade_E </option>
-        <option value="2">Unidade_F </option>
-        <option value="3">Nearshore </option>
-        <option value="3">Porto </option>
-
+    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" [(ngModel)]="selectUnit" name="selectUnit" (ngModelChange)="onChange($event)">
+      <option *ngFor="let unit of units$ | async ; let i = index" value="{{unit.id}}">{{unit.nameUnit}}</option>
     </select>
   </div>
   <div *ngIf='isAuthorized' class="form-group">
     <label for="inputAddress2">Business Manager: </label>
-    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-        <option selected>Selecione a unidade</option>
-        <option value="1">Ana</option>
-        <option value="2">Andrea </option>
-        <option value="3">Nuno</option>
-        <option value="3">Ze Carlos</option>
-        <option value="1">Manuel</option>
+    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" [disabled]="btnDisable">
+        <option selected>Selecione o manager</option>
+        <option *ngFor="let man of managersbyUnit$ | async ; let i = index" value="{{man.id}}">{{man.username}}</option>
     </select>
   </div>
   <div class="form-row">
@@ -68,7 +53,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let col of interactionTypeRow; let i = index">
+        <tr *ngFor="let col of interactionTypeRow; let i = index">
         <td>{{col.name}}</td>
         <td>{{col.interaction}}</td>
         <td><button class="btn btn-danger" (click)="delRow(i)">Del</button></td>
@@ -94,17 +79,13 @@
         <div class="dropdown show col-sm">
           <select class="custom-select my-1 mr-sm-2" type="number" id="selectionClient" [(ngModel)]="selectClient" name="selectClient">
             <option selected>Selecione o cliente</option>
-            <option value="1">Ana</option>
+            <option *ngFor="let client of clients$ | async ; let i = index" value="{{client.name}}">{{client.name}}</option>
             <option value="2">Andre </option>
             <option value="3">Nuno</option>
             <option value="4">Luis</option>
         </select>
-        <select class="custom-select my-1 mr-sm-2" type="number" id="selectionType" [(ngModel)]="selectType" name="selectType">
-          <option selected>Tipo de interação </option>
-          <option value="5">Pedido</option>
-          <option value="6">CV </option>
-          <option value="7">demissao</option>
-          <option value="8">haha </option>
+        <select class="custom-select my-1 mr-sm-2" type="number" id="selectionType" [(ngModel)]="selectType" name="selectType" >
+          <option *ngFor="let int of interactionTypes$ | async ; let i = index" value="{{int.interactionType}}">{{int.interactionType}}</option>
       </select>
     </div>
 
