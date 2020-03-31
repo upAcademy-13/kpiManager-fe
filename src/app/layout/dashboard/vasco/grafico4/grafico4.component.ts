@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+  selector: 'grafico4',
   templateUrl: './grafico4.component.html',
   styleUrls: ['./grafico4.component.scss']
 })
