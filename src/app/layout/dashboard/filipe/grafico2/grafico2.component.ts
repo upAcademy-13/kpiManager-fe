@@ -37,7 +37,7 @@ export class Grafico2Component implements OnInit {
         ],
         datasets: [
           {
-            label: "# of Votes",
+            label: "Numero de interações",
             data: [12, 19, 3, 5, 2, 3, 5, 9, 10, 23, 4, 13],
             backgroundColor: [
               "rgba(255, 99, 132, 0.5)",
