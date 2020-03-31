@@ -1,7 +1,7 @@
 import {Chart} from 'chart.js';
 import {Component, OnInit, ViewChild, ElementRef, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__} from '@angular/core';
 @Component({
-  selector: 'app-dashboard-grafico1',
+  selector: 'grafico1',
   templateUrl: './grafico1.component.html',
   styleUrls: ['./grafico1.component.scss']
 })
@@ -23,7 +23,7 @@ escondido = true;
       data: {
         labels: ['Unidade_A', 'Unidade_B', 'Unidade_C', 'Unidade_D', 'Unidade_E', 'Unidade_F', 'Nearshore', 'Porto' ],
         datasets: [{
-          label: 'Distribuiçã Salarial da Aubay',
+          label: 'Distribuição Salarial da Aubay',
           data: [3000, 2000, 4000, 3050, 2500, 1500],
           backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -65,7 +65,7 @@ desenhaDetalhe(clicado: number) {
     data: {
       labels: labelNovo ,
       datasets: [{
-        label: 'Distribuiçã Salarial da Mota Engil São Tomé',
+        label: 'Distribuição Salarial da Mota Engil São Tomé',
         data: dadoNovo,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',

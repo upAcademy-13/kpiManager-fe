@@ -1,138 +1,155 @@
-<!-- <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title }}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>
-            {{card.content}}
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div> -->
-
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="dashboard.component.scss">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="dashboard.component.scss" />
     <title>Hello, world!</title>
   </head>
   <body>
-<div class="container-100">
-<div class="central-container"> 
-    <span class="contact100-form-symbol">
-        <img src="https://image.shutterstock.com/image-vector/financial-analytic-chart-graphs-on-260nw-281437586.jpg" alt='image'>
-    </span> 
-    <h1 class="form-title text-center">DASHBOARD</h1>
+    <div class="container-100">
+      <div class="central-container">
+        <span class="contact100-form-symbol">
+          <img
+            src="https://image.shutterstock.com/image-vector/financial-analytic-chart-graphs-on-260nw-281437586.jpg"
+            alt="image"
+          />
+        </span>
+        <h1 class="form-title text-center">DASHBOARD</h1>
 
+        <div class="grid-container">
+          <h1 class="mat-h1"></h1>
+          <mat-grid-list cols="2" rowHeight="350px">
+            <mat-grid-tile [colspan]="1" [rowspan]="2">
+              <mat-card class="dashboard-card">
+                <mat-card-header>
+                  <mat-card-title>
+                    Distribuição de números de interacção por unidade de negócio
+                    <button
+                      mat-icon-button
+                      class="more-button"
+                      [matMenuTriggerFor]="menu"
+                      aria-label="Toggle menu"
+                    >
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                      <button mat-menu-item>Expand</button>
+                      <button mat-menu-item>Remove</button>
+                    </mat-menu>
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                  <grafico1></grafico1>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
 
-<div class="grid-container">
-  <h1 class="mat-h1"></h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile  [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Distribuição de números de interacção por unidade de negócio
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item >Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          Gráfico 1
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="2">
+              <mat-card class="dashboard-card">
+                <mat-card-header>
+                  <mat-card-title>
+                    Distribuição de números de interacções por tipo de
+                    interacção
+                    <button
+                      mat-icon-button
+                      class="more-button"
+                      [matMenuTriggerFor]="menu"
+                      aria-label="Toggle menu"
+                    >
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                      <button mat-menu-item>Expand</button>
+                      <button mat-menu-item>Remove</button>
+                    </mat-menu>
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                  <grafico2></grafico2>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
 
-    <mat-grid-tile  [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Distribuição de números de interacções por tipo de interacção
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          Gráfico 2
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="2">
+              <mat-card class="dashboard-card">
+                <mat-card-header>
+                  <mat-card-title>
+                    Número de currículos enviados
+                    <button
+                      mat-icon-button
+                      class="more-button"
+                      [matMenuTriggerFor]="menu"
+                      aria-label="Toggle menu"
+                    >
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                      <button mat-menu-item>Expand</button>
+                      <button mat-menu-item>Remove</button>
+                    </mat-menu>
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                  <grafico3></grafico3>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
 
-    <mat-grid-tile  [colspan]="1" [rowspan]="2">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Número de currículos enviados
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <grafico3></grafico3>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="2">
+              <mat-card class="dashboard-card">
+                <mat-card-header>
+                  <mat-card-title>
+                    Cliente com mais interacção
+                    <button
+                      mat-icon-button
+                      class="more-button"
+                      [matMenuTriggerFor]="menu"
+                      aria-label="Toggle menu"
+                    >
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                      <button mat-menu-item>Expand</button>
+                      <button mat-menu-item>Remove</button>
+                    </mat-menu>
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                  <grafico4></grafico4>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
 
-    <mat-grid-tile  [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Cliente com mais interacção
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          Gráfico 4
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-    </mat-grid-list>
+        <script
+          src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"
+        ></script>
+      </div>
     </div>
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
+  </body>
+</html>

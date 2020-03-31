@@ -1,13 +1,30 @@
- <div [hidden]="!escondido" (click)="graphClickEvent($event)"  class="chart-container" style="position: relative; height:40vh; width:80vw">
-<canvas #myChart ></canvas>
+<div class="container-fluid">
+  <div class="d-flex flex-row justify-content-center">
+    <div
+      [hidden]="!escondido"
+      (click)="graphClickEvent($event)"
+      class="chart-container responsive"
+      style="margin-top: 8rem!important; height:50vw; width:50vw; display: relative;"
+    >
+      <canvas #myChart></canvas>
+    </div>
+  </div>
 </div>
 
-<div [hidden]="escondido" class="chart-container" style="position: relative; height:40vh; width:80vw">
-<canvas (click)="graficoInicial()"  #myDetail></canvas>
-<button (click)="graficoInicial()"  >VOLTAR PARA GRÁFICO INICIAL</button>
+<div class="container-fluid">
+  <div class="d-flex flex-row justify-content-center">
+    <div
+      [hidden]="escondido"
+      class="chart-container responsive"
+      style="margin-top: 8rem!important; height:50vw; width:50vw; display: relative;"
+    >
+      <canvas (click)="graficoInicial()" #myDetail></canvas>
+      <button (click)="graficoInicial()">VOLTAR PARA GRÁFICO INICIAL</button>
+    </div>
+  </div>
 </div>
 
-<!--  <ngx-charts-bar-vertical 
+  <!--  <ngx-charts-bar-vertical 
 [view]="view"
 [scheme]="colorScheme"
 [results]="single"
@@ -24,4 +41,3 @@
 [yAxisLabel]="yAxisLabel"
 (select)="onSelect($event)">
 </ngx-charts-bar-vertical> -->
-
