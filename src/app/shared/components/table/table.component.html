@@ -1,59 +1,65 @@
 <div class="container-100">
   <div class="table-reponsive">
-    
+
     <div class="central-container ">
       <span class="contact100-form-symbol">
         <img src="assets/imagens/estatistica.webp">
       </span>
-      
-      
+
+
       <h1 class="form-title text-center ">ESTATÍSTICAS </h1>
 
-      
-      <div class=" search col-md-4">
-        <input class="search form-control" type='text' placeholder='Procurar por...' (keyup)='updateFilter($event)' />
+      <div class="row">
+        <div class=" search col-lg-3">
+          <input class="search form-control" type='text' placeholder='O que estás à procurar?' (keyup)='updateFilter($event)' >
+        </div>
+
       </div>
       <div class="row">
-        <div class="col-2">
+        <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='uFilterSemana(myselectSemana.value)' #myselectSemana  class="form-control" id="exampleFormControlSelect1">
+            <select (change)='uFilterSemana(myselectSemana.value)' #myselectSemana class=" form-control selected"
+              id="exampleFormControlSelect1">
               <option value="myselectSemana">Semana</option>
               <option *ngFor="let select of dataWeek$ | async">{{select}}</option>
             </select>
           </div>
         </div>
-        <div class="col-2">
+        <div class=" col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='uFilterUnidade(myselectUnidade.value)' #myselectUnidade   class="form-control" id="exampleFormControlSelect1">
+            <select (change)='uFilterUnidade(myselectUnidade.value)' #myselectUnidade class="form-control selected"
+              id="exampleFormControlSelect1">
               <option value="myselectUnidade">Unidade</option>
               <option *ngFor="let select of dataUnities$ | async">{{select}}</option>
             </select>
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='uFilterClient(myselectCliente.value)' #myselectCliente  class="form-control" id="exampleFormControlSelect1">
+            <select (change)='uFilterClient(myselectCliente.value)' #myselectCliente class="form-control selected"
+              id="exampleFormControlSelect1">
               <option value="myselectCliente">Cliente</option>
               <option *ngFor="let select of dataClients$ | async">{{select}}</option>
             </select>
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='uFilterBM(myselectBM.value)' #myselectBM class="form-control" id="myselectBM">
+            <select (change)='uFilterBM(myselectBM.value)' #myselectBM class="form-control selected" id="myselectBM">
               <option value="myselectBM">Business Manager</option>
               <option *ngFor="let select of dataBManagers$ | async">{{select}} </option>
             </select>
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='uFilterInteration(myselectInteration.value)' #myselectInteration  class="form-control" id="myselectInteration">
+            <select (change)='uFilterInteration(myselectInteration.value)' #myselectInteration
+              class="form-control selected" id="myselectInteration">
               <option value='myselectInteration'>Tipo de interação</option>
               <option *ngFor="let select of dataInteractions$ | async">{{select}}</option>
             </select>
@@ -62,13 +68,23 @@
 
 
       </div>
-     
-      <ngx-datatable #table class='material striped' [limit]="5" [rows]='rows' [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"
-        [columns]='[{prop:"dateInteraction", name:"Semana"},{prop:"unit.nameUnit", name:"Unidade"},{prop:"client.name", name:"Cliente"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Tipo de Interação"}]'  [columnMode]="ColumnMode.force" [headerHeight]='50'
-        [footerHeight]='50' [rowHeight]='"auto"' >
-      </ngx-datatable>
 
-    <!-- <ngx-datatable  #table class='material striped' [limit]="5" [rows]='rows ' [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"
+      <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='rows' [scrollbarV]="false"
+        [sorts]="[{prop: 'name', dir: 'desc'}]"
+        [columns]='[{prop:"dateInteraction", name:"Semana"},{prop:"unit.nameUnit", name:"Unidade"},{prop:"client.name", name:"Cliente"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Tipo de Interação"}]'
+        [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"'>
+
+
+      </ngx-datatable>
+      <ngx-datatable-footer>
+
+        <div class="footer" style=" padding: 5px 10px">
+          <div><strong> Número total de interações de:</strong> {{(rows).length}}</div>
+
+        </div>
+      </ngx-datatable-footer>
+
+      <!-- <ngx-datatable  #table class='material striped' [limit]="5" [rows]='rows ' [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"
     [columnMode]="ColumnMode.force" [headerHeight]='50'
       [footerHeight]='50' [rowHeight]='"auto"'>
     <ngx-datatable-column name="Company">

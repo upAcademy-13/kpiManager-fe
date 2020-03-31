@@ -11,7 +11,7 @@ var httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json
 export class DataService {
   obs: DataInteraction[] = [];
 
-  apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
+  apiUrl = 'http://127.0.0.1:3000/kpiManager/api/';
 
 
   constructor(private http: HttpClient) {

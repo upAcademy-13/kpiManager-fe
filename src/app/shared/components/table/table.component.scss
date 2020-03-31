@@ -92,9 +92,52 @@ label{
     max-width: 49px;
   }
    .search{
-       margin-bottom: 10px!important;
-       margin-top: 60px!important;
+    font-size: 1rem;
+    font-weight: 400; 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 4% !important;
    }
-.col-2{
-    margin-left: 30px!important;
+.col-sm-2{
+    margin-right: 30px;
 }
+
+.selected{
+    font-size: 1rem !important;
+      font-weight: 500; 
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      cursor: pointer;
+}
+.footer{
+    margin-top: 3%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1rem;
+}
+.prefix-css .datatable-header-cell {
+background-color: #e46310 !important;
+color: #fff !important;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important; 
+font-size: 1rem;
+  }
+  
+  .prefix-css .datatable-body-cell  {
+    font-size: 0.9rem!important;
+  }
+
+
+  @media (min-width: 950px) and (max-width: 1200px){
+    .col-sm-2{
+        margin-right: 22px!important;
+    }
+  }
+  @media (min-width:800px) and (max-width: 950px){
+    .col-sm-2{
+        margin-right:18px!important;
+    }
+  }
+  @media (min-width:659px) and (max-width: 800px){
+    .col-sm-2{
+        margin-right:13px!important;
+    }
+  }
+
+  

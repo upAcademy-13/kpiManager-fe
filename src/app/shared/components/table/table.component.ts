@@ -1,16 +1,19 @@
-import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Input, ViewChild, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Observable, from } from 'rxjs';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { TableColumn, ColumnMode } from '@swimlane/ngx-datatable';
 import { FormBuilder } from '@angular/forms';
 import { DataInteraction } from 'src/app/core/models/dataInteration';
+import {ViewEncapsulation} from '@angular/core'
 
 
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -25,9 +28,14 @@ export class TableComponent implements OnInit {
   @Input() dataInteractions$: Observable<any[]>;
   @Input() dataUnities$: Observable<any[]>;
 
+  
+
+
   ColumnMode = ColumnMode;
   temp = [];
   rows = [];
+
+
 
   tableColumns = [
     {
@@ -55,23 +63,25 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(" TableComponent = ", this.data$)
-    this.rows;
+    // console.log(" TableComponent = ", this.data$)
+    // this.rows;
 
   }
-
+  
+  
   constructor() {
     this.fetch(data => {
       this.temp = [...data];
       this.rows = data;
       console.log(this.rows)
-
+      
     });
   }
+      
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', '  http://127.0.0.1:8080/kpiManager/api/interactions/all');
+    req.open('GET', '  http://127.0.0.1:3000/kpiManager/api/interactions/all');
     req.onload = () => {
       cb(JSON.parse(req.response));
     };
@@ -82,7 +92,9 @@ export class TableComponent implements OnInit {
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.temp.filter(function (d) {
-      return d.person.name.toLowerCase().indexOf(val) !== -1 || !val;
+      return d.person.name.toLowerCase().indexOf(val) !== -1 || d.client.name.toLowerCase().indexOf(val) !== -1  ||
+      d.unit.nameUnit.toLowerCase().indexOf(val) !== -1 ||  d.dateInteraction.toLowerCase().indexOf(val) !== -1 ||
+      d.interactionType.interactionType.toLowerCase().indexOf(val) !== -1 || !val;
     });
     this.rows = temp;
     this.table.offset = 0;
