@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { Grafico3Component } from './grafico3.component';
 
 describe('Grafico3Component', () => {
