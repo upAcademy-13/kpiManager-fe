@@ -13,6 +13,10 @@ export class Grafico2Component implements OnInit {
   ngOnInit(): void {
     this.chartit();
   }
+
+  graphClickEvent(event) {
+    console.log("Entrei.",this.myChart.getElementAtEvent(event));
+  }
   chartit() {
     this.myChart = new Chart("myChart", {
       type: "bar",
