@@ -26,6 +26,8 @@
 
     <p *ngFor="let role of currentRole ; let i = index"> {{role.username}}</p> 
 
+    <p *ngFor="let int of interactionTypes$ | async ; let i = index"> {{int.interactionType}}</p>
+
 
  <!--  currentUser$  | async as currentUser-->
 

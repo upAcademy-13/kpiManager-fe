@@ -23,11 +23,17 @@ export class LayoutFormComponent implements OnInit {
   interactionTypeRow = [];
   isAuthorized: Boolean;
 
+
+  public units$: Observable<any[]>
+  public managers$: Observable<any[]>
+  public managersByUnit$: Observable<any[]>
+  public interactionTypes$: Observable<Object>
   public userRole$: Observable<Object>;
   public currentRole = [];
   public currentUser$: Observable<any[]>;
 
   private apiUrl: String = 'https://upacademytinder.herokuapp.com/api/users/';
+  private apiUrlKpi: String = 'http://127.0.0.1:8080/kpiManager/api/';
   // private http: HttpClient   ------ Why doesn't work here? It has something to do with context of the function or something?
 
   constructor(private http: HttpClient) {
@@ -38,6 +44,9 @@ export class LayoutFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.getFormData();
+
   }
 
 
@@ -58,10 +67,7 @@ export class LayoutFormComponent implements OnInit {
   public accessVerification() {
 
     let authorized = false;
-
     this.userRole$ = this.http.get(this.apiUrl + '?filter={"where":{"username":"ze carlos"}}');
-
-    console.log(this.userRole$);
 
     this.userRole$.subscribe((user: any[]) => {
       console.log('userString', user);
@@ -69,21 +75,14 @@ export class LayoutFormComponent implements OnInit {
       if (user[0].role == "director") {
         this.isAuthorized = true;
       }
-
       this.currentRole = user;
     })
 
-    console.log(this.currentRole);
-
     if (this.userRole$) {
       authorized = true;
-      console.log(authorized);
     }
 
-    console.log('tou no access Verification');
-    //   console.log(authorized);
     return authorized;
-
   }
 
 
@@ -95,11 +94,29 @@ public getValues(){
   testarPrintDate(tcode: string){
     console.log("Data escolhida " + tcode);
     let newDate = tcode.split(" ");
-    let dataInicio = newDate[0]
-    let dataFinal = newDate[2]
+    let dataInicio = newDate[0];
+    let dataFinal = newDate[2];
     console.log("Data de inicio: " + dataInicio);
     console.log("Data final: " + dataFinal);
   }
+
+
+  public getFormData() {
+
+    this.interactionTypes$ = this.http.get(this.apiUrlKpi + 'interactiontype');
+   // this.units$ = this.http.get(this.apiUrlKpi + 'units');
+  // this.managersbyUnit$ = this.http.get(this.apiUrlKpi + 'managers');
+
+    // this.managersbyUnit$ = this.http.get(this.apiUrlKpi + '127.0.0.1:8080/kpiManager/api/users/1/managers');
+
+    this.interactionTypes$.subscribe((interactionType: any[]) => {
+      console.log('interactionType', interactionType);
+    })
+  
+  }
+
 }
+
+
 
 
