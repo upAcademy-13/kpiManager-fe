@@ -11,6 +11,7 @@ var httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json
 export class DataService {
   obs: DataInteraction[] = [];
 
+  apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
 
 
   constructor(private http: HttpClient) {
@@ -18,9 +19,29 @@ export class DataService {
   }
  
 
-  public getAllData(): Observable<DataInteraction[]> {
-    return this.http.get<DataInteraction[]>('http://127.0.0.1:3000/kpiManager/api/interactions/all');
+ public getAllData():Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + 'interactions/all');
   }
+
+  public getAllWeeks():Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'interactions/allWeeks');
+  }
+
+  public getAllClients():Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'interactions/allClients');
+  }
+
+  public getAllBManagers():Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'interactions/allBManagers');
+  }
+
+  public getAllInteractions():Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'interactions/allInteractions');
+  }
+
+ public getAllUnities():Observable<any> {
+   return this.http.get<any>(this.apiUrl + 'interactions/allUnities');
+ }
 
 
 }

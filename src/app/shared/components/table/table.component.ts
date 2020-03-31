@@ -19,6 +19,11 @@ export class TableComponent implements OnInit {
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   @Input() data$: Observable<any[]>;
+  @Input() dataWeek$: Observable<any[]>;
+  @Input() dataClients$: Observable<any[]>;
+  @Input() dataBManagers$: Observable<any[]>;
+  @Input() dataInteractions$: Observable<any[]>;
+  @Input() dataUnities$: Observable<any[]>;
 
   ColumnMode = ColumnMode;
   temp = [];
@@ -66,7 +71,7 @@ export class TableComponent implements OnInit {
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', 'http://127.0.0.1:3000/kpiManager/api/interactions/all');
+    req.open('GET', '  http://127.0.0.1:8080/kpiManager/api/interactions/all');
     req.onload = () => {
       cb(JSON.parse(req.response));
     };
