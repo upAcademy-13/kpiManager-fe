@@ -19,14 +19,16 @@ import {MatSelectModule} from '@angular/material/select';
   declarations: [DashboardComponent, Grafico1Component, Grafico2Component, Grafico3Component, Grafico4Component],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    LayoutModule,
-    MatSelectModule
+    // LayoutModule,
+    MatSelectModule,
+  /*   NgxChartsModule, */
+    DashboardRoutingModule
   ]
 })
+
 export class DashboardModule { }

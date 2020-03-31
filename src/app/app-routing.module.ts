@@ -1,13 +1,21 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { LayoutNavBarComponent } from './layout-nav-bar/layout-nav-bar.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-  //{path: '**', redirectTo: 'dashboard'},
-  {path: 'layout', component: LayoutNavBarComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
+  { 
+    path: 'login', 
+    component: LoginComponent 
+  },
+  { 
+    path: 'layout', 
+    loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule), 
+    canActivate: [AuthGuard] },
+  {
+     path: '**', 
+     redirectTo: 'login' 
+  },
 ];
 
 @NgModule({
