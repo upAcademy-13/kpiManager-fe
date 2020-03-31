@@ -18,7 +18,7 @@ export class PermissionsCOOGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
-      if (this.tokenInfo['role'] == "COO") {
+      if (this.tokenInfo['role'] == "SuperUser") {
         return true;
       } else {
         this.router.navigate(['layout']);

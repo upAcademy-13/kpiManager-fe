@@ -33,7 +33,7 @@ export class CreateUserComponent implements OnInit {
       this.router.navigate(['layout']);
     },
     error => {
-      this.postData= "Erro! Tente novamente";
+      this.postData= error["error"];
     });
   }
 
