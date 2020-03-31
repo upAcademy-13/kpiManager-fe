@@ -24,7 +24,7 @@ export class Grafico4Component implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let massPopChart = new Chart("myChart", {
+    let massPopChart = new Chart("myChart4", {
       type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
       data: {
         labels: ['Cliente1', 'Cliente2', 'Cliente3', 'Cliente4', 'Cliente5', 'Cliente6'],
