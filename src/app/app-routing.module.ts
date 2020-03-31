@@ -7,7 +7,7 @@ const routes: Routes = [
   //{path: '**', redirectTo: 'dashboard'},
   {path: 'layout', component: LayoutNavBarComponent},
   {path: 'login', component: LoginComponent},
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
+  {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
 ];
 
 @NgModule({

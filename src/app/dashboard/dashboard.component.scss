@@ -19,3 +19,68 @@
 .dashboard-card-content {
   text-align: center;
 }
+
+
+.container-100{
+  width: 100%;  
+  min-height: 100vh;
+  background: #e6e6e6;
+  padding: 20px;
+  /* z-index: -2;
+  overflow: hidden; */
+  position: relative;
+
+}
+.container-100::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(173,173,173,0.4);
+  pointer-events: none;
+  
+}
+.central-container{
+  width: 90%; 
+  margin-top: 100px; 
+  margin-left: auto;
+  margin-right: auto;
+  position: relative; 
+  background: #fff;
+  border-radius: 10px;
+  padding: 62px 55px 90px 55px;
+  border: solid #817f7f;
+  border-width: 2px;
+  box-shadow: 10px 10px 5px grey;
+}
+
+.contact100-form-symbol {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #817f7f;
+  border-radius: 50%;
+  background: #fff;
+  top: -45px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.contact100-form-symbol img {
+  max-width: 49px;
+}
+
