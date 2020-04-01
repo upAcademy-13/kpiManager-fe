@@ -1,8 +1,7 @@
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { Observable, observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { User } from 'src/app/core/models/user';
 import * as moment from 'moment';
+import { InteractionsService } from 'src/app/core/services/interactions.service';
 
 
 @Component({
@@ -21,12 +20,12 @@ export class LayoutFormComponent implements OnInit {
   maxDate = new Date();
   selectClient: string; //id do cliente
   selectType: string; //id do tipo de interacao
+  selectUnit: string; // Select Unit
   interactionTemp: any;
   interactionTypeRow = [];
   isAuthorized: Boolean;
   date: any;
-  selectUnit: string; // Select Unit
-  teste: number;
+  idUnit: number;
 
   public currentUser: any;
   public managersByUnit$: Observable<any[]>
@@ -45,28 +44,23 @@ export class LayoutFormComponent implements OnInit {
   public selectPerson: string;
   public numWeek: any;
 
-  private apiUrl: String = 'https://upacademytinder.herokuapp.com/api/users/';
-  private apiUrlKpi: String = 'http://127.0.0.1:8080/kpiManager/api/';
-  // private http: HttpClient   ------ Why doesn't work here? It has something to do with context of the function or something?
-
-  private companySelect: any;
+  
   public btnDisable: boolean = true;
   public btnDisableUnit: boolean = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private interactionService:InteractionsService) {
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
     this.isAuthorized = this.accessVerification();
-
   }
 
   onChange(event) {
     if (event) {
       this.btnDisable = false;
     }
-    this.teste = parseInt(this.selectUnit);
+    this.idUnit = parseInt(this.selectUnit);
     console.log(this.selectUnit);
-    this.managersbyUnit$ = this.http.get(this.apiUrlKpi + 'users/' + parseInt(this.selectUnit) + '/managers');
+    this.managersbyUnit$ = this.interactionService.getManagerByUnit(this.selectUnit);
     this.managersbyUnit$.subscribe((managerByUnit: any[]) => {
       console.log('interactionType', managerByUnit);
     });
@@ -74,54 +68,28 @@ export class LayoutFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFormData();
-
-/*     this.listlength$.subscribe(btnDisable => {
-      if  (this.interactionTypeRow.length != 0){
-        btnDisable = true;
-        console.log(btnDisable);
-      }
-
-    });   Tentativa de pôr um observável para enable/disable Business Manager  */
-
   }
 
   addInteraction(tcode: string) { // tcode here is selectedDate.value no modal do html
 
     this.getCurrentDate(tcode);
     
-    if(this.isAuthorized){
 
     this.interactionTemp = {
-      "nameClient": this.selectClient.split('+')[1],//vai ser o nome do cliente
+      "nameClient": this.selectClient.split('+')[1],
       "idClient": this.selectClient.split('+')[0],
-      "interaction": this.selectType.split('+')[1], //vai ser o tipo da interacao
+      "interaction": this.selectType.split('+')[1], 
       "idInteraction": this.selectType.split('+')[0],
-      "nameUnit": this.selectUnit.split('+')[1],
-      "idUnit": this.selectUnit.split('+')[0],
-      "nameMan": this.selectPerson.split('+')[1],
-      "idMan": this.selectPerson.split('+')[0],
+      "nameUnit": this.isAuthorized ? this.selectUnit.split('+')[1] : "TESTEMANAGER",
+      "idUnit": this.isAuthorized ? this.selectUnit.split('+')[0]: "1",
+      "nameMan": this.isAuthorized ? this.selectPerson.split('+')[1]:this.currentRole[0].username,
+      "idMan": this.isAuthorized ? this.selectPerson.split('+')[0]: "5",
       "week": this.numWeek
     }
-
-    }else {
-      this.interactionTemp = {
-      "nameClient": this.selectClient.split('+')[1],//vai ser o nome do cliente
-      "idClient": this.selectClient.split('+')[0],
-      "interaction": this.selectType.split('+')[1], //vai ser o tipo da interacao
-      "idInteraction": this.selectType.split('+')[0],
-      "nameUnit": "TESTEMANAGER",
-      "idUnit": "1",
-      "nameMan": this.currentRole[0].username,
-      "idMan": "5",
-      "week": this.numWeek
-    }
-
-  }
 
     console.log(this.selectClient);
     console.log(this.interactionTemp.idClient);
     
-
     this.interactionTypeRow.push(this.interactionTemp);
     console.log(this.interactionTypeRow);
 
@@ -139,17 +107,13 @@ export class LayoutFormComponent implements OnInit {
       this.btnDisable = true;
       this.btnDisableUnit = false;
     }
-
   }
-  // I think this should be in a data.service.ts file but for now stays here
 
   public accessVerification() {
 
     let authorized = false;
-    this.userRole$ = this.http.get(this.apiUrl + '?filter={"where":{"username":"ze carlos"}}');
+    this.userRole$ = this.interactionService.getUserRole();
     console.log(this.userRole$);
-
-    //  observable: userRole;
 
     this.userRole$.subscribe((user: any[]) => {
       console.log('userString', user);
@@ -157,17 +121,14 @@ export class LayoutFormComponent implements OnInit {
       if (user[0].role == "director") {
         this.isAuthorized = false;
       }
-
-      this.currentRole = user; //criar array com os valores armazenados 
+      this.currentRole = user; 
     })
 
     if (this.userRole$) {
       authorized = true;
     }
-
     return authorized;
   }
-
 
   public getValues() {
     console.log(this.cliente);
@@ -175,20 +136,17 @@ export class LayoutFormComponent implements OnInit {
   }
 
   sendData() {
-    
     if(this.interactionTypeRow.length == 0){
       this.btnDisable = true;
       this.btnDisableUnit = false;
     }
-
     this.postInteractions(this.interactionTypeRow);
-
   }
 
   public getFormData() {
-    this.interactionTypes$ = this.http.get(this.apiUrlKpi + 'interactiontype');
-    this.clients$ = this.http.get(this.apiUrlKpi + 'clients');
-    this.units$ = this.http.get(this.apiUrlKpi + 'units');
+    this.interactionTypes$ = this.interactionService.getInteractionType();
+    this.clients$ = this.interactionService.getClients();
+    this.units$ = this.interactionService.getUnits();
 
     this.interactionTypes$.subscribe((interactionType: any[]) => {
       console.log('interactionType', interactionType);
@@ -221,16 +179,14 @@ export class LayoutFormComponent implements OnInit {
         "unit" : {"id": interaction.idUnit}
       }
 
-
-       this.http.post(this.apiUrlKpi +'interactions', interactionPOST)
-        .toPromise()
-        .then(inter => {console.log(inter) });
+      this.interactionService.createInteraction(interactionPOST).subscribe(res=>{
+        console.log(res);
+      });
     }
 
   }
 
   getCurrentDate(tcode: string){
-
     console.log("Data escolhida " + tcode);
     let newDate = tcode.split(" ");
     let dataInicio = newDate[0];
