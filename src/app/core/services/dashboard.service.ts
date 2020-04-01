@@ -57,6 +57,13 @@ export class DashboardService {
   /////////////////
   // Funções Ana //
   /////////////////
+
+  public getAllManagers() {
+    return this.http.get(
+      "http://127.0.0.1:8080/kpiManager/api/interactions/allBManagers"
+    );
+  }
+
   public countAllCvsPerWeekPerManager(managerName: String, week: String) {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/cvs/count/" +
