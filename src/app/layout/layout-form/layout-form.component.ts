@@ -250,6 +250,7 @@ export class LayoutFormComponent implements OnInit {
       this.form.nativeElement.reset();
       this.interactionTypeRow = [];
       this.fireSwal.fire();
+      this.btnDisableUnit = false;
 
 
     }
