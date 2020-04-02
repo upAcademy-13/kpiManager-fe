@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { DataInteraction } from 'src/app/core/models/dataInteration';
 import { ViewEncapsulation } from '@angular/core'
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { DataService } from 'src/app/core/services/data.service';
 
 
 
@@ -40,9 +41,12 @@ export class TableComponent implements OnInit {
 
   }
 
-  apiUrl = 'http://127.0.0.1:3000/kpiManager/api/';
+  apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private data: DataService) 
+    {
     this.fetch(data => {
       this.temp = [...data];
       this.rows = data;
@@ -51,10 +55,19 @@ export class TableComponent implements OnInit {
     });
   }
 
+  refreshTabela()
+  {
+    this.isFiltro = false;
+    this.data.getAllData().subscribe(res => {
+      console.log('AllData = ', res);
+      this.rows = [...res];
+    });
+  }
+
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', '  http://127.0.0.1:3000/kpiManager/api/interactions/all');
+    req.open('GET', '  http://127.0.0.1:8080/kpiManager/api/interactions/all');
     req.onload = () => {
       cb(JSON.parse(req.response));
     };
