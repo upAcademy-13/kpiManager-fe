@@ -1,11 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { switchMap, map } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+
 
 @Injectable({
   providedIn: "root"
 })
 export class DashboardService {
-  constructor(private http: HttpClient) {}
+  constructor(public http: HttpClient) {}
 
   ////////////////////
   // Funções Micael //
@@ -61,7 +64,17 @@ export class DashboardService {
   public getAllManagers() {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/allBManagers"
-    );
+    ).pipe(
+      switchMap((managers: any[]) => forkJoin(
+        managers.map(manager => this.countAllCvsPerWeekPerManager(manager, "2020")
+        .pipe(
+          map(cvNumber => {
+            return {manager, cvNumber}
+          })
+        ))
+      ))
+    )
+    
   }
 
   public countAllCvsPerWeekPerManager(managerName: String, week: String) {
@@ -72,6 +85,19 @@ export class DashboardService {
         week
     );
   }
+
+  // function example() {
+  //   return source.pipe(
+  //      mergeMap(elements => forkJoin(
+  //        elements.map(element => getLocations(element.id).pipe(
+  //          map(cvs => {
+  //            return {value: cvs, name: element.name};
+  //          })
+  //        ))
+  //      ))
+  //    )
+  //  }
+
 
   //Apenas usar para preencher filtros da tabela, não necessário para gráficos
   public getAllCvsPerManagerPerWeek(managerName: String, week: String) {
