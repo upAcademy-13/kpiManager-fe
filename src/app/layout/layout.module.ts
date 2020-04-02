@@ -6,6 +6,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutFormComponent } from './layout-form/layout-form.component';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     CommonModule,
     LayoutRoutingModule,
     FormsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    SweetAlert2Module.forRoot()
   ]
 })
 export class LayoutModule { } 

@@ -1,50 +1,48 @@
-
 <div class="container-100">
-<div class="central-container"> 
+<div id="formVisible" class="central-container"> 
     <span class="contact100-form-symbol">
         <img src="assets/imagens/interaction-icon.png" >
     </span> 
-    <h1 class="form-title text-center ">INTERAÇÕES </h1>
-
-<form>
-    <div class="form-row"> <label for="inputSemana">Semana do ano:</label></div>
-    
-
+    <h1 class="form-title text-center ">INTERACTIONS</h1>
+    <!--ng-valid ng-dirty ng-touched-->
+<form #formularioInteraction>
+    <div class="form-row"> <label for="inputSemana">Interaction Week:</label></div>
 
     <div class="row">
-      <div class="col form-group">
-        <input #selectedDate 
+      <div class="col form-group"><!--LINHA 17: NGCLASS transforma a classe dependente do erro-->
+        <input #selectedDate
               type="text"
-              placeholder="Select Date"
-              class="form-control"
+              (focusin)="validateError(selectedDate.value)"
+              placeholder="{{placeHolderText}}"
+              [ngClass]="{'form-control' : !hasError, 'animated bounce error' : hasError}"
               bsDaterangepicker
               [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-orange'}">
       </div>
     </div> 
 
-
-
   <div *ngIf="isAuthorized" class="form-group">
-    <label for="inputUnidade">Unidade:</label>
-    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" [(ngModel)]="selectUnit" name="selectUnit" [disabled]="btnDisableUnit" (ngModelChange)="onChange($event)">
+    <label for="inputUnidade">Unit:</label>
+    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref2" [(ngModel)]="selectUnit" name="selectUnit" [disabled]="btnDisableUnit" (ngModelChange)="onChange($event)">
+      <option [ngValue]="undefined" disabled  selected>Please select one unit</option>
       <option *ngFor="let unit of units$ | async ; let i = index" value="{{unit.id}}+{{unit.nameUnit}}">{{unit.nameUnit}}</option>
     </select>
   </div>
   <div *ngIf='isAuthorized' class="form-group">
     <label for="inputAddress2">Business Manager: </label>
-    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" [(ngModel)]="selectPerson" name="selectPerson" [disabled]="btnDisable">
-        <option *ngFor="let man of managersbyUnit$ | async ; let i = index" value="{{man.id}}+{{man.username}}">{{man.username}}</option>
-    </select>
+    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" [(ngModel)]="selectPerson" name="selectPerson" [disabled]="btnDisable" (click)="removeBorder()" >
+      <option [ngValue]="undefined" disabled  selected>Please select one manager</option>  
+      <option *ngFor="let man of managersbyUnit$ | async ; let i = index" value="{{man.id}}+{{man.name}}">{{man.name}}</option>
+     </select>
   </div>
-  <div class="form-row">
-    <button type="button" class="form-add-btn" data-toggle="modal" data-target="#exampleModal"> Add interactions <img src="assets/imagens/add-icon1.png" width="20" height="20"> </button>
+  <div class="text-center">
+    <button style="background-color: #e46310; border-color: #fca772;" id="modalButton" (click)="checkFields(selectedDate.value)" class="btn-primary btn-lg mr-auto"  data-target="#exampleModal"> Add Interactions <img class="ml-2" src="assets/imagens/iconMore.png" width="25" height="25"> </button>
   </div>
   
   <table class="table mt-3" id="tableInteractions" >
     <thead class="thead-light">
       <tr >
-        <th scope="col">Client</th> 
-        <th scope="col">Tipo de interacao</th>
+        <th scope="col">Client</th>
+        <th scope="col">Type of interactions</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -52,7 +50,7 @@
         <tr *ngFor="let col of interactionTypeRow; let i = index">
         <td>{{col.nameClient}}</td>
         <td>{{col.interaction}}</td>
-        <td><button class="btn btn-danger" (click)="delRow(i)">Del</button></td>
+        <td><button class="btn btn-danger" (click)="delRow(i)"><img src="assets/imagens/trashIcon.png" width="25" height="25"></button></td>
       </tr>
     </tbody>
   </table>
@@ -73,11 +71,12 @@
           <div class="row">
 
         <div class="dropdown show col-sm">
-          <select class="custom-select my-1 mr-sm-2" type="number" id="selectionClient" [(ngModel)]="selectClient" name="selectClient">
-            <option selected>Selecione o cliente</option>
+          <select (click)="removeBorderCliente()"  class="custom-select my-1 mr-sm-2" type="number" id="selectionClient" [(ngModel)]="selectClient" name="selectClient">
+            <option [ngValue]="undefined" disabled  selected>Select the client</option>  
             <option *ngFor="let client of clients$ | async ; let i = index" value = "{{client.id}}+{{client.name}}" >{{client.name}}</option>
         </select>
-        <select class="custom-select my-1 mr-sm-2" type="number" id="selectionType" [(ngModel)]="selectType" name="selectType" >
+        <select (click)="removeBorderInteraction()" class="custom-select my-1 mr-sm-2" type="number" id="selectionType" [(ngModel)]="selectType" name="selectType" >
+          <option [ngValue]="undefined" disabled  selected>Select the interaction</option>  
           <option *ngFor="let int of interactionTypes$ | async ; let i = index" value="{{int.id}}+{{int.interactionType}}">{{int.interactionType}}</option>
       </select>
     </div>
@@ -86,16 +85,33 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="addInteraction(selectedDate.value)">Save changes</button>
+        <button type="button" style="background-color:#a7a6a5; border-style: none;" class="btn btn-secondary"  data-dismiss="modal">Close</button>
+        <button type="button" style="background-color: #e46310; border-style: none;" class="btn btn-primary" (click)="addInteraction(selectedDate.value)">Save changes</button>
       </div>
     </div>
   </div>
 </div>
-  <div class="form-row">
-    <button (click)="sendData()" type="submit" class="form-btn">Enviar   <img src="assets/imagens/add-icon1.png" width="20" height="20"> </button>
+  <div>
+    <button (click)="sendData(selectedDate.value)" type="submit" style="background-color: #e46310; border-color: #fca772;" class="btn-primary btn-lg btn-block">Send<img class="ml-2" src="assets/imagens/sendIcon.png" width="25" height="25"> </button>
   </div>
 
+<swal
+  #fireSwal
+  positio='top-end'
+  icon='success'
+  title='Your interaction has been saved'
+  showConfirmButton='false'
+  timer='1500'>
+</swal>
+
+<swal
+  #errorSwal
+  positio='top-end'
+  icon='error'
+  title='Must fill all fields'
+  showConfirmButton='true'
+  timer='1500'>
+</swal>
 </form>
 </div>
 </div>
