@@ -1,11 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { forkJoin } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root"
 })
 export class DashboardService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ////////////////////
   // Funções Micael //
@@ -19,7 +21,7 @@ export class DashboardService {
   public countAllInteractionsPerUnit(unit: String) {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/count/interactions?unit=" +
-        unit
+      unit
     );
   }
 
@@ -42,7 +44,7 @@ export class DashboardService {
   public countAllInteractionsPerInteractionType(interactionType: String) {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/count/interactions?interactionType" +
-        interactionType
+      interactionType
     );
   }
 
@@ -50,7 +52,7 @@ export class DashboardService {
   public getAllInteractionsPerInteractionType(interactionType: String) {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/allInteractionsFilter/" +
-        interactionType
+      interactionType
     );
   }
 
@@ -60,9 +62,9 @@ export class DashboardService {
   public countAllCvsPerWeekPerManager(managerName: String, week: String) {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/cvs/count/" +
-        managerName +
-        "?week=" +
-        week
+      managerName +
+      "?week=" +
+      week
     );
   }
 
@@ -70,9 +72,9 @@ export class DashboardService {
   public getAllCvsPerManagerPerWeek(managerName: String, week: String) {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/cvs/" +
-        managerName +
-        "?week=" +
-        week
+      managerName +
+      "?week=" +
+      week
     );
   }
 
@@ -83,13 +85,22 @@ export class DashboardService {
   public getAllClientNames() {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/allClients"
-    );
+    ).pipe(
+      switchMap((clients: any[]) => forkJoin(
+        clients.map(client => this.countAllInteractionsPerClient(client)
+          .pipe(
+            map(interactions => {
+              return { client, interactions }
+            }
+            ))
+        ))
+      ))
   }
 
   public countAllInteractionsPerClient(clientName: String) {
     return this.http.get(
-      "http://127.0.0.1:8080/kpiManager/api/interactions/count/interactions?clientName" +
-        clientName
+      "http://127.0.0.1:8080/kpiManager/api/interactions/count/interactions?clientName=" +   // Ex: ?clientName=ClientDois
+      clientName
     );
   }
 
@@ -97,7 +108,7 @@ export class DashboardService {
   public getAllInteractionsPerClient(clientName: String) {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/allClientsFilter/" +
-        clientName
+      clientName
     );
   }
 }
