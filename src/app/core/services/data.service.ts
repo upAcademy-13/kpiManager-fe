@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { DataInteraction } from '../models/dataInteration';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 
 var httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json" }) }
 
@@ -42,6 +42,5 @@ export class DataService {
  public getAllUnities():Observable<any> {
    return this.http.get<any>(this.apiUrl + 'interactions/allUnities');
  }
-
 
 }

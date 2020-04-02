@@ -34,7 +34,6 @@ export class StatisticsComponent implements OnInit {
   ngOnInit() {
     // console.log("obj",this.obs);
     // this.dataInteration$ = this.data.getAllData();
-  
 
     this.allData$ = this.data.getAllData();    
     this.allWeek$ = this.data.getAllWeeks();
