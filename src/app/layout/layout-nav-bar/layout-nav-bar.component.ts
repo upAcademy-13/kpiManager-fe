@@ -14,10 +14,13 @@ export class LayoutNavBarComponent implements OnInit {
     private router: Router
   ) { }
 
+  username;
   tokenInfo;  
   ngOnInit(): void {
     const token = localStorage.getItem("token");
     this.tokenInfo = this.auth.getDecodedAccessToken(token); 
+    this.username = this.tokenInfo['iss'];
+    
   }
 
   logOut(){

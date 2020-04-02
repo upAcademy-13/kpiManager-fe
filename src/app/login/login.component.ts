@@ -20,6 +20,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.user.username = '';
     this.user.password = '';
+
+    if (this.auth.isAuthenticated()) {
+      this.router.navigate(['/layout']);
+    } 
   }
 
   unauthorized;
