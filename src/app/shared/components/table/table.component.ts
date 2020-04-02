@@ -41,7 +41,7 @@ export class TableComponent implements OnInit {
 
   }
 
-  apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
+  apiUrl = 'http://127.0.0.1:3000/kpiManager/api/';
 
   constructor(
     private http: HttpClient,
@@ -62,12 +62,13 @@ export class TableComponent implements OnInit {
       console.log('AllData = ', res);
       this.rows = [...res];
     });
+    this.filterClearSelect();
   }
 
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', '  http://127.0.0.1:8080/kpiManager/api/interactions/all');
+    req.open('GET', '  http://127.0.0.1:3000/kpiManager/api/interactions/all');
     req.onload = () => {
       cb(JSON.parse(req.response));
     };
