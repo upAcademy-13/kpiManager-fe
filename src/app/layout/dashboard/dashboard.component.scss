@@ -19,3 +19,13 @@
 .dashboard-card-content {
   text-align: center;
 }
+
+p {
+  font-family: Lato;
+}
+
+mat-card {
+  width: calc(100% - 70px);
+  height: calc(100% - 70px);
+}
+

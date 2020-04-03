@@ -1,15 +1,15 @@
- <div [hidden]="!escondido" (click)="graphClickEvent($event)"  class="chart-container" style="position: relative; height:40vh; width:80vw">
+ <div style="width: 100%; height: 100px" [hidden]="!escondido"  (click)="graphClickEvent($event)"  class="chart-container" style="position: relative">
 <canvas #myChart ></canvas>
 </div>
 
-<div [hidden]="escondido" class="chart-container" style="position: relative; height:40vh; width:80vw">
-<canvas (click)="graficoInicial()"  #myDetail></canvas>
-<button (click)="graficoInicial()"  >VOLTAR PARA GRÁFICO INICIAL</button>
+<div  style="width: 100%; height: 100px" [hidden]="escondido" class="chart-container" style="position: relative;">
+<canvas (click)="graficoInicial()"  #myDetail ></canvas>
+<button (click)="graficoInicial()"  >Voltar Ao Gráfico Inicial</button>
 </div>
 
 <!--  <ngx-charts-bar-vertical 
 [view]="view"
-[scheme]="colorScheme"
+[scheme]="colorScheme"rowHeight="350px"
 [results]="single"
 [gradient]="gradient"
 [xAxis]="showXAxis"

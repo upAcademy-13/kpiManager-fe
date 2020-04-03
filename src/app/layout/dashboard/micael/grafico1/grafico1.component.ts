@@ -1,5 +1,8 @@
+import { Router } from '@angular/router';
+import { AuthService } from './../../../../core/services/auth.service';
 import {Chart} from 'chart.js';
 import {Component, OnInit, ViewChild, ElementRef, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__} from '@angular/core';
+import { DashboardService } from 'src/app/core/services/dashboard.service';
 @Component({
   selector: 'app-dashboard-grafico1',
   templateUrl: './grafico1.component.html',
@@ -7,9 +10,11 @@ import {Component, OnInit, ViewChild, ElementRef, ɵSWITCH_VIEW_CONTAINER_REF_FA
 })
 export class Grafico1Component implements OnInit {
 
+  constructor(private ds: DashboardService, private router: Router  ) { }
+
 listaDetalhada: any [];
-colunas: string [];
-valores: number [];
+colunas: string [] = [];
+valores: number [] = [];
 
 escondido = true;
 @ViewChild('myChart', {static: true}) element: ElementRef;
@@ -17,14 +22,22 @@ escondido = true;
 
   myChart: any;
   myDetail: any;
+
   ngOnInit(): void {
-    this.myChart = new Chart(this.element.nativeElement, {
+
+   this.ds.getAllUnits().subscribe(dados => {
+     this.listaDetalhada = dados; console.log(this.listaDetalhada); 
+     for (const row of this.listaDetalhada) {
+      this.colunas.push(row.nome);
+      this.valores.push(row.valor);
+    } 
+     this.myChart = new Chart(this.element.nativeElement, {
       type: 'bar',
       data: {
-        labels: ['Unidade_A', 'Unidade_B', 'Unidade_C', 'Unidade_D', 'Unidade_E', 'Unidade_F', 'Nearshore', 'Porto' ],
+        labels: this.colunas, // ['Unidade_A', 'Unidade_B', 'Unidade_C', 'Unidade_D', 'Unidade_E', 'Unidade_F', 'Nearshore', 'Porto' ],
         datasets: [{
-          label: 'Distribuiçã Salarial da Aubay',
-          data: [3000, 2000, 4000, 3050, 2500, 1500],
+          label: 'Distribuição Salarial da Aubay',
+          data: this.valores,        // [3000, 2000, 4000, 3050, 2500, 1500],
           backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -46,16 +59,41 @@ escondido = true;
 
       },
 
+
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+
+
     });
+  
+  } );
+
+
+   
+
+   console.log(this.listaDetalhada);
+
   }
 
   graphClickEvent(event) {
   const idClicado: number = this.myChart.chart.getElementAtEvent(event)[0]._index;
   this.desenhaDetalhe(idClicado);
-  console.log(idClicado);
+  this.router.navigate(['action-selection'], { state: { labelClicado: idClicado } });  console.log(idClicado);
 }
 
+// this.router.getCurrentNavigation().extras.state.example ( para eles aplicarem )
+
 desenhaDetalhe(clicado: number) {
+
   const barraClicada: number = clicado;
   const labelNovo: string [ ] = ['Unidade_AAA', 'Unidade_B', 'Unidade_C', 'Unidade_D', 'Unidade_E', 'Unidade_F', 'Nearshore', 'Porto' ];
   const dadoNovo: any [ ] = [3000, 2000, 1400, 3050, 2500, 1500, 21545, 8656];
@@ -65,7 +103,7 @@ desenhaDetalhe(clicado: number) {
     data: {
       labels: labelNovo ,
       datasets: [{
-        label: 'Distribuiçã Salarial da Mota Engil São Tomé',
+        label: 'Distribuição Salarial da Mota Engil São Tomé',
         data: dadoNovo,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -92,17 +130,17 @@ desenhaDetalhe(clicado: number) {
   this.escondido = !this.escondido;
 
   // tslint:disable-next-line: deprecation
-  
+
 }
 
 graficoInicial() {
-  this.ngOnInit();
+  
   this.escondido = true;
   console.log(this.escondido);
 }
 
 getListadetalhada(id: number) {
-  //pega id da coluna clicada
+  // pega id da coluna clicada
   // retorna a lista de objecos com nome de cada interaçao
   // e valor total dentro da iteraçao.
 }
