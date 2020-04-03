@@ -1,45 +1,4 @@
-.btn-primary {
-    color: white;
-    background-color: #e46310;
-    border-color: #e46310;
-  }
-
-.btn-outline-primary {
-    color: #e46310;
-    border-color: #e46310;
-  }
-
-.btn-primary:hover{
-      background-color: #913902;
-      border-color: #913902;
-  }
-
-.btn-primary:active,
-.btn-primary:focus
-.btn-primary:visited{
-    background-color: #eca173 !important;
-    border-color: #eca173 !important;
-}
-
-.btn-outline-primary:hover{
-    background-color: #e46310;
-    border-color: #e46310;
-}
-
-.btn-outline-primary:active,
-.btn-outline-primary:focus,
-.btn-outline-primary:visited{
-    background-color:  #eca173 !important;
-    border-color:  #eca173 !important;
-}
-  
-.navbar li a:hover {
-    border-bottom: 1px solid #e46310;
-}
-
-.navbar li a:active {
-    border-bottom: 1px solid #e46310;
-}
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
 .container-100{
     width: 100%;  
@@ -72,7 +31,7 @@
     position: relative; 
     background: #fff;
     border-radius: 10px;
-    padding: 62px 55px 90px 55px;
+    padding: 62px 55px 50px 55px;
     border: solid #817f7f;
     border-width: 2px;
     box-shadow: 10px 10px 5px grey;
@@ -88,23 +47,31 @@
     margin-top:  auto;
 
 }
+
 .form-add-btn:hover {
     background-color: #00ad5f;
 }
+
 .form-btn{
     align-items: center;
     padding: 0 20px;
-    width: 100%;
+    width: 94%;
     height: 50px;
     background-color: #333333;
     border-radius: 10px;
     margin-top: 20px;
     color: #e6e6e6;
 }
+
 .form-btn:hover {
     background-color:#F95102;
 }
-label{
+
+h1 {
+    margin-bottom: 2rem;
+}
+
+h6{
     color: #F95102;
     font-size: 20px;
 }
@@ -134,25 +101,3 @@ label{
   .contact100-form-symbol img {
     max-width: 49px;
   }
-
-  bs-daterangepicker-inline .theme-green .bs-datepicker-head {
-    background-color: darkorange;
-}
-
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td span.selected,
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td.selected span,
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td span[class*="select-"]:after,
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td[class*="select-"] span:after {
-  background-color: darkorange; }
-
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td.week span {
-  color: darkorange; 
-}
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td.active-week span:hover {
-    cursor: pointer;
-    background-color: darkorange;;
-    color: #fff;
-    opacity: 0.5;
-    transition: 0s; }
-
-  @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";

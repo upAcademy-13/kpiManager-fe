@@ -31,7 +31,10 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@swimlane/ngx-datatable/index.css",
               "./node_modules/@swimlane/ngx-datatable/themes/material.css",
-              "./node_modules/@swimlane/ngx-datatable/assets/icons.css"
+              "./node_modules/@swimlane/ngx-datatable/assets/icons.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -95,6 +98,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/app/createUser/createUser.component.scss",
               "src/styles.scss"
             ],
             "scripts": []

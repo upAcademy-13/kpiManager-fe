@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -9,13 +8,20 @@ import { SharedModule } from '../shared/shared.module';
 import { LayoutNavBarComponent } from './layout-nav-bar/layout-nav-bar.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
+import { LayoutRoutingModule } from './layout-routing.module';
+import { CreateUserComponent } from './createUser/createUser.component';
+import { LayoutFormComponent } from './layout-form/layout-form.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 @NgModule({
   declarations: [
-    LayoutComponent,
-    StatisticsComponent,
-    LayoutNavBarComponent
+    LayoutComponent, 
+    LayoutNavBarComponent,
+    CreateUserComponent,
+    LayoutFormComponent,
+    StatisticsComponent
   ],
   imports: [
     CommonModule,
@@ -23,8 +29,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxDatatableModule
-
+    NgxDatatableModule,
+    BsDatepickerModule.forRoot(),
+    SweetAlert2Module.forRoot()
   ]
 })
 

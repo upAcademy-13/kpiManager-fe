@@ -18,17 +18,27 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user.username = 'COO';
-    this.user.password = 'COO123';
+    this.user.username = '';
+    this.user.password = '';
+
+    if (this.auth.isAuthenticated()) {
+      this.router.navigate(['/layout']);
+    } 
   }
 
+  unauthorized;
   login() {
-    console.log('login', this.user);
-   /*  this.auth.login(this.user).subscribe( res => {
+    this.auth.login(this.user).subscribe((res:any) =>   {
       console.log('resultado', res);
-    }); */
-    this.router.navigate(['layout']);
-    
+      
+      this.auth.setCurrentToken(res); 
+      localStorage.setItem("token", res);
+
+      this.router.navigate(['layout']);
+    }, 
+    error => {
+      this.unauthorized = "Username ou password incorrecta!";
+    });
   }
 
 }
