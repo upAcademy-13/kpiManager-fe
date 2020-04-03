@@ -42,29 +42,29 @@ export class StatisticsComponent implements OnInit {
     this.allInteractions$ = this.data.getAllInteractions();
     this.allUnities$ = this.data.getAllUnities();
 
-    this.data.getAllData().subscribe(res => {
-      console.log('AllData = ', res);
-    });
+    // this.data.getAllData().subscribe(res => {
+    //   console.log('AllData = ', res);
+    // });
 
-    this.data.getAllWeeks().subscribe(res => {
-      console.log('AllWeeks = ', res);
-    });
+    // this.data.getAllWeeks().subscribe(res => {
+    //   console.log('AllWeeks = ', res);
+    // });
 
-    this.data.getAllClients().subscribe(res => {
-      console.log('ALLCLIENTES = ', res);
-    });
+    // this.data.getAllClients().subscribe(res => {
+    //   console.log('ALLCLIENTES = ', res);
+    // });
 
-    this.data.getAllBManagers().subscribe(res => {
-      console.log('ALLBManager = ', res);
-    });
+    // this.data.getAllBManagers().subscribe(res => {
+    //   console.log('ALLBManager = ', res);
+    // });
 
-    this.data.getAllInteractions().subscribe(res => {
-      console.log('ALLInteractions = ', res);
-    });
+    // this.data.getAllInteractions().subscribe(res => {
+    //   console.log('ALLInteractions = ', res);
+    // });
 
-    this.data.getAllUnities().subscribe(res => {
-      console.log('ALLUnities = ', res);
-    });
+    // this.data.getAllUnities().subscribe(res => {
+    //   console.log('ALLUnities = ', res);
+    // });
   }
 
 

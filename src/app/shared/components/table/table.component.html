@@ -75,7 +75,7 @@
           [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"'>
         </ngx-datatable>
 
-        <ngx-datatable-footer>
+
 
           <div class="footer row" style=" padding: 5px 10px">
             <div class="col-5"><strong> Número total de interações de:</strong> {{(filtro$ | async)?.length}}</div>
@@ -84,7 +84,7 @@
             </div>
 
           </div>
-        </ngx-datatable-footer>
+     
 
       </div>
 
@@ -97,8 +97,6 @@
 
         </ngx-datatable>
 
-        <ngx-datatable-footer>
-
           <div class="footer row" style=" padding: 5px 10px">
             <div class="col-5"><strong> Número total de interações de:</strong> {{(rows).length}}</div>
             <div class="col-4 offset-3 text-right">
@@ -106,8 +104,6 @@
             </div>
 
           </div>
-
-        </ngx-datatable-footer>
 
       </div>
 

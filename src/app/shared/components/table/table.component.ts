@@ -37,11 +37,10 @@ export class TableComponent implements OnInit {
   isFiltro: boolean = false;
 
   ngOnInit() {
-     this.rows;
-
+     this.rows;     
   }
 
-  apiUrl = 'http://127.0.0.1:3000/kpiManager/api/';
+  apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
 
   constructor(
     private http: HttpClient,
@@ -60,15 +59,17 @@ export class TableComponent implements OnInit {
     this.isFiltro = false;
     this.data.getAllData().subscribe(res => {
       console.log('AllData = ', res);
-      this.rows = [...res];
+      this.temp = [...res];
     });
+    this.rows = this.temp;
     this.filterClearSelect();
+    
   }
 
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', '  http://127.0.0.1:3000/kpiManager/api/interactions/all');
+    req.open('GET', '  http://127.0.0.1:8080/kpiManager/api/interactions/all');
     req.onload = () => {
       cb(JSON.parse(req.response));
     };
@@ -206,6 +207,7 @@ export class TableComponent implements OnInit {
     select[2].selectedIndex = 0;
     select[3].selectedIndex = 0;
     select[4].selectedIndex = 0;
+    this.isFiltro = false;
   }
 
 
