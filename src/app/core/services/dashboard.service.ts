@@ -86,18 +86,6 @@ export class DashboardService {
     );
   }
 
-  // function example() {
-  //   return source.pipe(
-  //      mergeMap(elements => forkJoin(
-  //        elements.map(element => getLocations(element.id).pipe(
-  //          map(cvs => {
-  //            return {value: cvs, name: element.name};
-  //          })
-  //        ))
-  //      ))
-  //    )
-  //  }
-
 
   //Apenas usar para preencher filtros da tabela, não necessário para gráficos
   public getAllCvsPerManagerPerWeek(managerName: String, week: String) {

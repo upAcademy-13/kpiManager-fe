@@ -34,17 +34,18 @@ export class Grafico3Component implements OnInit {
 
     this.dashboard.getAllManagers().subscribe((data: any[])=>{
         console.log(data);     
-        data.forEach((res => this.managers.push(res.manager))) 
-        console.log("é este", this.managers); 
-        data.forEach((res => this.cvs.push(res.cvNumber))) 
-
+        data.forEach(cvPerManager => { 
+          this.managers.push(cvPerManager.manager)
+          this.cvs.push(cvPerManager.cvNumber) 
+        });
+        
+        
         let myChart = new Chart('cvChart', {
           type: 'horizontalBar',
           data: {
-                // labels: ['Manager1', 'Manager2', 'Manager3', 'Manager4', 'Manager5'],
                 labels: this.managers,
               datasets: [{
-                  label: 'Número de CV enviados',
+                  label: 'Number of sent CV"s',
                   data: this.cvs,
                   backgroundColor: [
                       '#F26609',
