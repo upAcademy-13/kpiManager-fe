@@ -23,19 +23,19 @@
   <div *ngIf="isAuthorized" class="form-group">
     <label for="inputUnidade">Unit:</label>
     <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref2" [(ngModel)]="selectUnit" name="selectUnit" [disabled]="btnDisableUnit" (ngModelChange)="onChange($event)">
-      <option [ngValue]="undefined" disabled  selected>Please select one unit</option>
+      <option [ngValue]="undefined" disabled hidden selected>Please select one unit</option>
       <option *ngFor="let unit of units$ | async ; let i = index" value="{{unit.id}}+{{unit.nameUnit}}">{{unit.nameUnit}}</option>
     </select>
   </div>
   <div *ngIf='isAuthorized' class="form-group">
     <label for="inputAddress2">Business Manager: </label>
     <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" [(ngModel)]="selectPerson" name="selectPerson" [disabled]="btnDisable" (click)="removeBorder()" >
-      <option [ngValue]="undefined" disabled  selected>Please select one manager</option>  
+      <option [ngValue]="undefined" disabled hidden selected>Please select one manager</option>  
       <option *ngFor="let man of managersbyUnit$ | async ; let i = index" value="{{man.id}}+{{man.name}}">{{man.name}}</option>
      </select>
   </div>
-  <div class="text-center">
-    <button style="background-color: #e46310; border-color: #fca772;" id="modalButton" (click)="checkFields(selectedDate.value)" class="btn-primary btn-lg mr-auto"  data-target="#exampleModal"> Add Interactions <img class="ml-2" src="assets/imagens/iconMore.png" width="25" height="25"> </button>
+  <div class="text-right">
+    <button style="background-color: #e46310; border-color: #fca772;" id="modalButton" (click)="checkFields(selectedDate.value)" class="btn-primary btn-lg"  data-target="#exampleModal"> Add Interactions <img class="ml-2" src="assets/imagens/iconMore.png" width="25" height="25"> </button>
   </div>
   
   <table class="table mt-3" id="tableInteractions" >
@@ -72,11 +72,11 @@
 
         <div class="dropdown show col-sm">
           <select (click)="removeBorderCliente()"  class="custom-select my-1 mr-sm-2" type="number" id="selectionClient" [(ngModel)]="selectClient" name="selectClient">
-            <option [ngValue]="undefined" disabled  selected>Select the client</option>  
+            <option [ngValue]="undefined" disabled hidden selected>Select the client</option>  
             <option *ngFor="let client of clients$ | async ; let i = index" value = "{{client.id}}+{{client.name}}" >{{client.name}}</option>
         </select>
         <select (click)="removeBorderInteraction()" class="custom-select my-1 mr-sm-2" type="number" id="selectionType" [(ngModel)]="selectType" name="selectType" >
-          <option [ngValue]="undefined" disabled  selected>Select the interaction</option>  
+          <option [ngValue]="undefined" disabled hidden selected>Select the interaction</option>  
           <option *ngFor="let int of interactionTypes$ | async ; let i = index" value="{{int.id}}+{{int.interactionType}}">{{int.interactionType}}</option>
       </select>
     </div>

@@ -66,6 +66,8 @@ export class LayoutFormComponent implements OnInit {
 
   onChange(event) {
 
+    this.selectPerson = undefined;
+    
     if(this.selectUnit != null){
 
       let teste = document.getElementById("inlineFormCustomSelectPref2");
