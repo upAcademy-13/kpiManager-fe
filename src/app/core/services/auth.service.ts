@@ -30,4 +30,10 @@ export class AuthService {
     }
   }
 
+getUnidade(){
+
+return this.http.get("http://127.0.0.1:8080/kpiManager/api/interactions/allWeeks")
+
+}
+
 }
