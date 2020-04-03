@@ -14,33 +14,33 @@ const routes: Routes = [
       {
         path: "dashboard",
         loadChildren: () =>
-          import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
+          import("./dashboard/dashboard.module").then(m => m.DashboardModule)
       },
       {
         path: "create",
         component: CreateUserComponent,
-        canActivate: [PermissionsCOOGuard],
+        canActivate: [PermissionsCOOGuard]
       },
       {
         path: "layoutform",
-        component: LayoutFormComponent,
+        component: LayoutFormComponent
       },
       {
         path: "statistics",
-        component: StatisticsComponent,
+        component: StatisticsComponent
       },
-      /*  {
+     /*  {
         path: "",
         redirectTo: "layoutform",
         pathMatch: "full"
       }, */
-      { path: "", redirectTo: "dashboard", pathMatch: "full" },
-    ],
-  },
+      { path: "**", redirectTo: "dashboard" }
+    ]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class LayoutRoutingModule {}
