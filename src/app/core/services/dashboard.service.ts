@@ -1,5 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { of, Observable, forkJoin } from "rxjs";
+import { switchMap, map, tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -34,14 +36,26 @@ export class DashboardService {
   // Funções Filipe //
   ////////////////////
   public getAllInteractionTypes() {
-    return this.http.get(
-      "http://127.0.0.1:8080/kpiManager/api/interactions/allInteractions"
-    );
+    return this.http
+      .get("http://127.0.0.1:8080/kpiManager/api/interactions/allInteractions")
+      .pipe(
+        switchMap((interactionTypes: any[]) =>
+          forkJoin(
+            interactionTypes.map(interactions =>
+              this.countAllInteractionsPerInteractionType(interactions).pipe(
+                map(count => {
+                  return { interactions, count };
+                })
+              )
+            )
+          )
+        )
+      );
   }
 
   public countAllInteractionsPerInteractionType(interactionType: String) {
     return this.http.get(
-      "http://127.0.0.1:8080/kpiManager/api/interactions/count/interactions?interactionType" +
+      "http://127.0.0.1:8080/kpiManager/api/interactions/count/interactions?interactionType=" +
         interactionType
     );
   }

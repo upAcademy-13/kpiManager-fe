@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef } from "@angular/core";
 import { Chart } from "chart.js";
+import { DashboardService } from 'src/app/core/services/dashboard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: "grafico2",
@@ -8,12 +10,20 @@ import { Chart } from "chart.js";
 })
 export class Grafico2Component implements OnInit {
   myChart: any;
-  constructor(private elementRef: ElementRef) {}
+  interactionTypes = [];
+  interactionsCount = [];
+  constructor(private elementRef: ElementRef, private dbService: DashboardService) {}
 
   ngOnInit(): void {
-    this.chartit();
+    this.dbService.getAllInteractionTypes().subscribe((data: any[]) => {     
+      data.forEach(interactionType => { 
+        this.interactionTypes.push(interactionType.interactions)
+        this.interactionsCount.push(interactionType.count)
+      });
+      this.chartit();
+    })
   }
-
+  
   graphClickEvent(event) {
     console.log("Entrei.",this.myChart.getElementAtEvent(event));
   }
@@ -21,24 +31,11 @@ export class Grafico2Component implements OnInit {
     this.myChart = new Chart("myChart", {
       type: "bar",
       data: {
-        labels: [
-          "Pedido",
-          "Cv Enviado",
-          "Entrevista",
-          "Aprovação",
-          "Proposta aceite",
-          "Proposta recusada",
-          "Saída",
-          "Ponto de situação",
-          "Realocações-receber",
-          "Realocações - Dar",
-          "Reuniões cliente",
-          "Negócio abaixo 32%"
-        ],
+        labels: this.interactionTypes,
         datasets: [
           {
             label: "Numero de interações",
-            data: [12, 19, 3, 5, 2, 3, 5, 9, 10, 23, 4, 13],
+            data: this.interactionsCount,
             backgroundColor: [
               "rgba(255, 99, 132, 0.5)",
               "rgba(54, 162, 235, 0.5)",
