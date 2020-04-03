@@ -30,8 +30,11 @@ export class Grafico4Component implements OnInit {
 
     this.dashboard.getAllClientNames().subscribe((data: any[]) => {
       console.log(data);
-      data.forEach((res => this.client.push(res.client)))
-      data.forEach((res => this.interactions.push(res.interactions)))
+
+      data.forEach(clients => {
+        this.client.push(clients.client)
+        this.interactions.push(clients.interactions)
+      });
 
       let massPopChart = new Chart("myChart4", {
         type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
