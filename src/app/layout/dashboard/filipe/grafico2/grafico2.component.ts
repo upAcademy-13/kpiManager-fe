@@ -34,7 +34,7 @@ export class Grafico2Component implements OnInit {
         labels: this.interactionTypes,
         datasets: [
           {
-            label: "Numero de interações",
+            label: "Interactions Number",
             data: this.interactionsCount,
             backgroundColor: [
               "rgba(255, 99, 132, 0.5)",
