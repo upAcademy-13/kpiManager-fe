@@ -35,6 +35,7 @@ export class TableComponent implements OnInit {
   temp = [];
   rows = [];
   isFiltro: boolean = false;
+  inputSearch: string = "";
 
   ngOnInit() {
      this.rows;     
