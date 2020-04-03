@@ -7,7 +7,7 @@ import { switchMap, map } from "rxjs/operators";
   providedIn: "root"
 })
 export class DashboardService {
-  constructor(private http: HttpClient) {}
+  constructor(public http: HttpClient) {}
 
   ////////////////////
   // Funções Micael //
@@ -83,6 +83,23 @@ export class DashboardService {
   /////////////////
   // Funções Ana //
   /////////////////
+
+  public getAllManagers() {
+    return this.http.get(
+      "http://127.0.0.1:8080/kpiManager/api/interactions/allBManagers"
+    ).pipe(
+      switchMap((managers: any[]) => forkJoin(
+        managers.map(manager => this.countAllCvsPerWeekPerManager(manager, "2020")
+        .pipe(
+          map(cvNumber => {
+            return {manager, cvNumber}
+          })
+        ))
+      ))
+    )
+    
+  }
+
   public countAllCvsPerWeekPerManager(managerName: String, week: String) {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/cvs/count/" +
@@ -91,6 +108,7 @@ export class DashboardService {
         week
     );
   }
+
 
   //Apenas usar para preencher filtros da tabela, não necessário para gráficos
   public getAllCvsPerManagerPerWeek(managerName: String, week: String) {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Chart} from 'chart.js';
+import { DashboardService } from 'src/app/core/services/dashboard.service';
+import { tap } from 'rxjs/operators';
 
 
 interface Week {
@@ -23,47 +25,61 @@ export class Grafico3Component implements OnInit {
         {value: 'Semana-4', viewValue: 'Semana 4'}
       ];
 
-  constructor() { }
+    managers = [];
+    cvs = [];
+
+  constructor(private dashboard: DashboardService) { }
 
   ngOnInit() {
-    let myChart = new Chart('cvChart', {
-      type: 'horizontalBar',
-      data: {
-          labels: ['Manager1', 'Manager2', 'Manager3', 'Manager4', 'Manager5'],
-          datasets: [{
-              label: 'Número de CV enviados',
-              data: [3, 19, 10, 5, 15, 8],
-              backgroundColor: [
-                  '#F26609',
-                  '#F27A18',
-                  '#ED9A25',
-                  '#FFAF30',
-                  '#FFC05D'
-                  
-              ],
-              borderColor: [
-                  'rgba(0, 0, 0)',
-                  'rgba(0, 0, 0)',
-                  'rgba(0, 0, 0)',
-                  'rgba(0, 0, 0)',
-                  'rgba(0, 0, 0)',
-                  
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
+
+    this.dashboard.getAllManagers().subscribe((data: any[])=>{
+        console.log(data);     
+        data.forEach(cvPerManager => { 
+          this.managers.push(cvPerManager.manager)
+          this.cvs.push(cvPerManager.cvNumber) 
+        });
+        
+        
+        let myChart = new Chart('cvChart', {
+          type: 'horizontalBar',
+          data: {
+                labels: this.managers,
+              datasets: [{
+                  label: 'Number of sent CV"s',
+                  data: this.cvs,
+                  backgroundColor: [
+                      '#F26609',
+                      '#F27A18',
+                      '#ED9A25',
+                      '#FFAF30',
+                      '#FFC05D'
+                      
+                  ],
+                  borderColor: [
+                      'rgba(0, 0, 0)',
+                      'rgba(0, 0, 0)',
+                      'rgba(0, 0, 0)',
+                      'rgba(0, 0, 0)',
+                      'rgba(0, 0, 0)',
+                      
+                  ],
+                  borderWidth: 1
               }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
           }
+      });
+        
+    }) 
+        
       }
-  });
     
-    
-  }
 
 }
