@@ -8,6 +8,11 @@
   left: 15px;
   right: 15px;
   bottom: 15px;
+  -webkit-box-shadow: 9px 4px 11px -1px rgba(77,76,77,1);
+  -moz-box-shadow: 9px 4px 11px -1px rgba(77,76,77,1);
+  box-shadow: 10px 10px 5px grey;
+  border: solid #817f7f;
+  border-width: 2px;
 }
 
 .more-button {
@@ -20,16 +25,14 @@
   text-align: center;
 }
 
-
-.container-100{
-  width: 100%;  
+.container-100 {
+  width: 100%;
   min-height: 100vh;
   background: #e6e6e6;
   padding: 20px;
   /* z-index: -2;
   overflow: hidden; */
   position: relative;
-
 }
 .container-100::before {
   content: "";
@@ -40,16 +43,15 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba(173,173,173,0.4);
+  background: rgba(173, 173, 173, 0.4);
   pointer-events: none;
-  
 }
-.central-container{
-  width: 90%; 
-  margin-top: 100px; 
+.central-container {
+  width: 90%;
+  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
-  position: relative; 
+  position: relative;
   background: #fff;
   border-radius: 10px;
   padding: 62px 55px 90px 55px;
@@ -83,4 +85,3 @@
 .contact100-form-symbol img {
   max-width: 49px;
 }
-

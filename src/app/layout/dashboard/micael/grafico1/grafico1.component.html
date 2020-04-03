@@ -1,49 +1,11 @@
-<<<<<<< HEAD
 <div class="container-fluid">
   <div class="d-flex flex-row justify-content-center">
     <div
-      [hidden]="!escondido"
+      class="chart-container responsive"
       (click)="graphClickEvent($event)"
-      class="chart-container responsive"
       style="margin-top: 8rem!important; height:50vw; width:50vw; display: relative;"
     >
-      <canvas #myChart></canvas>
+      <canvas id="grafico1"></canvas>
     </div>
   </div>
 </div>
-
-<div class="container-fluid">
-  <div class="d-flex flex-row justify-content-center">
-    <div
-      [hidden]="escondido"
-      class="chart-container responsive"
-      style="margin-top: 8rem!important; height:50vw; width:50vw; display: relative;"
-    >
-      <canvas (click)="graficoInicial()" #myDetail></canvas>
-      <button (click)="graficoInicial()">VOLTAR PARA GRÁFICO INICIAL</button>
-    </div>
-  </div>
-</div>
-
-  <!--  <ngx-charts-bar-vertical 
-[view]="view"
-[scheme]="colorScheme"
-[results]="single"
-[gradient]="gradient"
-[xAxis]="showXAxis"
-[yAxis]="showYAxis"
-[legend]="showLegend"
-
-(click)="graphClickEvent($event)"
-
-[showXAxisLabel]="showXAxisLabel"
-[showYAxisLabel]="showYAxisLabel"
-[xAxisLabel]="xAxisLabel"
-[yAxisLabel]="yAxisLabel"
-(select)="onSelect($event)">
-</ngx-charts-bar-vertical> -->
-=======
- <div style="width: 100%; height: 100px"  (click)="graphClickEvent($event)"  class="chart-container" style="position: relative">
-<canvas #myChart ></canvas>
-</div>
->>>>>>> origin/dashboard/feature/grafico1

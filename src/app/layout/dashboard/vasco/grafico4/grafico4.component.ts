@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js';
-import { DashboardService } from 'src/app/core/services/dashboard.service';
+import { Component, OnInit } from "@angular/core";
+import { Chart } from "chart.js";
+import { DashboardService } from "src/app/core/services/dashboard.service";
 
 interface Week {
   value: string;
@@ -8,68 +8,87 @@ interface Week {
 }
 
 @Component({
-  selector: 'grafico4',
-  templateUrl: './grafico4.component.html',
-  styleUrls: ['./grafico4.component.scss']
+  selector: "grafico4",
+  templateUrl: "./grafico4.component.html",
+  styleUrls: ["./grafico4.component.scss"]
 })
 export class Grafico4Component implements OnInit {
-
   //drilldown das semanas
   weeks: Week[] = [
-    { value: 'Semana-1', viewValue: 'Semana 1' },
-    { value: 'Semana-2', viewValue: 'Semana 2' },
-    { value: 'Semana-3', viewValue: 'Semana 3' },
-    { value: 'Semana-4', viewValue: 'Semana 4' }
+    { value: "Semana-1", viewValue: "Semana 1" },
+    { value: "Semana-2", viewValue: "Semana 2" },
+    { value: "Semana-3", viewValue: "Semana 3" },
+    { value: "Semana-4", viewValue: "Semana 4" }
   ];
 
   client = [];
   interactions = [];
-  constructor(private dashboard: DashboardService) { }
+  constructor(private dashboard: DashboardService) {}
 
   ngOnInit(): void {
-
     this.dashboard.getAllClientNames().subscribe((data: any[]) => {
-      console.log(data);
-
       data.forEach(clients => {
-        this.client.push(clients.client)
-        this.interactions.push(clients.interactions)
+        this.client.push(clients.client);
+        this.interactions.push(clients.interactions);
       });
 
       let massPopChart = new Chart("myChart4", {
-        type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+        type: "bar", // bar, horizontalBar, pie, line, doughnut, radar, polarArea
         data: {
           labels: this.client,
-          datasets: [{
-            label: 'Nº de Interações',
-            data:
-              this.interactions,
+          datasets: [
+            {
+              label: "Nº of interactions per client",
+              data: this.interactions,
 
-            //backgroundColor:'green',
-            backgroundColor: [
-              '#F26609',
-              '#F27A18',
-              '#ED9A25',
-              '#FFAF30',
-              '#FFC05D'
-            ],
-            borderWidth: 1,
-            borderColor: 'rgba(0, 0, 0)',
-            hoverBorderWidth: 3,
-            hoverBorderColor: '#000'
-          }]
+              //backgroundColor:'green',
+              backgroundColor: [
+                "rgba(242, 102, 9, 0.8)",
+                "rgba(242, 122, 24,  0.8)",
+                "rgba(237, 154, 37,  0.8)",
+                "rgba(255, 175, 48,  0.8)",
+                "rgba(255, 192, 93,  0.8)"
+              ],
+              borderColor: [
+                "rgba(242, 102, 9, 1)",
+                "rgba(242, 122, 24, 1)",
+                "rgba(237, 154, 37, 1)",
+                "rgba(255, 175, 48, 1)",
+                "rgba(255, 192, 93, 1)"
+              ],
+              borderWidth: 1,
+              hoverBorderWidth: 3,
+              hoverBorderColor: [
+                "rgba(242, 102, 9, 1)",
+                "rgba(242, 122, 24, 1)",
+                "rgba(237, 154, 37, 1)",
+                "#rgba(255, 175, 48, 1)",
+                "#rgba(255, 192, 93, 1)"
+              ]
+            }
+          ]
         },
         options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  stepSize: 1,
+                  beginAtZero: true
+                }
+              }
+            ]
+          },
           title: {
             display: false,
-            text: 'Cliente com mais interacção',
+            text: "Client with most interactions",
             fontSize: 25
           },
           legend: {
             display: true,
-            position: 'top',
+            position: "top",
             labels: {
-              fontColor: '#000'
+              fontColor: "#000"
             }
           },
           layout: {
@@ -85,19 +104,6 @@ export class Grafico4Component implements OnInit {
           }
         }
       });
-
-
-    })
-
-    console.log(this.client)
-
-    //dados do grafico
-
-
-
+    });
   }
-
 }
-
-
-// 'Cliente1', 'Cliente2', 'Cliente3', 'Cliente4', 'Cliente5', 'Cliente6'
