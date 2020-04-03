@@ -1,50 +1,3 @@
-.btn-primary {
-    color: white;
-    background-color: #e46310;
-    border-color: #e46310;
-  }
-
-.btn-outline-primary {
-    color: #e46310;
-    border-color: #e46310;
-  }
-
-.btn-primary:hover{
-      background-color: #913902;
-      border-color: #913902;
-  }
-
-.btn-primary:active,
-.btn-primary:focus
-.btn-primary:visited{
-    background-color: #eca173 !important;
-    border-color: #eca173 !important;
-}
-
-.btn-outline-primary:hover{
-    background-color: #e46310;
-    border-color: #e46310;
-}
-
-.btn-outline-primary:active,
-.btn-outline-primary:focus,
-.btn-outline-primary:visited{
-    background-color:  #eca173 !important;
-    border-color:  #eca173 !important;
-}
-  
-.navbar li a:hover {
-    border-bottom: 1px solid #e46310;
-}
-
-.navbar li a:active {
-    border-bottom: 1px solid #e46310;
-}
-
-  @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .container-100{
     width: 100%;  
     min-height: 100vh;
@@ -69,7 +22,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     
   }
 .central-container{
-    width: 50%; 
+    width: 87%; 
     margin-top: 100px; 
     margin-left: auto;
     margin-right: auto;
@@ -138,25 +91,55 @@ label{
   .contact100-form-symbol img {
     max-width: 49px;
   }
-
-  bs-daterangepicker-inline .theme-green .bs-datepicker-head {
-    background-color: darkorange;
+   .search{
+    font-size: 1rem;
+    font-weight: 400; 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 4% !important;
+   }
+.col-sm-2{
+    margin-right: 30px;
 }
 
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td span.selected,
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td.selected span,
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td span[class*="select-"]:after,
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td[class*="select-"] span:after {
-  background-color: darkorange; }
-
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td.week span {
-  color: darkorange; 
+.selected{
+    font-size: 1rem !important;
+      font-weight: 500; 
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      cursor: pointer;
 }
-bs-daterangepicker-inline .theme-green .bs-datepicker-body table td.active-week span:hover {
-    cursor: pointer;
-    background-color: darkorange;;
-    color: #fff;
-    opacity: 0.5;
-    transition: 0s; }
+.footer{
+    margin-top: 3%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1rem;
+}
+.prefix-css .datatable-header-cell {
+background-color: #e46310 !important;
+color: #fff !important;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important; 
+font-size: 1rem;
+  }
+  
+  .prefix-css .datatable-body-cell  {
+    font-size: 0.9rem!important;
+  }
 
-  @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+  @media (min-width: 950px) and (max-width: 1200px){
+    .col-sm-2{
+        margin-right: 22px!important;
+    }
+  }
+  @media (min-width:800px) and (max-width: 950px){
+    .col-sm-2{
+        margin-right:18px!important;
+    }
+  }
+  @media (min-width:659px) and (max-width: 800px){
+    .col-sm-2{
+        margin-right:13px!important;
+    }
+  }
+
+  .my-btn-orange {background-color:#e46310}
+
+  

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout-nav-bar',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutNavBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
+  username;
+  tokenInfo;  
   ngOnInit(): void {
+    const token = localStorage.getItem("token");
+    this.tokenInfo = this.auth.getDecodedAccessToken(token); 
+    this.username = this.tokenInfo['iss'];
+    
+  }
+
+  logOut(){
+    localStorage.removeItem('token');
+    this.auth.setCurrentToken("");
+    this.router.navigate(['/login']);
   }
 
 }
