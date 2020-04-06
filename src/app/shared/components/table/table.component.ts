@@ -54,6 +54,8 @@ export class TableComponent implements OnInit {
   ngOnInit() {
      this.rows;    
      this.selectInteraction = window.history.state.selectInteraction; 
+     console.log(this.selectInteraction);
+     
   }
 
   apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';

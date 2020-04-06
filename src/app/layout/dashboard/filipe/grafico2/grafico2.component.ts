@@ -32,9 +32,7 @@ export class Grafico2Component implements OnInit {
     this.chartElem = this.myChart.getElementAtEvent(event);
     this.router.navigate(["/layout/statistics"], {
       state: { selectInteraction:  this.chartElem[0]._model.label}
-    });
-    
-
+    });    
   }
   chartit() {
     this.myChart = new Chart("myChart", {
