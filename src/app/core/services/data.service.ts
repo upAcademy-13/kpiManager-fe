@@ -40,7 +40,7 @@ export class DataService {
   }
 
  public getAllUnities():Observable<any> {
-   return this.http.get<any>(this.apiUrl + 'interactions/allUnities');
+   return this.http.get<any>(this.apiUrl + 'interactions/allUnits');
  }
 
 }
