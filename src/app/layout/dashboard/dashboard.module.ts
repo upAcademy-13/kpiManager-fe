@@ -12,6 +12,7 @@ import { Grafico2Component } from './filipe/grafico2/grafico2.component';
 import { Grafico3Component } from './ana/grafico3/grafico3.component';
 import { Grafico4Component } from './vasco/grafico4/grafico4.component';
 import {MatSelectModule} from '@angular/material/select';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [DashboardComponent, Grafico1Component, Grafico2Component, Grafico3Component, Grafico4Component],
@@ -23,7 +24,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatIconModule,
     MatButtonModule,
     MatSelectModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    BsDatepickerModule
   ]
 })
 

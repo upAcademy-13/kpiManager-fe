@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Chart } from "chart.js";
 import { DashboardService } from "src/app/core/services/dashboard.service";
+import * as moment from 'moment';
 
 interface Week {
   value: string;
@@ -13,17 +14,28 @@ interface Week {
   styleUrls: ["./grafico3.component.scss"]
 })
 export class Grafico3Component implements OnInit {
-  weeks: Week[] = [
-    { value: "Semana-1", viewValue: "Semana 1" },
-    { value: "Semana-2", viewValue: "Semana 2" },
-    { value: "Semana-3", viewValue: "Semana 3" },
-    { value: "Semana-4", viewValue: "Semana 4" }
-  ];
+
+  placeHolderText = "Select date";
+  dateChoose = "";
+  hasError = false;
+  maxDate = new Date();
+  date: any;
+  public numWeek: any;
+  static getCurrentDate: any;
+
+  // weeks: Week[] = [
+  //   { value: "Semana-1", viewValue: "Semana 1" },
+  //   { value: "Semana-2", viewValue: "Semana 2" },
+  //   { value: "Semana-3", viewValue: "Semana 3" },
+  //   { value: "Semana-4", viewValue: "Semana 4" }
+  // ];
 
   managers = [];
   cvs = [];
 
-  constructor(private dashboard: DashboardService) {}
+  constructor(private dashboard: DashboardService) {
+    this.maxDate.setDate(this.maxDate.getDate() + 7);
+  }
 
   ngOnInit() {
     this.dashboard.getAllManagers().subscribe((data: any[]) => {
@@ -87,5 +99,18 @@ export class Grafico3Component implements OnInit {
         }
       });
     });
+  }
+
+  getCurrentDate(tcode: string) {
+    console.log("Data escolhida " + tcode);
+    let newDate = tcode.split(" ");
+    let dataInicio = newDate[0];
+    let dataFinal = newDate[2];
+    console.log("Data de inicio: " + dataInicio);
+    console.log("Data final: " + dataFinal);
+    let data = moment(dataInicio, "MM-DD-YYYY");
+    console.log(data);
+    this.numWeek = data.week();
+    console.log(this.numWeek);  
   }
 }

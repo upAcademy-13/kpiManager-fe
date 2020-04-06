@@ -1,21 +1,30 @@
+<div class="container-fluid">
+  <div class="d-flex flex-row justify-content-center">
+    <div class="chart-container responsive"
+      style="margin-top: 8rem!important; height:50vw; width:50vw; display: relative;">
 
-      <div class="container-fluid">
-        <div class="d-flex flex-row justify-content-center">
-          <div class="chart-container responsive"
-            style="margin-top: 8rem!important; height:50vw; width:50vw; display: relative;">
+      <canvas id='cvChart'></canvas>
+      <div>
+        <div class="form-row"> <label for="inputSemana">Interaction Week:</label></div>
 
-            <canvas id='cvChart'></canvas>
-            <div>
-              <mat-form-field>
+        <div class="row">
+          <div class="col form-group">
+            <!--LINHA 17: NGCLASS transforma a classe dependente do erro-->
+            <input #selectedDate type="text" (focusin)="validateError(selectedDate.value)"
+              placeholder="{{placeHolderText}}"
+              [ngClass]="{'form-control' : !hasError, 'animated bounce error' : hasError}" bsDaterangepicker
+              [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-orange'}">
+          </div>
+        </div>
+        <!-- <mat-form-field>
                 <mat-label>Semana</mat-label>
                 <mat-select>
                   <mat-option *ngFor="let week of weeks" [value]="week.value">
                     {{week.viewValue}}
                   </mat-option>
                 </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
+              </mat-form-field> -->
       </div>
-
+    </div>
+  </div>
+</div>
