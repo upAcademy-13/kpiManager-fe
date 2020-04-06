@@ -56,9 +56,9 @@
         <div class="col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='filtro()' #myselectInteration class="form-control selected" id="myselectInteration">
-              <option value='myselectInteration'>Tipo de interação</option>
-              <option *ngFor="let select of dataInteractions$ | async">{{select}}</option>
+            <select (change)='filtro()' #myselectInteration [(ngModel)]="selectInteraction" class="form-control selected" id="myselectInteration">
+              <option value="myselectInteration" selected>Tipo de interação</option>
+              <option [value]='select' *ngFor="let select of dataInteractions$ | async">{{select}}</option>
             </select>
           </div>
         </div>

@@ -14,7 +14,7 @@ export class DashboardService {
   ////////////////////
   public getAllUnits() {
     return this.http
-      .get("http://127.0.0.1:8080/kpiManager/api/interactions/allUnits")
+      .get("http://127.0.0.1:8080/kpiManager/api/interactions/allUnities")
       .pipe(
         switchMap((units: any[]) =>
           forkJoin(
@@ -40,7 +40,7 @@ export class DashboardService {
   //Apenas usar para preencher filtros da tabela, não necessário para gráficos
   public getAllInteractionsPerUnit(unit: String) {
     return this.http.get(
-      "http://127.0.0.1:8080/kpiManager/api/interactions/allUnitsFilter/" + unit
+      "http://127.0.0.1:8080/kpiManager/api/interactions/allUnitiesFilter/" + unit
     );
   }
 

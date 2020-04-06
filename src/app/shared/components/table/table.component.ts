@@ -7,6 +7,7 @@ import { DataInteraction } from 'src/app/core/models/dataInteration';
 import { ViewEncapsulation } from '@angular/core'
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { DataService } from 'src/app/core/services/data.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 
@@ -21,7 +22,7 @@ import { DataService } from 'src/app/core/services/data.service';
 
 export class TableComponent implements OnInit {
 
-  @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
+  @ViewChild(DatatableComponent, { static: true }) table: DatatableComponent;
 
   @Input() filtro$: Observable<any[]>;
   @Input() data$: Observable<any[]>;
@@ -36,16 +37,12 @@ export class TableComponent implements OnInit {
   rows = [];
   isFiltro: boolean = false;
   inputSearch: string = "";
-
-  ngOnInit() {
-     this.rows;     
-  }
-
-  apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
+  selectInteraction = "";
 
   constructor(
     private http: HttpClient,
-    private data: DataService) 
+    private data: DataService,
+    private router: Router) 
     {
     this.fetch(data => {
       this.temp = [...data];
@@ -54,6 +51,13 @@ export class TableComponent implements OnInit {
 
     });
   }
+  ngOnInit() {
+     this.rows;    
+     this.selectInteraction = window.history.state.selectInteraction; 
+  }
+
+  apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
+
 
   refreshTabela()
   {
@@ -198,7 +202,8 @@ export class TableComponent implements OnInit {
 
     this.table.offset = 0;
     console.log('this.temp = ', this.temp);
-
+    console.log(myselectInteration);
+    
   }
 
   filterClearSelect(){

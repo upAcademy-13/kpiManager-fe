@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from "@angular/core";
 import { Chart } from "chart.js";
 import { DashboardService } from "src/app/core/services/dashboard.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "grafico2",
@@ -11,8 +12,9 @@ export class Grafico2Component implements OnInit {
   myChart: any;
   interactionTypes = [];
   interactionsCount = [];
+  chartElem: any;
   constructor(
-    private elementRef: ElementRef,
+    private router: Router,
     private dbService: DashboardService
   ) {}
 
@@ -27,7 +29,12 @@ export class Grafico2Component implements OnInit {
   }
 
   graphClickEvent(event) {
-    console.log("Entrei.", this.myChart.getElementAtEvent(event));
+    this.chartElem = this.myChart.getElementAtEvent(event);
+    this.router.navigate(["/layout/statistics"], {
+      state: { selectInteraction:  this.chartElem[0]._model.label}
+    });
+    
+
   }
   chartit() {
     this.myChart = new Chart("myChart", {

@@ -10,7 +10,7 @@
         <div class="row">
           <div class="col form-group">
             <!--LINHA 17: NGCLASS transforma a classe dependente do erro-->
-            <input #selectedDate type="text" (focusin)="validateError(selectedDate.value)"
+            <input #selectedDate type="text" 
               placeholder="{{placeHolderText}}"
               [ngClass]="{'form-control' : !hasError, 'animated bounce error' : hasError}" bsDaterangepicker
               [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-orange'}">
