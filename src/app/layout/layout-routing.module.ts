@@ -5,6 +5,7 @@ import { StatisticsComponent } from "./statistics/statistics.component";
 import { CreateUserComponent } from "./createUser/createUser.component";
 import { PermissionsCOOGuard } from "../core/guards/permissionsCOO.guard";
 import { LayoutFormComponent } from "./layout-form/layout-form.component";
+import { ManagersClientManagementComponent } from './managers-client-management/managers-client-management.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: "statistics",
         component: StatisticsComponent,
+      },
+      {
+        path: "clients&managers",
+        component: ManagersClientManagementComponent,
       },
       /*  {
         path: "",
