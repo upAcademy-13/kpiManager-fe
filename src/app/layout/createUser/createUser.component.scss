@@ -71,9 +71,9 @@ h1 {
     margin-bottom: 2rem;
 }
 
-h6{
+.titleStyle {
     color: #F95102;
-    font-size: 20px;
+    font-size: 14px;
 }
 
 .contact100-form-symbol {
@@ -100,4 +100,8 @@ h6{
   }
   .contact100-form-symbol img {
     max-width: 49px;
+  }
+
+  .form-control {
+      margin-bottom: 2em;
   }
