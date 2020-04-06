@@ -7,16 +7,16 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item mr-4">
-          <a class="nav-link" routerLink="layout/layoutform">Interactions</a>
+          <a class="nav-link" [routerLink]="['/layout/layoutform']">Interactions</a>
         </li>
         <li class="nav-item mr-4">
-          <a class="nav-link" href="#"  routerLink="statistics" >Static Module</a>
+          <a class="nav-link" href="#"   [routerLink]="['/layout/statistics']" >Statistic Module</a>
         </li>
         <li class="nav-item mr-4">
           <a class="nav-link" href="#" [routerLink]="['/layout/dashboard']" routerLinkActive="active" >Dashboard</a>
         </li>
         <li class="nav-item mr-4" *ngIf="tokenInfo['role'] == 'SuperUser'">
-          <a class="nav-link" href="#" [routerLinkActive]="['active']" [routerLink]="['/layout/create']">Criar Utilizador</a>
+          <a class="nav-link" href="#" [routerLinkActive]="['active']" [routerLink]="['/layout/create']">Create User</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
