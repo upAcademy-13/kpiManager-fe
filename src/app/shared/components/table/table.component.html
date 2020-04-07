@@ -21,9 +21,9 @@
         <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='filtro()' #myselectSemana class=" form-control selected " id="exampleFormControlSelect1">
-              <option value="myselectSemana">Week</option>
-              <option *ngFor="let select of dataWeek$ | async">{{select}}</option>
+            <select  [(ngModel)]= "selectWeek" (change)='filtrer()' #myselectSemana class=" form-control selected " id="exampleFormControlSelect1">
+              <option value="">Week</option>
+              <option  value={{select}}  *ngFor="let select of dataWeek$ | async">{{select}} ª </option>
             </select>
           </div>
         </div>
@@ -31,36 +31,36 @@
         <div class=" col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='filtro()' #myselectUnidade class="form-control selected" id="exampleFormControlSelect1">
-              <option value="myselectUnidade">Unity</option>
-              <option *ngFor="let select of dataUnities$ | async">{{select}}</option>
+            <select   [(ngModel)]= "selectUnit" (change)='filtrer()' #myselectUnidade class="form-control selected" id="exampleFormControlSelect1">
+              <option value="">Unit</option>
+              <option value={{select}} *ngFor="let select of dataUnities$ | async">{{select}}</option>
             </select>
           </div>
         </div>
         <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='filtro()' #myselectCliente class="form-control selected" id="exampleFormControlSelect1">
-              <option value="myselectCliente">Client</option>
-              <option *ngFor="let select of dataClients$ | async">{{select}}</option>
+            <select [(ngModel)]= "selectClient" (change)='filtrer()' #myselectCliente class="form-control selected" id="exampleFormControlSelect1">
+              <option  value="">Client</option>
+              <option value={{select}}  *ngFor="let select of dataClients$ | async">{{select}}</option>
             </select>
           </div>
         </div>
         <div class="col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='filtro()' #myselectBM class="form-control selected" id="myselectBM">
-              <option value="myselectBM">Business Manager</option>
-              <option *ngFor="let select of dataBManagers$ | async">{{select}} </option>
+            <select [(ngModel)]= "selectBM" (change)='filtrer()' #myselectBM class="form-control selected" id="myselectBM">
+              <option  value="">Business Manager</option>
+              <option  value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}} </option>
             </select>
           </div>
         </div>
         <div class="col-sm-2 lastSel">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select  (change)='filtro()' #myselectInteration class="form-control selected " id="myselectInteration">
-              <option value='myselectInteration'>Interaction Type</option>
-              <option *ngFor="let select of dataInteractions$ | async">{{select}}</option>
+            <select  [(ngModel)]= "selectInteraction" (change)='filtrer()' #myselectInteration class="form-control selected " id="myselectInteration">
+              <option value="">Interaction Type</option>
+              <option value={{select}} *ngFor="let select of dataInteractions$ | async">{{select}}</option>
             </select>
           </div>
         </div>
@@ -69,20 +69,20 @@
       </div>
 
 
-      <div *ngIf="isFiltro">
+      <div>
 
-        <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='filtro$ | async'
+        <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='rows'
           [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"
           [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unity"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
-          [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"'>
+          [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"' >  
         </ngx-datatable>
 
 
 
           <div class="footer row" style=" padding: 5px 10px">
-            <div class="col-5"><strong>  Total number of interactions:</strong> {{(filtro$ | async)?.length}}</div>
+            <div class="col-5"><strong>  Total number of interactions:</strong> {{rows.length}}</div>
             <div class="col-4 offset-3 text-right">
-              <button id="btnRefresh" (click)="refreshTabela()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Refresh table</button>
+              <button id="btnRefresh" (click)="refreshTable()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Refresh table</button>
             </div>
 
           </div>
@@ -90,7 +90,7 @@
 
       </div>
 
-      <div *ngIf="isFiltro==false">
+      <!-- <div *ngIf="isFiltro==false">
         <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='rows' [scrollbarV]="false"
           [sorts]="[{prop: 'name', dir: 'desc'}]"
           [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unity"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
@@ -109,7 +109,7 @@
 
           </div>
 
-      </div>
+      </div> -->
 
 
       <!-- <ngx-datatable  #table class='material striped' [limit]="5" [rows]='rows ' [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"

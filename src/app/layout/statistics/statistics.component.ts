@@ -24,10 +24,7 @@ export class StatisticsComponent implements OnInit {
   constructor(private http: HttpClient,
     private data: DataService
   ) { 
-    // this.getAllData().subscribe((obs) => {
-    //   this.obs = obs;
-    //   console.log(this.obs);
-    // });
+   
   }
 
 

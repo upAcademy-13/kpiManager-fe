@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, EventEmitter, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { TableColumn, ColumnMode } from '@swimlane/ngx-datatable';
@@ -36,37 +36,44 @@ export class TableComponent implements OnInit {
   rows = [];
   isFiltro: boolean = false;
   inputSearch: string = "";
-
-  ngOnInit() {
-     this.rows;     
-  }
-
+  selectInteraction: string;
+  selectBM: string;
+  selectClient: string;
+  selectUnit: string;
+  selectWeek: string;
   apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
 
-  constructor(
+
+
+  ngOnInit() {
+    console.log('ngOnInit - start')
+    this.selectInteraction = !!window.history.state.selectInteraction ? window.history.state.selectInteraction : '';
+    this.selectBM = !!window.history.state.selectBM ? window.history.state.selectBM : '';
+    this.selectClient = !!window.history.state.selectClient ? window.history.state.selectClient : '';
+    this.selectUnit = !!window.history.state.selectUnit ? window.history.state.selectUnit : '';
+    this.selectWeek = !!window.history.state.selectWeek ? window.history.state.selectWeek : '';
+    if (this.selectInteraction !== '' || this.selectUnit !== '' || this.selectUnit !== '' || this.selectWeek !== '' || this.selectClient) {
+      this.filtrer();
+    } else {
+      this.fetch(data => {
+        this.temp = [...data];
+        this.rows = this.temp;
+      })
+    }
+    console.log('ngOnInit - fim')
+  }
+
+    constructor(
     private http: HttpClient,
-    private data: DataService) 
-    {
-    this.fetch(data => {
-      this.temp = [...data];
-      this.rows = data;
-      console.log(this.rows)
-
-    });
+    private data: DataService,
+    private cdr: ChangeDetectorRef
+  ) {
   }
 
-  refreshTabela()
-  {
-    this.isFiltro = false;
-    this.data.getAllData().subscribe(res => {
-      console.log('AllData = ', res);
-      this.temp = [...res];
-    });
-    this.rows = this.temp;
+  refreshTable() {
     this.filterClearSelect();
-    
+    this.rows = this.temp;
   }
-
 
   fetch(cb) {
     const req = new XMLHttpRequest();
@@ -79,7 +86,6 @@ export class TableComponent implements OnInit {
   }
 
   updateFilter(event) {
-    this.isFiltro = false;
     this.filterClearSelect();
     const val = event.target.value.toLowerCase();
     const temp = this.temp.filter(function (d) {
@@ -92,123 +98,48 @@ export class TableComponent implements OnInit {
     console.log("passou", this.rows)
   }
 
-  // uFilterBM(value: string) {
-  //   if (value == 'myselectBM') {
-  //     this.rows = this.temp;
-  //     return;
-  //   }
-  //   const val = value;
-  //   const temp = this.temp.filter(function (d) {
-  //     return d.person.name.indexOf(val) !== -1 || !val;
-  //   });
+  filtrer() {
 
-  //   this.rows = temp;
-  //   this.table.offset = 0;
-  // }
-
-  // uFilterInteration(value: string) {
-  //   if (value == 'myselectInteration') {
-  //     this.rows = this.temp;
-  //     return;
-  //   }
-
-  //   const val = value;
-  //   const temp = this.temp.filter(function (d) {
-  //     return d.interactionType.interactionType.indexOf(val) !== -1 || !val;
-  //   });
-
-  //   this.rows = temp;
-  //   this.table.offset = 0;
-  // }
-
-  // uFilterClient(value: string) {
-  //   if (value == 'myselectCliente') {
-  //     this.rows = this.temp;
-  //     return;
-  //   }
-
-  //   const val = value;
-  //   const temp = this.temp.filter(function (d) {
-  //     return d.client.name.indexOf(val) !== -1 || !val;
-  //   });
-
-  //   this.rows = temp;
-  //   this.table.offset = 0;
-  // }
-
-  // uFilterUnidade(value: string) {
-  //   if (value == 'myselectUnidade') {
-  //     this.rows = this.temp;
-  //     return;
-  //   }
-
-  //   const val = value;
-  //   const temp = this.temp.filter(function (d) {
-  //     return d.unit.nameUnit.indexOf(val) !== -1 || !val;
-  //   });
-
-  //   this.rows = temp;
-  //   this.table.offset = 0;
-  // }
-
-  // uFilterSemana(value: string) {
-  //   if (value == 'myselectSemana') {
-  //     this.rows = this.temp;
-  //     return;
-  //   }
-
-  //   const val = value;
-  //   const temp = this.temp.filter(function (d) {
-  //     return d.dateInteraction.indexOf(val) !== -1 || !val;
-  //   });
-
-  //   this.rows = temp;
-  //   this.table.offset = 0;
-  // }
-
-  filtro() {
-    document.querySelector('input').value = "";
-    
-    this.isFiltro = true;
     this.rows = [];
-    let myselectSemana, myselectUnidade, myselectCliente, myselectBM, myselectInteration;
-
-    var select = document.querySelectorAll('select');
-
-    myselectSemana = select[0].selectedIndex > 0 ? select[0].value : null; //semana
-    myselectUnidade = select[1].selectedIndex > 0 ? select[1].value : null; //unicade
-    myselectCliente = select[2].selectedIndex > 0 ? select[2].value : null; //cliente
-    myselectBM = select[3].selectedIndex > 0 ? select[3].value : null; //BM
-    myselectInteration = select[4].selectedIndex > 0 ? select[4].value : null; //TP
-
+    let myselectWeek, myselectUnit, myselectClient, myselectBM, myselectInteration;
+    myselectBM = this.selectBM !== "" ? this.selectBM : null;
+    myselectClient = this.selectClient !== "" ? this.selectClient : null;
+    myselectUnit = this.selectUnit !== "" ? this.selectUnit : null;
+    myselectWeek = this.selectWeek!== "" ? this.selectWeek :null;
+    myselectInteration = this.selectInteraction !== "" ? this.selectInteraction : null;
 
     let params = new HttpParams();
-   
 
-    params = params.append('sel0', myselectSemana);
-    params = params.append('sel1', myselectUnidade);
-    params = params.append('sel2', myselectCliente);
-    params = params.append('sel3', myselectBM);
-    params = params.append('sel4', myselectInteration);
+    params = params.append('week', myselectWeek);
+    params = params.append('unit', myselectUnit);
+    params = params.append('client', myselectClient);
+    params = params.append('businessManagers', myselectBM);
+    params = params.append('interaction', myselectInteration);
 
-    this.filtro$ = this.http.get<any[]>(this.apiUrl + 'interactions/filtro', {
+    this.filtro$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter', {
       params: params
-    }
-    );
+    });
+    this.filtro$.subscribe((res) => {
+      this.rows = [...res];
+      console.log(this.rows);
+      this.table.offset = 0;
+      this.cdr.detectChanges();
+    })
 
-    this.table.offset = 0;
+
+    // this.table.offset = 0;
     console.log('this.temp = ', this.temp);
 
   }
 
-  filterClearSelect(){
-    var select = document.querySelectorAll('select');
-    select[0].selectedIndex = 0;
-    select[1].selectedIndex = 0;
-    select[2].selectedIndex = 0;
-    select[3].selectedIndex = 0;
-    select[4].selectedIndex = 0;
-    this.isFiltro = false;
+  filterClearSelect() {
+
+    this.selectBM = "";
+    this.selectClient="";
+    this.selectWeek="";
+    this.selectUnit="";
+    this.selectInteraction="";
+  
   }
 
 
