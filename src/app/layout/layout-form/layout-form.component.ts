@@ -313,6 +313,7 @@ export class LayoutFormComponent implements OnInit {
       this.btnDisableUnit = false;
       this.btnDisableEditInt = false;
       this.numWeek = null;
+      this.updateTableHeader();
     }
   }
 
