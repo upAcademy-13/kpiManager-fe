@@ -59,12 +59,9 @@ export class Grafico3Component implements OnInit {
     this.myChart = null;
     console.log(this.myChart);
     this.getDataforGraph(this.selected);
-
   }
 
-
   getDataWeek() {
-
     this.dashboard.getAllWeeks().subscribe((allWeeks: any[]) => {
       allWeeks.forEach(res => this.weeks.push(res));
       console.log(this.weeks);
@@ -72,7 +69,6 @@ export class Grafico3Component implements OnInit {
       this.selected = this.weeks[lastWeek];
       console.log(this.selected);
       this.getDataforGraph(this.selected)
-
     });
   }
 
@@ -83,60 +79,8 @@ export class Grafico3Component implements OnInit {
         this.cvs.push(cvPerManager.cvNumber);
         this.createChart(this.managers, this.cvs);
       });
-
-<<<<<<< HEAD
-      let myChart = new Chart("cvChart", {
-        type: "horizontalBar",
-        data: {
-          labels: this.managers,
-          datasets: [
-            {
-              data: ["1","1","1","1"],//this.cvs,
-              backgroundColor: [
-                "rgba(242, 102, 9, 0.8)",
-                "rgba(242, 122, 24,  0.8)",
-                "rgba(237, 154, 37,  0.8)",
-                "rgba(255, 175, 48,  0.8)",
-                "rgba(255, 192, 93,  0.8)"
-              ],
-              borderColor: [
-                "rgba(242, 102, 9, 1)",
-                "rgba(242, 122, 24, 1)",
-                "rgba(237, 154, 37, 1)",
-                "rgba(255, 175, 48, 1)",
-                "rgba(255, 192, 93, 1)"
-              ],
-              borderWidth: 1,
-              hoverBorderWidth: 3,
-              hoverBorderColor: [
-                "rgba(242, 102, 9, 1)",
-                "rgba(242, 122, 24, 1)",
-                "rgba(237, 154, 37, 1)",
-                "#rgba(255, 175, 48, 1)",
-                "#rgba(255, 192, 93, 1)"
-              ]
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  stepSize: 1,
-                  beginAtZero: true
-                }
-              }
-=======
     })
   }
-
-  
 
   createChart(managers: any[], cvs: any[]) {
     this.myChart = null;
@@ -146,7 +90,6 @@ export class Grafico3Component implements OnInit {
         labels: managers,
         datasets: [
           {
-            label: 'Nº of CV"s sent',
             data: cvs,
             backgroundColor: [
               "rgba(242, 102, 9, 0.8)",
@@ -154,7 +97,6 @@ export class Grafico3Component implements OnInit {
               "rgba(237, 154, 37,  0.8)",
               "rgba(255, 175, 48,  0.8)",
               "rgba(255, 192, 93,  0.8)"
->>>>>>> dashboard/feature/grafico3
             ],
             borderColor: [
               "rgba(242, 102, 9, 1)",
@@ -176,14 +118,12 @@ export class Grafico3Component implements OnInit {
         ]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
         scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ],
           xAxes: [
             {
               ticks: {
@@ -195,24 +135,5 @@ export class Grafico3Component implements OnInit {
         }
       }
     });
-  }
-
-
-
-  getCurrentDate(tcode: string) {
-    console.log("Data escolhida " + tcode);
-    let newDate = tcode.split(" ");
-    let dataInicio = newDate[0];
-    let dataFinal = newDate[2];
-    console.log("Data de inicio: " + dataInicio);
-    console.log("Data final: " + dataFinal);
-    let data = moment(dataInicio, "MM-DD-YYYY");
-    console.log(data);
-    this.numWeek = data.week();
-    console.log(this.numWeek);
-  }
-
-  validateError(value: String) {
-    this.hasError = false;
   }
 }

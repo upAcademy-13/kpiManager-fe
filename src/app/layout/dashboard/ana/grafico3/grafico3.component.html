@@ -1,46 +1,31 @@
 <div class="container-fluid">
-  <div class="d-flex justify-content-center">
-    <div class="chart-container responsive">
-      <canvas class="responsive" id="cvChart"></canvas>
+  <div *ngIf="displayRoute()" class="container-fluid justify-content-center">
+    <div class="row">
+      <button
+        class="mr-2"
+        mat-raised-button
+        [routerLink]="['/layout/dashboard']"
+      >
+        Back
+      </button>
+      <h1 class="ml-2">Number of sent CV's per manager</h1>
     </div>
   </div>
-  <div class="container">
-    <select
-      class="selectpicker"
-      placeholder="Week"
-      [(value)]="selected"
-      (selectionChange)="changeWeek($event.value)"
-    >
-      <option *ngFor="let week of weeks" [value]="week"> {{ week }}</option>
-    </select>
+<div class="d-flex justify-content-center">
+  <div class="chart-container responsive">
+    <canvas class="responsive" id="cvChart" (click)="graphClickEvent($event)">
+    </canvas>
   </div>
 </div>
-<div class="d-flex flex-row justify-content-center">
-  <div
-    class="chart-container responsive"
-    style="
-      margin-top: 8rem !important;
-      height: 50vw;
-      width: 50vw;
-      display: relative;
-    "
+<div class="container d-flex justify-content-center">
+  <select
+    class="form-control"
+    placeholder="Week"
+    [(value)]="selected"
+    style="width: 150px;"
+    (change)="changeWeek($event.value)"
   >
-    <div>
-      <div
-        *ngIf="displayRoute()"
-        class="container-fluid justify-content-center"
-      >
-        <div class="row">
-          <button
-            class="mr-2"
-            mat-raised-button
-            [routerLink]="['/layout/dashboard']"
-          >
-            Back
-          </button>
-          <h1 class="ml-2">Number of sent CV's per manager</h1>
-        </div>
-      </div>
-    </div>
-  </div>
+    <option *ngFor="let week of weeks" [value]="week"> {{ week }}</option>
+  </select>
+</div>
 </div>
