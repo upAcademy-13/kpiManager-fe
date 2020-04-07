@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,28 +7,47 @@ import { HttpClient } from '@angular/common/http';
 export class InteractionsService {
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
-  private apiUrl: String = 'https://upacademytinder.herokuapp.com/api/users/';
   private apiUrlKpi: String = 'http://127.0.0.1:8080/kpiManager/api/';
 
-  createInteraction(interaction){
-    return this.http.post(this.apiUrlKpi +'interactions', interaction);
+  createInteraction(interaction) {
+    return this.http.post(this.apiUrlKpi + 'interactions', interaction);
   }
-  getInteractionType(){
+
+  updateInteraction(interaction) {
+    return this.http.put(this.apiUrlKpi + 'interactions/' + interaction.id, interaction);
+  }
+
+  getInteractionType() {
     return this.http.get(this.apiUrlKpi + 'interactiontype');
   }
-  getClients(){
+  getClients() {
     return this.http.get(this.apiUrlKpi + 'clients');
   }
-  getUnits(){
+  getUnits() {
     return this.http.get(this.apiUrlKpi + 'units');
   }
-  getUserRole(){
-    return this.http.get(this.apiUrl + '?filter={"where":{"username":"ze carlos"}}');
+  getUserById(id: number) {
+    return this.http.get(this.apiUrlKpi + 'users/' + id);
   }
-  getManagerByUnit(selectUnit){
+  getManagerByUnit(selectUnit) {
     return this.http.get(this.apiUrlKpi + 'users/' + parseInt(selectUnit) + '/managers');
   }
+  getInteractionByUserId(idPerson: any) {
+    return this.http.get(this.apiUrlKpi + 'interactions' + '/person/' + idPerson);
+  }
+  getAllInteractions() {
+    return this.http.get(this.apiUrlKpi + 'interactions/all');
+  }
+
+  getAllInteractionsFilter(params) {
+
+    return this.http.get<any[]>(this.apiUrlKpi + 'interactions/filtro', {
+      params: params
+    });
+
+  }
+
 }

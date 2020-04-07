@@ -6,4 +6,37 @@
     padding: .375rem .75rem;
 }
 
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+button{
+    background-color: #e46310;
+    border-color: #fca772;
+    color: #000000
+}
+
+#delButtonDB {
+    background-color: #d82222;
+    border-color: #fca772;
+    color: #cccccc
+}
+
+#delButtonTable {
+    background-color: #d82222;
+    border-color: #fca772;
+    color: #cccccc
+}
+
+#editButton {
+    background-color: #e7b91f;
+    border-color: #fca772;
+    color: #cccccc
+}
+
+
+
 
