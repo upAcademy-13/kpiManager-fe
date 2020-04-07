@@ -1,4 +1,26 @@
-<!-- <table mat-table [dataSource]="myDataArray">
-    ...
-  </table> -->
+<div class="container-clients-managers">
+  <div class="table-reponsive-clients-managers">
+
+    <div class="central-container-table-clients-managers">
+      <span class="contact100-form-symbol">
+        <img src="assets/imagens/estatistica.webp">
+      </span>
+
+      <h1 class="form-title text-center ">CLIENTS & MANAGERS</h1>
+
+      <ngx-datatable 
+        class="material" 
+        [rows]="rows" 
+        [loadingIndicator]="loadingIndicator" 
+        [columns]="columns"
+        [columnMode]="ColumnMode.force" 
+        headerHeight="50" 
+        footerHeight="50" 
+        rowHeight="auto" 
+        [reorderable]="reorderable">
+      </ngx-datatable>
+
+    </div>
+  </div>
+</div>
 <app-layout-nav-bar></app-layout-nav-bar>
