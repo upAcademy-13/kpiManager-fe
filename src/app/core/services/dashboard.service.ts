@@ -16,7 +16,7 @@ export class DashboardService {
   ////////////////////
   public getAllUnits() {
     return this.http
-      .get("http://127.0.0.1:8080/kpiManager/api/interactions/allUnities")
+      .get("http://127.0.0.1:8080/kpiManager/api/interactions/allUnits")
       .pipe(
         switchMap((units: any[]) =>
           forkJoin(
