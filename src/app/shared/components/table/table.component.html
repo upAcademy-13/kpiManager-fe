@@ -74,16 +74,9 @@
         <div class="col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select
-              (change)="filtro()"
-              #myselectBM
-              class="form-control selected"
-              id="myselectBM"
-            >
+            <select (change)='filtro()' #myselectBM [(ngModel)]="selectManager" class="form-control selected" id="myselectBM">
               <option value="myselectBM">Business Manager</option>
-              <option *ngFor="let select of dataBManagers$ | async"
-                >{{ select }}
-              </option>
+              <option [value]='select' *ngFor="let select of dataBManagers$ | async">{{select}} </option>
             </select>
           </div>
         </div>

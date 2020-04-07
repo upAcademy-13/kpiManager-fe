@@ -39,6 +39,7 @@ export class TableComponent implements OnInit {
   inputSearch: string = "";
   selectInteraction = "";
   selectClient = "";
+  selectManager = "";
 
   constructor(
     private http: HttpClient,
@@ -56,6 +57,8 @@ export class TableComponent implements OnInit {
      this.selectInteraction = !!window.history.state.selectInteraction ? window.history.state.selectInteraction : '';
      this.selectClient = window.history.state.selectClient;
      console.log(this.selectInteraction);
+     this.selectManager = window.history.state.selectManager;
+     console.log(this.selectManager);
      
   }
 
