@@ -44,8 +44,9 @@ export class ManagersClientManagementComponent implements OnInit {
     this.profileForm = new FormGroup({
       name : new FormControl('',Validators.required),
       nipc : new FormControl('',Validators.required),
-     unit : new FormControl('',Validators.required),
-  
+     unit : new FormGroup(
+       {id: new FormControl('',Validators.required),
+     })
     })
   }
 
@@ -118,10 +119,7 @@ public getFormData() {
 
 @ViewChild('lgModal') public lgModal: ModalDirective;
 public addClient(){
-  this.getFormData();
-  const requestOptions: Object = {
-    responseType: 'text'
-  }
+  
 console.log(JSON.stringify(this.profileForm.value) + " ---Daniel");
   this.http.post<any>(this.apiUrlClient,this.profileForm.value).subscribe(data => {
     console.log(data);
