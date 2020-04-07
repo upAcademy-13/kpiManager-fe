@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input } from "@angular/core";
+import { Component, OnInit, Output, Input, ChangeDetectorRef, ViewChild, ElementRef } from "@angular/core";
 import { Chart } from "chart.js";
 import { DashboardService } from "src/app/core/services/dashboard.service";
 import * as moment from 'moment';
@@ -16,15 +16,6 @@ interface Week {
 })
 export class Grafico3Component implements OnInit {
 
-  placeHolderText = "Select date";
-  dateChoose = "";
-  hasError = false;
-  maxDate = new Date();
-  bsInlineValue = new Date();
-  bsInlineRangeValue: Date[];
-  date: any;
-  public numWeek: any;
-  static getCurrentDate: any;
 
   managers = [];
   cvs = [];
@@ -34,8 +25,7 @@ export class Grafico3Component implements OnInit {
   selected = "";
 
   constructor(private dashboard: DashboardService, private router: Router) {
-    this.maxDate.setDate(this.maxDate.getDate() + 7);
-    this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
+    
   }
 
   ngOnInit() {
@@ -55,9 +45,9 @@ export class Grafico3Component implements OnInit {
 
   changeWeek(selectedWeek) {
     this.selected = selectedWeek;
-    console.log(this.selected);
-    this.myChart = null;
-    console.log(this.myChart);
+    this.managers = [];
+    this.cvs = [];
+    this.myChart.destroy();
     this.getDataforGraph(this.selected);
   }
 
@@ -77,13 +67,13 @@ export class Grafico3Component implements OnInit {
       data.forEach(cvPerManager => {
         this.managers.push(cvPerManager.manager);
         this.cvs.push(cvPerManager.cvNumber);
-        this.createChart(this.managers, this.cvs);
       });
+      this.createChart(this.managers, this.cvs);
     })
   }
 
   createChart(managers: any[], cvs: any[]) {
-    this.myChart = null;
+    
     this.myChart = new Chart("cvChart", {
       type: "horizontalBar",
       data: {
