@@ -1,30 +1,15 @@
 <div class="container-fluid">
-  <div class="d-flex flex-row justify-content-center">
-    <div class="chart-container responsive"
-      style="margin-top: 8rem!important; height:50vw; width:50vw; display: relative;">
-
-      <canvas id='cvChart'></canvas>
-      <div>
-        <div class="form-row"> <label for="inputSemana">Interaction Week:</label></div>
-
-        <div class="row">
-          <div class="col form-group">
-            <!--LINHA 17: NGCLASS transforma a classe dependente do erro-->
-            <input #selectedDate type="text" 
-              placeholder="{{placeHolderText}}"
-              [ngClass]="{'form-control' : !hasError, 'animated bounce error' : hasError}" bsDaterangepicker
-              [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-orange'}">
-          </div>
-        </div>
-        <!-- <mat-form-field>
-                <mat-label>Semana</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let week of weeks" [value]="week.value">
-                    {{week.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field> -->
-      </div>
+  <div class="d-flex justify-content-center">
+    <div class="chart-container responsive">
+      <canvas class="responsive" id="cvChart"></canvas>
     </div>
+  </div>
+  <div class="container">
+    <select class="selectpicker"
+      >Semana
+      <option>Semana 1</option>
+      <option>Semana 2</option>
+      <option>Semana 3</option>
+    </select>
   </div>
 </div>

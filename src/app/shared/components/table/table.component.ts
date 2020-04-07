@@ -53,7 +53,7 @@ export class TableComponent implements OnInit {
   }
   ngOnInit() {
      this.rows;    
-     this.selectInteraction = window.history.state.selectInteraction; 
+     this.selectInteraction = !!window.history.state.selectInteraction ? window.history.state.selectInteraction : '';
      console.log(this.selectInteraction);
      
   }

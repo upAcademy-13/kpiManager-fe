@@ -1,17 +1,11 @@
 <div class="container-fluid">
-<!--   <button
-    type="button"
-    class="btn btn-primary btn-lg"
-    style="background-color: #e46310"
-  >
-    Back
-  </button> -->
-  <div class="d-flex justify-content-center" style="height: 42vw;">
-     <div
-      class="chart-container responsive"
-      style="margin-top: 8rem!important; height:50vw; width:50vw; display: relative;"
-    >
-      <canvas id="myChart" (click)="graphClickEvent($event)"></canvas>
+  <div class="d-flex justify-content-center">
+    <div class="chart-container responsive">
+      <canvas
+        class="responsive"
+        id="myChart"
+        (click)="graphClickEvent($event)"
+      ></canvas>
     </div>
   </div>
-
+</div>

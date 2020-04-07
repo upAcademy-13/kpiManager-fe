@@ -50,8 +50,7 @@ export class Grafico3Component implements OnInit {
           labels: this.managers,
           datasets: [
             {
-              label: 'Nº of CV"s sent',
-              data: this.cvs,
+              data: ["1","1","1","1"],//this.cvs,
               backgroundColor: [
                 "rgba(242, 102, 9, 0.8)",
                 "rgba(242, 122, 24,  0.8)",
@@ -79,10 +78,16 @@ export class Grafico3Component implements OnInit {
           ]
         },
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            display: false
+          },
           scales: {
             yAxes: [
               {
                 ticks: {
+                  stepSize: 1,
                   beginAtZero: true
                 }
               }

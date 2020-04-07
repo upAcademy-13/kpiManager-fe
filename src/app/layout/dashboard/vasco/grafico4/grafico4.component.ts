@@ -38,7 +38,6 @@ export class Grafico4Component implements OnInit {
           labels: this.client,
           datasets: [
             {
-              label: "Nº of interactions per client",
               data: this.interactions,
 
               //backgroundColor:'green',
@@ -69,6 +68,8 @@ export class Grafico4Component implements OnInit {
           ]
         },
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
           scales: {
             yAxes: [
               {
@@ -85,7 +86,7 @@ export class Grafico4Component implements OnInit {
             fontSize: 25
           },
           legend: {
-            display: true,
+            display: false,
             position: "top",
             labels: {
               fontColor: "#000"

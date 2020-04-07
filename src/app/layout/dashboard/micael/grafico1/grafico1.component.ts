@@ -45,38 +45,57 @@ export class Grafico1Component implements OnInit {
           labels: this.colunas,
           datasets: [
             {
-              label: "Nº of Interactions per unit ",
               data: this.valores,
               backgroundColor: [
-                "rgba(251, 99, 132, 0.2)",
+              /*   "rgba(251, 99, 132, 0.2)",
                 "rgba(54, 162, 235, 0.2)",
                 "rgba(25, 206, 86, 0.2)",
                 "rgba(75, 192, 192, 0.2)",
                 "rgba(153, 102, 255, 0.2)",
-                "rgba(250, 159, 64, 0.2)"
+                "rgba(250, 159, 64, 0.2)" */
+                "rgba(242, 102, 9, 0.8)",
+                "rgba(242, 122, 24,  0.8)",
+                "rgba(237, 154, 37,  0.8)",
+                "rgba(255, 175, 48,  0.8)",
+                "rgba(255, 192, 93,  0.8)"
               ],
               borderColor: [
-                "rgba(251, 99, 132, 1)",
+               /*  "rgba(251, 99, 132, 1)",
                 "rgba(54, 162, 235, 1)",
                 "rgba(25, 206, 86, 1)",
                 "rgba(75, 192, 192, 1)",
                 "rgba(153, 102, 255, 1)",
-                "rgba(250, 159, 64, 1)"
+                "rgba(250, 159, 64, 1)" */
+                "rgba(242, 102, 9, 1)",
+                "rgba(242, 122, 24, 1)",
+                "rgba(237, 154, 37, 1)",
+                "rgba(255, 175, 48, 1)",
+                "rgba(255, 192, 93, 1)"
               ],
               borderWidth: 1,
               hoverBorderWidth: 3,
               hoverBorderColor: [
-              "rgba(251, 99, 132, 1)",
+             /*  "rgba(251, 99, 132, 1)",
               "rgba(54, 162, 235, 1)",
               "rgba(25, 206, 86, 1)",
               "rgba(75, 192, 192, 1)",
               "rgba(153, 102, 255, 1)",
-              "rgba(250, 159, 64, 1)"
+              "rgba(250, 159, 64, 1)" */
+              "rgba(242, 102, 9, 1)",
+                "rgba(242, 122, 24, 1)",
+                "rgba(237, 154, 37, 1)",
+                "#rgba(255, 175, 48, 1)",
+                "#rgba(255, 192, 93, 1)"
             ]
             }
           ]
         },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
         scales: {
           yAxes: [
             {

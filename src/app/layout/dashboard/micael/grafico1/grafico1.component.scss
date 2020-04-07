@@ -1,0 +1,25 @@
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .chart-container {
+        height: 25vh !important;
+        width: 50vw !important;
+        display: relative;
+      }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .chart-container {
+        height: 25vh !important;
+        width: 30vw !important;
+        display: relative;
+      }
+}
+
+
+@media (min-width: 767px) and (max-width: 2000px) {
+  .chart-container {
+      height: 20vh !important;
+      width: 30vw !important;
+      display: relative;
+    }
+}
