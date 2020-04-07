@@ -38,12 +38,12 @@ export class TableComponent implements OnInit {
   isFiltro: boolean = false;
   inputSearch: string = "";
   selectInteraction = "";
+  selectClient = "";
 
   constructor(
     private http: HttpClient,
     private data: DataService,
-    private router: Router) 
-    {
+    private router: Router) {
     this.fetch(data => {
       this.temp = [...data];
       this.rows = data;
@@ -52,17 +52,18 @@ export class TableComponent implements OnInit {
     });
   }
   ngOnInit() {
-     this.rows;    
-     this.selectInteraction = window.history.state.selectInteraction; 
-     console.log(this.selectInteraction);
-     
+    this.rows;
+    this.selectInteraction = window.history.state.selectInteraction;
+    this.selectClient = window.history.state.selectClient;
+    console.log(this.selectInteraction);
+    console.log(this.selectClient);
+
   }
 
   apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
 
 
-  refreshTabela()
-  {
+  refreshTabela() {
     this.isFiltro = false;
     this.data.getAllData().subscribe(res => {
       console.log('AllData = ', res);
@@ -70,7 +71,7 @@ export class TableComponent implements OnInit {
     });
     this.rows = this.temp;
     this.filterClearSelect();
-    
+
   }
 
 
@@ -174,7 +175,7 @@ export class TableComponent implements OnInit {
 
   filtro() {
     document.querySelector('input').value = "";
-    
+
     this.isFiltro = true;
     this.rows = [];
     let myselectSemana, myselectUnidade, myselectCliente, myselectBM, myselectInteration;
@@ -189,7 +190,7 @@ export class TableComponent implements OnInit {
 
 
     let params = new HttpParams();
-   
+
 
     params = params.append('sel0', myselectSemana);
     params = params.append('sel1', myselectUnidade);
@@ -205,10 +206,10 @@ export class TableComponent implements OnInit {
     this.table.offset = 0;
     console.log('this.temp = ', this.temp);
     console.log(myselectInteration);
-    
+
   }
 
-  filterClearSelect(){
+  filterClearSelect() {
     var select = document.querySelectorAll('select');
     select[0].selectedIndex = 0;
     select[1].selectedIndex = 0;

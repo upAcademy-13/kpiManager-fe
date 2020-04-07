@@ -11,8 +11,8 @@
 
       <div class="row">
         <div class=" search col-lg-3">
-          <input class="search form-control" id="inputSearch" type='text' [(ngModel)]="inputSearch" placeholder='O que estás à procurar?'
-            (keyup)='updateFilter($event)'>
+          <input class="search form-control" id="inputSearch" type='text' [(ngModel)]="inputSearch"
+            placeholder='O que estás à procurar?' (keyup)='updateFilter($event)'>
         </div>
 
       </div>
@@ -38,9 +38,10 @@
         <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='filtro()' #myselectCliente class="form-control selected" id="exampleFormControlSelect1">
-              <option value="myselectCliente">Cliente</option>
-              <option *ngFor="let select of dataClients$ | async">{{select}}</option>
+            <select (change)='filtro()' #myselectClient [(ngModel)]="selectClient" class="form-control selected"
+              id="myselectClient">
+              <option value="myselectCliente" selected>Cliente</option>
+              <option [value]='select' *ngFor="let select of dataClients$ | async">{{select}}</option>
             </select>
           </div>
         </div>
@@ -56,7 +57,8 @@
         <div class="col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='filtro()' #myselectInteration [(ngModel)]="selectInteraction" class="form-control selected" id="myselectInteration">
+            <select (change)='filtro()' #myselectInteration [(ngModel)]="selectInteraction"
+              class="form-control selected" id="myselectInteration">
               <option value="myselectInteration" selected>Tipo de interação</option>
               <option [value]='select' *ngFor="let select of dataInteractions$ | async">{{select}}</option>
             </select>
@@ -77,14 +79,15 @@
 
 
 
-          <div class="footer row" style=" padding: 5px 10px">
-            <div class="col-5"><strong> Número total de interações de:</strong> {{(filtro$ | async)?.length}}</div>
-            <div class="col-4 offset-3 text-right">
-              <button id="btnRefresh" (click)="refreshTabela()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1">Reiniciar Tabela</button>
-            </div>
-
+        <div class="footer row" style=" padding: 5px 10px">
+          <div class="col-5"><strong> Número total de interações de:</strong> {{(filtro$ | async)?.length}}</div>
+          <div class="col-4 offset-3 text-right">
+            <button id="btnRefresh" (click)="refreshTabela()"
+              class="btn btn-outline my-btn-orange text-white m-2 my-sm-1">Reiniciar Tabela</button>
           </div>
-     
+
+        </div>
+
 
       </div>
 
@@ -97,13 +100,14 @@
 
         </ngx-datatable>
 
-          <div class="footer row" style=" padding: 5px 10px">
-            <div class="col-5"><strong> Número total de interações de:</strong> {{(rows).length}}</div>
-            <div class="col-4 offset-3 text-right">
-              <button id="btnRefresh" (click)="refreshTabela()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1">Reiniciar Tabela</button>
-            </div>
-
+        <div class="footer row" style=" padding: 5px 10px">
+          <div class="col-5"><strong> Número total de interações de:</strong> {{(rows).length}}</div>
+          <div class="col-4 offset-3 text-right">
+            <button id="btnRefresh" (click)="refreshTabela()"
+              class="btn btn-outline my-btn-orange text-white m-2 my-sm-1">Reiniciar Tabela</button>
           </div>
+
+        </div>
 
       </div>
 
