@@ -7,11 +7,10 @@
       </span>
 
       <h1 class="form-title text-center ">CLIENTS & MANAGERS</h1>
-
+      <button (click)="getAllManagers()">Manager</button><button (click)="getAllClients()">Clients</button>
       <ngx-datatable 
         class="material" 
         [rows]="rows" 
-        [loadingIndicator]="loadingIndicator" 
         [columns]="columns"
         [columnMode]="ColumnMode.force" 
         headerHeight="50" 
