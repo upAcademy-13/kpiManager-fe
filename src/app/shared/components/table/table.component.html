@@ -26,13 +26,16 @@
             <select
               (change)="filtro()"
               #myselectSemana
+              [(ngModel)]="selectWeek"
               class="form-control selected"
               id="exampleFormControlSelect1"
             >
-              <option value="myselectSemana">Semana</option>
-              <option *ngFor="let select of dataWeek$ | async">{{
-                select
-              }}</option>
+              <option value="myselectSemana" selected>Semana</option>
+              <option
+                [value]="select"
+                *ngFor="let select of dataWeek$ | async"
+                >{{ select }}</option
+              >
             </select>
           </div>
         </div>
@@ -42,13 +45,16 @@
             <select
               (change)="filtro()"
               #myselectUnidade
+              [(ngModel)]="selectUnit"
               class="form-control selected"
               id="exampleFormControlSelect1"
             >
-              <option value="myselectUnidade">Unidade</option>
-              <option *ngFor="let select of dataUnities$ | async">{{
-                select
-              }}</option>
+              <option value="myselectUnidade" selected>Unidade</option>
+              <option
+                [value]="select"
+                *ngFor="let select of dataUnities$ | async"
+                >{{ select }}</option
+              >
             </select>
           </div>
         </div>
@@ -74,9 +80,19 @@
         <div class="col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='filtro()' #myselectBM [(ngModel)]="selectManager" class="form-control selected" id="myselectBM">
+            <select
+              (change)="filtro()"
+              #myselectBM
+              [(ngModel)]="selectManager"
+              class="form-control selected"
+              id="myselectBM"
+            >
               <option value="myselectBM">Business Manager</option>
-              <option [value]='select' *ngFor="let select of dataBManagers$ | async">{{select}} </option>
+              <option
+                [value]="select"
+                *ngFor="let select of dataBManagers$ | async"
+                >{{ select }}
+              </option>
             </select>
           </div>
         </div>

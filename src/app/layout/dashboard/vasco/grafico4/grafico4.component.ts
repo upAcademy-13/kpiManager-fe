@@ -29,6 +29,7 @@ export class Grafico4Component implements OnInit {
       this.clientInteractionChart();
     });
   }
+
   graphClickEvent(event) {
     console.log(event);
     
@@ -37,6 +38,11 @@ export class Grafico4Component implements OnInit {
       state: { selectClient: this.chartElem[0]._model.label }
     });
   }
+
+  displayRoute() {
+    return this.router.url === '/layout/dashboard/grafico4';
+  }
+
   clientInteractionChart() {
       this.myChart = new Chart("myChart4", {
         type: "bar", // bar, horizontalBar, pie, line, doughnut, radar, polarArea

@@ -11,6 +11,7 @@ export class Grafico1Component implements OnInit {
   constructor(private ds: DashboardService, private router: Router) {}
 
   myChart: any;
+  chartElem: any;
   listaDetalhada: any[];
   colunas = [];
   valores = [];
@@ -22,14 +23,14 @@ export class Grafico1Component implements OnInit {
   myDetail: any;
 
   graphClickEvent(event) {
-    const idClicado: number = this.myChart.chart.getElementAtEvent(event)[0]
-      ._label;
-    this.router.navigate(["/estatistica"], {
-      state: { labelClicado: idClicado }
+    this.chartElem = this.myChart.getElementAtEvent(event);
+    this.router.navigate(["/layout/statistics"], {
+      state: { selectUnit: this.chartElem[0]._model.label }
     });
-    console.log(idClicado);
   }
-
+  displayRoute() {
+    return this.router.url === '/layout/dashboard/grafico1';
+  }
   ngOnInit(): void 
   {
     this.ds.getAllUnits().subscribe(dados => {

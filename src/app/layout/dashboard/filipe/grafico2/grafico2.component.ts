@@ -31,6 +31,10 @@ export class Grafico2Component implements OnInit {
     });
   }
 
+  displayRoute() {
+    return this.router.url === "/layout/dashboard/grafico2";
+  }
+
   graphClickEvent(event) {
     this.chartElem = this.myChart.getElementAtEvent(event);
     this.router.navigate(["/layout/statistics"], {
@@ -51,7 +55,7 @@ export class Grafico2Component implements OnInit {
           {
             data: this.interactionsCount,
             backgroundColor: [
-           /*    "rgba(255, 99, 132, 0.5)",
+              /*    "rgba(255, 99, 132, 0.5)",
               "rgba(54, 162, 235, 0.5)",
               "rgba(255, 206, 86, 0.5)",
               "rgba(246, 8, 12, 0.5)",
@@ -67,10 +71,10 @@ export class Grafico2Component implements OnInit {
               "rgba(242, 122, 24,  0.8)",
               "rgba(237, 154, 37,  0.8)",
               "rgba(255, 175, 48,  0.8)",
-              "rgba(255, 192, 93,  0.8)"
+              "rgba(255, 192, 93,  0.8)",
             ],
             borderColor: [
-           /*    "rgba(255, 99, 132, 1)",
+              /*    "rgba(255, 99, 132, 1)",
               "rgba(54, 162, 235, 1)",
               "rgba(255, 206, 86, 1)",
               "rgba(246, 8, 12, 1)",
@@ -86,7 +90,7 @@ export class Grafico2Component implements OnInit {
               "rgba(242, 122, 24, 1)",
               "rgba(237, 154, 37, 1)",
               "rgba(255, 175, 48, 1)",
-              "rgba(255, 192, 93, 1)"
+              "rgba(255, 192, 93, 1)",
             ],
             borderWidth: 1,
             hoverBorderWidth: 3,
@@ -104,10 +108,10 @@ export class Grafico2Component implements OnInit {
               "rgba(235, 122, 9, 1)",
               "rgba(8, 246, 127, 1)", */
               "rgba(242, 102, 9, 1)",
-                "rgba(242, 122, 24, 1)",
-                "rgba(237, 154, 37, 1)",
-                "#rgba(255, 175, 48, 1)",
-                "#rgba(255, 192, 93, 1)"
+              "rgba(242, 122, 24, 1)",
+              "rgba(237, 154, 37, 1)",
+              "#rgba(255, 175, 48, 1)",
+              "#rgba(255, 192, 93, 1)",
             ],
           },
         ],
@@ -116,7 +120,7 @@ export class Grafico2Component implements OnInit {
         responsive: true,
         maintainAspectRatio: false,
         legend: {
-          display: false
+          display: false,
         },
         scales: {
           yAxes: [
