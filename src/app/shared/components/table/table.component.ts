@@ -41,8 +41,7 @@ export class TableComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private data: DataService,
-    private router: Router) 
+    private data: DataService) 
     {
     this.fetch(data => {
       this.temp = [...data];
@@ -97,80 +96,6 @@ export class TableComponent implements OnInit {
     this.table.offset = 0;
     console.log("passou", this.rows)
   }
-
-  // uFilterBM(value: string) {
-  //   if (value == 'myselectBM') {
-  //     this.rows = this.temp;
-  //     return;
-  //   }
-  //   const val = value;
-  //   const temp = this.temp.filter(function (d) {
-  //     return d.person.name.indexOf(val) !== -1 || !val;
-  //   });
-
-  //   this.rows = temp;
-  //   this.table.offset = 0;
-  // }
-
-  // uFilterInteration(value: string) {
-  //   if (value == 'myselectInteration') {
-  //     this.rows = this.temp;
-  //     return;
-  //   }
-
-  //   const val = value;
-  //   const temp = this.temp.filter(function (d) {
-  //     return d.interactionType.interactionType.indexOf(val) !== -1 || !val;
-  //   });
-
-  //   this.rows = temp;
-  //   this.table.offset = 0;
-  // }
-
-  // uFilterClient(value: string) {
-  //   if (value == 'myselectCliente') {
-  //     this.rows = this.temp;
-  //     return;
-  //   }
-
-  //   const val = value;
-  //   const temp = this.temp.filter(function (d) {
-  //     return d.client.name.indexOf(val) !== -1 || !val;
-  //   });
-
-  //   this.rows = temp;
-  //   this.table.offset = 0;
-  // }
-
-  // uFilterUnidade(value: string) {
-  //   if (value == 'myselectUnidade') {
-  //     this.rows = this.temp;
-  //     return;
-  //   }
-
-  //   const val = value;
-  //   const temp = this.temp.filter(function (d) {
-  //     return d.unit.nameUnit.indexOf(val) !== -1 || !val;
-  //   });
-
-  //   this.rows = temp;
-  //   this.table.offset = 0;
-  // }
-
-  // uFilterSemana(value: string) {
-  //   if (value == 'myselectSemana') {
-  //     this.rows = this.temp;
-  //     return;
-  //   }
-
-  //   const val = value;
-  //   const temp = this.temp.filter(function (d) {
-  //     return d.dateInteraction.indexOf(val) !== -1 || !val;
-  //   });
-
-  //   this.rows = temp;
-  //   this.table.offset = 0;
-  // }
 
   filtro() {
     document.querySelector('input').value = "";
