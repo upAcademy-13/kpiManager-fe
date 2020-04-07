@@ -111,7 +111,6 @@ public getFormData() {
   this.units$ = this.interactionService.getUnits();
 
   this.units$.subscribe((unit: any[]) => {
-    console.log(unit);
     this.unitsArray = unit;
   });
   
@@ -120,19 +119,17 @@ public getFormData() {
 @ViewChild('lgModal') public lgModal: ModalDirective;
 public addClient(){
   this.getFormData();
-  console.log(this.unitsArray[0].id);
   const requestOptions: Object = {
     responseType: 'text'
   }
-console.log(this.profileForm.value);
-  this.http.post<any>(this.apiUrlClient,this.profileForm.value,requestOptions).subscribe(data => {
+console.log(JSON.stringify(this.profileForm.value) + " ---Daniel");
+  this.http.post<any>(this.apiUrlClient,this.profileForm.value).subscribe(data => {
     console.log(data);
   },
   error => {
     console.log(error);
   });
-  this.http.get(this.apiUrlClient).subscribe(data =>{
-console.log(data);
+  this.http.get(this.apiUrlClient ).subscribe(data =>{
   })
   this.lgModal.hide();
 }
