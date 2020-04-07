@@ -1,20 +1,22 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, Input, Output } from "@angular/core";
 import { forkJoin } from "rxjs";
 import { switchMap, map } from "rxjs/operators";
+import { Grafico3Component } from 'src/app/layout/dashboard/ana/grafico3/grafico3.component';
 
 @Injectable({
   providedIn: "root"
 })
 export class DashboardService {
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) {}  
+  
 
   ////////////////////
   // Funções Micael //
   ////////////////////
   public getAllUnits() {
     return this.http
-      .get("http://127.0.0.1:8080/kpiManager/api/interactions/allUnities")
+      .get("http://127.0.0.1:8080/kpiManager/api/interactions/allUnits")
       .pipe(
         switchMap((units: any[]) =>
           forkJoin(
@@ -84,12 +86,16 @@ export class DashboardService {
   // Funções Ana //
   /////////////////
 
-  public getAllManagers() {
+  public getAllWeeks(){
+    return this.http.get("http://127.0.0.1:8080/kpiManager/api/interactions/allWeeks")
+  }
+
+  public getAllManagers(week: String) {
     return this.http.get(
       "http://127.0.0.1:8080/kpiManager/api/interactions/allBManagers"
     ).pipe(
       switchMap((managers: any[]) => forkJoin(
-        managers.map(manager => this.countAllCvsPerWeekPerManager(manager, "2020")
+        managers.map(manager => this.countAllCvsPerWeekPerManager(manager, week)
         .pipe(
           map(cvNumber => {
             return {manager, cvNumber}

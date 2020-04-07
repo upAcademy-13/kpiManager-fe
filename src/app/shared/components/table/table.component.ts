@@ -38,6 +38,7 @@ export class TableComponent implements OnInit {
   isFiltro: boolean = false;
   inputSearch: string = "";
   selectInteraction = "";
+  selectManager = "";
 
   constructor(
     private http: HttpClient,
@@ -55,6 +56,8 @@ export class TableComponent implements OnInit {
      this.rows;    
      this.selectInteraction = window.history.state.selectInteraction; 
      console.log(this.selectInteraction);
+     this.selectManager = window.history.state.selectManager;
+     console.log(this.selectManager);
      
   }
 
