@@ -22,9 +22,6 @@ export class Grafico2Component implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /* this.breakpoint = (window.innerWidth <= 1000) ? "sm" : "lg";
-    console.log(Chart.instances); */
-
     this.dbService.getAllInteractionTypes().subscribe((data: any[]) => {
       data.forEach((interactionType) => {
         this.interactionTypes.push(interactionType.interactions);

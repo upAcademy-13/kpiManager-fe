@@ -33,7 +33,6 @@ export class Grafico1Component implements OnInit {
   ngOnInit(): void 
   {
     this.ds.getAllUnits().subscribe(dados => {
-      console.log(dados);
       dados.forEach(unidades => {
         this.colunas.push(unidades.unit);
         this.valores.push(unidades.interaction);

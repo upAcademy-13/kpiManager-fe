@@ -57,14 +57,17 @@
             <label for="exampleFormControlSelect1"></label>
             <select
               (change)="filtro()"
-              #myselectCliente
+              #myselectClient
+              [(ngModel)]="selectClient"
               class="form-control selected"
-              id="exampleFormControlSelect1"
+              id="myselectClient"
             >
-              <option value="myselectCliente">Cliente</option>
-              <option *ngFor="let select of dataClients$ | async">{{
-                select
-              }}</option>
+              <option value="myselectCliente" selected>Cliente</option>
+              <option
+                [value]="select"
+                *ngFor="let select of dataClients$ | async"
+                >{{ select }}</option
+              >
             </select>
           </div>
         </div>

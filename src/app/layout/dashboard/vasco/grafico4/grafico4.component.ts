@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Chart } from "chart.js";
 import { DashboardService } from "src/app/core/services/dashboard.service";
+import { Router } from '@angular/router';
 
 interface Week {
   value: string;
@@ -13,33 +14,37 @@ interface Week {
   styleUrls: ["./grafico4.component.scss"]
 })
 export class Grafico4Component implements OnInit {
-  //drilldown das semanas
-  weeks: Week[] = [
-    { value: "Semana-1", viewValue: "Semana 1" },
-    { value: "Semana-2", viewValue: "Semana 2" },
-    { value: "Semana-3", viewValue: "Semana 3" },
-    { value: "Semana-4", viewValue: "Semana 4" }
-  ];
-
-  client = [];
+  myChart: any;
+  chartElem: any;
+  clients = [];
   interactions = [];
-  constructor(private dashboard: DashboardService) {}
+  constructor(private router: Router, private dashboard: DashboardService) {}
 
   ngOnInit(): void {
     this.dashboard.getAllClientNames().subscribe((data: any[]) => {
       data.forEach(clients => {
-        this.client.push(clients.client);
+        this.clients.push(clients.client);
         this.interactions.push(clients.interactions);
       });
-
-      let massPopChart = new Chart("myChart4", {
+      this.clientInteractionChart();
+    });
+  }
+  graphClickEvent(event) {
+    console.log(event);
+    
+    this.chartElem = this.myChart.getElementAtEvent(event);
+    this.router.navigate(["/layout/statistics"], {
+      state: { selectClient: this.chartElem[0]._model.label }
+    });
+  }
+  clientInteractionChart() {
+      this.myChart = new Chart("myChart4", {
         type: "bar", // bar, horizontalBar, pie, line, doughnut, radar, polarArea
         data: {
-          labels: this.client,
+          labels: this.clients,
           datasets: [
             {
               data: this.interactions,
-
               //backgroundColor:'green',
               backgroundColor: [
                 "rgba(242, 102, 9, 0.8)",
@@ -87,10 +92,6 @@ export class Grafico4Component implements OnInit {
           },
           legend: {
             display: false,
-            position: "top",
-            labels: {
-              fontColor: "#000"
-            }
           },
           layout: {
             padding: {
@@ -105,6 +106,5 @@ export class Grafico4Component implements OnInit {
           }
         }
       });
-    });
+    }
   }
-}

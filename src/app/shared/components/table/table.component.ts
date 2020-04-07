@@ -38,6 +38,7 @@ export class TableComponent implements OnInit {
   isFiltro: boolean = false;
   inputSearch: string = "";
   selectInteraction = "";
+  selectClient = "";
 
   constructor(
     private http: HttpClient,
@@ -53,6 +54,7 @@ export class TableComponent implements OnInit {
   ngOnInit() {
      this.rows;    
      this.selectInteraction = !!window.history.state.selectInteraction ? window.history.state.selectInteraction : '';
+     this.selectClient = window.history.state.selectClient;
      console.log(this.selectInteraction);
      
   }
