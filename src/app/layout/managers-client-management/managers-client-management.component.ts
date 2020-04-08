@@ -87,7 +87,6 @@ export class ManagersClientManagementComponent implements OnInit {
   }
   modalRef: BsModalRef;
   public units$: Observable<Object>;
-  public unitsArray = [];
   selectUnit: string;
   private apiUrlClient = 'http://localhost:8080/kpiManager/api/clients';
   public client: Client = new Client();
@@ -110,10 +109,6 @@ profileForm : FormGroup;
 public getFormData() {
 
   this.units$ = this.interactionService.getUnits();
-
-  this.units$.subscribe((unit: any[]) => {
-    this.unitsArray = unit;
-  });
   
 }
 

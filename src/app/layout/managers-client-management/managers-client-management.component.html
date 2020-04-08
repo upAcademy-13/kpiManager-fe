@@ -2,14 +2,17 @@
   <div class="table-reponsive-clients-managers">
 
     <div class="central-container-table-clients-managers">
-      <button type="button" class="btn btn-primary float-right mt-5" (click)="lgModal.show()">
+      <h1 class="form-title text-center ">CLIENTS & MANAGERS</h1>
+      <button type="button" class="btn btn-custom float-right" (click)="lgModal.show()">
         New client
       </button>
+      
       <span class="contact100-form-symbol">
-        <img src="assets/imagens/estatistica.webp">
+        <i class="fas fa-portrait fa-3x"></i>
+        
       </span>
 
-      <h1 class="form-title text-center ">CLIENTS & MANAGERS</h1>
+      
       <button class="btn btn-custom mr-2" (click)="getAllManagers()">Manager</button><button class="btn btn-custom" (click)="getAllClients()">Clients</button>
       
       <ngx-datatable 
@@ -23,7 +26,7 @@
         >
         <ngx-datatable-column
 
-          name="name"
+          name="Name"
         >
           <ng-template let-row="row"  ngx-datatable-cell-template>
             {{row.name}}
@@ -32,19 +35,19 @@
 
         <ngx-datatable-column
 
-          name="unit"
+          name="Unit"
         >
           <ng-template let-row="row"  ngx-datatable-cell-template>
-            {{row.unit.nameUnit}}
+            {{row.unit?.nameUnit|| ""}}
           </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column
 
-          name="actions"
+          name="Actions"
         >
           <ng-template let-row="row"  ngx-datatable-cell-template>
-            asd
+            <button class="btn btn-custom">Edit</button> 
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
@@ -99,7 +102,7 @@
                   </div>
                   <div class="col-10" formGroupName="unit">
                     <select class="form-control w-75 form-control-sm mb-4" formControlName="id" name="unit" required>
-                      <option [ngValue]="undefined" disabled hidden selected>Please select one unit</option>
+                      <option value="" disabled hidden>Please select one unit</option>
                       <option  *ngFor="let unit of units$ | async ; let i = index"
                         value={{unit.id}}>
                         {{unit.nameUnit}}
