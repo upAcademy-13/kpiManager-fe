@@ -123,10 +123,10 @@ $indicator-width: 50px;
 $indicator-height: 4px;
 
 /* breakpoints */
-$breakpoints: (
+/* $breakpoints: (
   medium: #{$tab-count*250px},
   small: #{$tab-count*150px}
-);
+); */
 
 
 /* selectors relative to radio inputs */
@@ -314,9 +314,9 @@ body {
           fill: $accent;
         }
         
-        @media (max-width: map-get($breakpoints, small)) {
+        /* @media (max-width: map-get($breakpoints, small)) {
           background: rgba(0, 0, 0, 0.08);
-        }
+        } */
       }
     }
   }
@@ -332,7 +332,7 @@ body {
     }
   }
   
-  @media (max-width: map-get($breakpoints, medium)) {
+  /* @media (max-width: map-get($breakpoints, medium)) {
     ul li label {
       white-space: initial;
       
@@ -345,8 +345,8 @@ body {
       }
     }
   }
-  
-  @media (max-width: map-get($breakpoints, small)) {
+   */
+ /*  @media (max-width: map-get($breakpoints, small)) {
     ul li label {
       padding: 5px;
       border-radius: 5px;
@@ -367,5 +367,5 @@ body {
         display: block;
       }
     }
-  }
-}
+  }*/
+} 
