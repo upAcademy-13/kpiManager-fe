@@ -9,13 +9,24 @@
         <i class="fas fa-portrait fa-3x"></i>
 
       </span>
-      <div class="row">
+      <div class="tabs">
+  
+        <input type="radio" id="tab1" name="tab-control" checked>
+        <input type="radio" id="tab2" name="tab-control">
+        <input type="radio" id="tab3" name="tab-control">  
+        <input type="radio" id="tab4" name="tab-control">
+        <ul>
+          <li  ><label for="tab1" role="button" ><span  (click)="getAllClients()">Clients</span></label></li>
+          <li  ><label for="tab2" role="button"  ><span  (click)="getAllManagers()">Managers</span></label></li>
+        </ul>
+        
+        <div class="slider"><div class="indicator"></div></div>
+      <!-- <div class="row">
 
         <div class="col-2">
           <ul class="nav nav-tabs">
-            <li class="nav-item"><button id="client"  [ngClass]="{'active': isManager == false}" [disabled]="isManager == false" class="nav-link active" (click)="getAllClients()">Clients</button></li>
             <li class="nav-item "><button [ngClass]="{'active': isManager}" class="nav-link" [disabled]="isManager" (click)="getAllManagers()">Managers</button></li>
-           
+            <li class="nav-item"><button id="client"  [ngClass]="{'active': isManager == false}" [disabled]="isManager == false" class="nav-link active" (click)="getAllClients()">Clients</button></li>
 
           </ul>
         </div>
@@ -31,7 +42,7 @@
          
           
         </div>
-      </div>
+      </div> -->
 
 
       <!-- <button class="btn btn-custom mr-2" (click)="getAllManagers()">Manager</button>
