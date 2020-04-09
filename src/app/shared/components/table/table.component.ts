@@ -23,6 +23,7 @@ export class TableComponent implements OnInit {
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
+  @Input() tempo$: Observable<any[]>;
   @Input() filtro$: Observable<any[]>;
   @Input() data$: Observable<any[]>;
   @Input() dataWeek$: Observable<any[]>;
@@ -43,9 +44,19 @@ export class TableComponent implements OnInit {
   selectWeek: string;
   apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
 
+  page = {
+    limit: 10,
+    count: 0,
+    offset: 0,
+    orderBy: 'myColumn1',
+    orderDir: 'desc',
+    pageNumber: 0,
+    size: 2
 
+  };
 
   ngOnInit() {
+    this.pageCallback({ offset: 0 });
     console.log('ngOnInit - start')
     this.selectInteraction = !!window.history.state.selectInteraction ? window.history.state.selectInteraction : '';
     this.selectBM = !!window.history.state.selectBM ? window.history.state.selectBM : '';
@@ -55,35 +66,69 @@ export class TableComponent implements OnInit {
     if (this.selectInteraction !== '' || this.selectUnit !== '' || this.selectUnit !== '' || this.selectWeek !== '' || this.selectClient) {
       this.filtrer();
     } else {
-      this.fetch(data => {
-        this.temp = [...data];
-        this.rows = this.temp;
-      })
+      this.reloadTable();
     }
     console.log('ngOnInit - fim')
   }
 
-    constructor(
+  constructor(
     private http: HttpClient,
     private data: DataService,
     private cdr: ChangeDetectorRef
   ) {
+
+  }
+
+  pageCallback(pageInfo: { count?: number, pageSize?: number, limit?: number, offset?: number }) {
+    this.page.offset = pageInfo.offset;
+    this.reloadTable();
+  }
+
+  // sortCallback(sortInfo: { sorts: { dir: string, prop: string }[], column: {}, prevValue: string, newValue: string }) {
+  //   // there will always be one "sort" object if "sortType" is set to "single"
+  //   this.page.orderDir = sortInfo.sorts[0].dir;
+  //   this.page.orderBy = sortInfo.sorts[0].prop;
+  //   this.reloadTable();
+  // }
+
+
+
+  reloadTable() {
+
+    // NOTE: those params key values depends on your API!
+    let params = new HttpParams();
+
+    params = params.append('startIndex', `${this.page.offset}`);
+    params = params.append('quantity', `${this.page.limit}`);
+    // .set('orderColumn', `${this.page.orderBy}`)
+    // .set('orderDir', `${this.page.orderDir}`)
+
+
+    this.tempo$ = this.http.get<any[]>(` http://127.0.0.1:8080/kpiManager/api/interactions/all/between`, { params })
+    this.tempo$.subscribe((res) => {
+      this.rows = [...res];
+      console.log("tempo, between", this.rows);
+      this.table.offset = 0;
+      this.cdr.detectChanges();
+    })
   }
 
   refreshTable() {
     this.filterClearSelect();
+    this.reloadTable();
     this.rows = this.temp;
   }
 
-  fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', '  http://127.0.0.1:8080/kpiManager/api/interactions/all');
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    };
-    req.send();
-    console.log("passou req", req)
-  }
+  // fetch(cb) {
+  //   console.log('fetch - start')
+  //   const req = new XMLHttpRequest();
+  //   req.open('GET', '  http://127.0.0.1:8080/kpiManager/api/interactions/all');
+  //   req.onload = () => {
+  //     cb(JSON.parse(req.response));
+  //   };
+  //   req.send();
+  //   console.log('fetch - fim')
+  // }
 
   updateFilter(event) {
     this.filterClearSelect();
@@ -105,7 +150,7 @@ export class TableComponent implements OnInit {
     myselectBM = this.selectBM !== "" ? this.selectBM : null;
     myselectClient = this.selectClient !== "" ? this.selectClient : null;
     myselectUnit = this.selectUnit !== "" ? this.selectUnit : null;
-    myselectWeek = this.selectWeek!== "" ? this.selectWeek :null;
+    myselectWeek = this.selectWeek !== "" ? this.selectWeek : null;
     myselectInteration = this.selectInteraction !== "" ? this.selectInteraction : null;
 
     let params = new HttpParams();
@@ -126,21 +171,16 @@ export class TableComponent implements OnInit {
       this.cdr.detectChanges();
     })
 
-
-    // this.table.offset = 0;
     console.log('this.temp = ', this.temp);
-
   }
 
   filterClearSelect() {
-
     this.selectBM = "";
-    this.selectClient="";
-    this.selectWeek="";
-    this.selectUnit="";
-    this.selectInteraction="";
-  
-  }
+    this.selectClient = "";
+    this.selectWeek = "";
+    this.selectUnit = "";
+    this.selectInteraction = "";
 
+  }
 
 }

@@ -8,12 +8,12 @@
 
 
       <h1 class="form-title text-center ">
-        Statistics </h1>
+        STATISTICS </h1>
 
       <div class="row">
-        <div class=" search col-lg-3">
-          <input class="search form-control" id="inputSearch" type='text' [(ngModel)]="inputSearch" placeholder='What are you looking for?'
-            (keyup)='updateFilter($event)'>
+        <div class="  col-lg-3">
+          <input class="search form-control" id="inputSearch" type='text' [(ngModel)]="inputSearch"
+            placeholder='Search...' (keyup)='updateFilter($event)'>
         </div>
 
       </div>
@@ -21,17 +21,19 @@
         <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select  [(ngModel)]= "selectWeek" (change)='filtrer()' #myselectSemana class=" form-control selected " id="exampleFormControlSelect1">
+            <select [(ngModel)]="selectWeek" (change)='filtrer()' #myselectSemana class=" form-control selected "
+              id="exampleFormControlSelect1">
               <option value="">Week</option>
-              <option  value={{select}}  *ngFor="let select of dataWeek$ | async">{{select}} ª </option>
+              <option value={{select}} *ngFor="let select of dataWeek$ | async">{{select}} ª </option>
             </select>
           </div>
         </div>
-   
+
         <div class=" col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select   [(ngModel)]= "selectUnit" (change)='filtrer()' #myselectUnidade class="form-control selected" id="exampleFormControlSelect1">
+            <select [(ngModel)]="selectUnit" (change)='filtrer()' #myselectUnidade class="form-control selected"
+              id="exampleFormControlSelect1">
               <option value="">Unit</option>
               <option value={{select}} *ngFor="let select of dataUnities$ | async">{{select}}</option>
             </select>
@@ -40,25 +42,28 @@
         <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select [(ngModel)]= "selectClient" (change)='filtrer()' #myselectCliente class="form-control selected" id="exampleFormControlSelect1">
-              <option  value="">Client</option>
-              <option value={{select}}  *ngFor="let select of dataClients$ | async">{{select}}</option>
+            <select [(ngModel)]="selectClient" (change)='filtrer()' #myselectCliente class="form-control selected"
+              id="exampleFormControlSelect1">
+              <option value="">Client</option>
+              <option value={{select}} *ngFor="let select of dataClients$ | async">{{select}}</option>
             </select>
           </div>
         </div>
         <div class="col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select [(ngModel)]= "selectBM" (change)='filtrer()' #myselectBM class="form-control selected" id="myselectBM">
-              <option  value="">Business Manager</option>
-              <option  value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}} </option>
+            <select [(ngModel)]="selectBM" (change)='filtrer()' #myselectBM class="form-control selected"
+              id="myselectBM">
+              <option value="">Business Manager</option>
+              <option value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}} </option>
             </select>
           </div>
         </div>
         <div class="col-sm-2 lastSel">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select  [(ngModel)]= "selectInteraction" (change)='filtrer()' #myselectInteration class="form-control selected " id="myselectInteration">
+            <select [(ngModel)]="selectInteraction" (change)='filtrer()' #myselectInteration
+              class="form-control selected " id="myselectInteration">
               <option value="">Interaction Type</option>
               <option value={{select}} *ngFor="let select of dataInteractions$ | async">{{select}}</option>
             </select>
@@ -71,22 +76,22 @@
 
       <div>
 
-        <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='rows'
-          [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"
-          [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unity"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
-          [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"' >  
+        <ngx-datatable #table class='prefix-css material striped' [rows]='rows' [scrollbarV]="false"
+          [sorts]="[{prop: 'name', dir: 'desc'}]"
+          [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unit"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
+          [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"'   [limit]="page.size"
+          >
         </ngx-datatable>
 
-
-
-          <div class="footer row" style=" padding: 5px 10px">
-            <div class="col-5"><strong>  Total number of interactions:</strong> {{rows.length}}</div>
-            <div class="col-4 offset-3 text-right">
-              <button id="btnRefresh" (click)="refreshTable()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Refresh table</button>
-            </div>
-
+        <div class="footer row" style=" padding: 5px 10px">
+          <div class="col-5"><strong> Total number of interactions:</strong> {{rows.length}}</div>
+          <div class="col-4 offset-3 text-right">
+            <button id="btnRefresh" (click)="refreshTable()"
+              class="btn btn-outline my-btn-orange-btn text-white m-2 my-sm-1"> Refresh table</button>
           </div>
-     
+
+        </div>
+
 
       </div>
 
