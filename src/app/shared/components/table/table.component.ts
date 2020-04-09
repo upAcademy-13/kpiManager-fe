@@ -51,7 +51,7 @@ export class TableComponent implements OnInit {
     orderBy: 'myColumn1',
     orderDir: 'desc',
     pageNumber: 0,
-    size: 2
+    size:5
 
   };
 
@@ -91,8 +91,6 @@ export class TableComponent implements OnInit {
   //   this.reloadTable();
   // }
 
-
-
   reloadTable() {
 
     // NOTE: those params key values depends on your API!
@@ -107,6 +105,7 @@ export class TableComponent implements OnInit {
     this.tempo$ = this.http.get<any[]>(` http://127.0.0.1:8080/kpiManager/api/interactions/all/between`, { params })
     this.tempo$.subscribe((res) => {
       this.rows = [...res];
+      this.temp = [...res];
       console.log("tempo, between", this.rows);
       this.table.offset = 0;
       this.cdr.detectChanges();
@@ -161,15 +160,23 @@ export class TableComponent implements OnInit {
     params = params.append('businessManagers', myselectBM);
     params = params.append('interaction', myselectInteration);
 
-    this.filtro$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter', {
-      params: params
-    });
-    this.filtro$.subscribe((res) => {
+    this.tempo$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter', { params })
+    this.tempo$.subscribe((res) => {
       this.rows = [...res];
-      console.log(this.rows);
+      console.log("tempo, between", this.rows);
       this.table.offset = 0;
       this.cdr.detectChanges();
     })
+
+    // this.filtro$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter', {
+    //   params: params
+    // });
+    // this.filtro$.subscribe((res) => {
+    //   this.rows = [...res];
+    //   console.log(this.rows);
+    //   this.table.offset = 0;
+    //   this.cdr.detectChanges();
+    // })
 
     console.log('this.temp = ', this.temp);
   }

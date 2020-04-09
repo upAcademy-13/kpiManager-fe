@@ -75,12 +75,11 @@
 
 
       <div>
-
         <ngx-datatable #table class='prefix-css material striped' [rows]='rows' [scrollbarV]="false"
           [sorts]="[{prop: 'name', dir: 'desc'}]"
           [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unit"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
           [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"'   [limit]="page.size"
-          >
+          >      
         </ngx-datatable>
 
         <div class="footer row" style=" padding: 5px 10px">
@@ -91,10 +90,10 @@
           </div>
 
         </div>
-
-
       </div>
-
+      <div>
+      
+     
       <!-- <div *ngIf="isFiltro==false">
         <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='rows' [scrollbarV]="false"
           [sorts]="[{prop: 'name', dir: 'desc'}]"
@@ -150,4 +149,5 @@
 
     </div>
   </div>
+</div>
 </div>
