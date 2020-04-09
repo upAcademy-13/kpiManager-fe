@@ -159,4 +159,11 @@ bs-daterangepicker-inline .theme-green .bs-datepicker-body table td.active-week 
     opacity: 0.5;
     transition: 0s; }
 
+    .ngx-datatable.material .datatable-header .datatable-header-cell {
+      background-color: #e46310 !important;
+      color: #fff !important;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif !important;
+      font-size: 1rem;
+  }
+
   @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
