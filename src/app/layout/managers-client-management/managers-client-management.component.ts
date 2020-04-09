@@ -38,8 +38,7 @@ export class ManagersClientManagementComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    this.getAllClients();
-    this.getAllManagers();
+
     this.getFormData();
     this.profileForm = new FormGroup({
       name : new FormControl('',Validators.required),
@@ -109,15 +108,14 @@ profileForm : FormGroup;
 public getFormData() {
 
   this.units$ = this.interactionService.getUnits();
+
   
 }
 
 @ViewChild('lgModal') public lgModal: ModalDirective;
 public addClient(){
   
-console.log(JSON.stringify(this.profileForm.value) + " ---Daniel");
   this.http.post<any>(this.apiUrlClient,this.profileForm.value).subscribe(data => {
-    console.log(data);
   },
   error => {
     console.log(error);
