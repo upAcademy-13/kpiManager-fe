@@ -20,6 +20,13 @@ export class InteractionsService {
     return this.http.put(this.apiUrlKpi + 'interactions/' + interaction.id, interaction);
   }
 
+  deleteInteraction(interaction) {
+
+    console.log("INTERACTION ID   " + interaction.id);
+    return this.http.delete(this.apiUrlKpi + 'interactions/' + interaction.id);
+
+  }
+
   getInteractionType() {
     return this.http.get(this.apiUrlKpi + 'interactiontype');
   }

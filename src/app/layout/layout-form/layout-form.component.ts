@@ -137,6 +137,8 @@ export class LayoutFormComponent implements OnInit {
     }
   }
 
+  // To adjust responsive window
+
   @HostListener('window:resize', ['$event'])
 
   onResize(event) {
@@ -235,7 +237,6 @@ export class LayoutFormComponent implements OnInit {
       this.interactionTypeRow = [];
     }
 
-
     this.updateTableHeader();
 
   }
@@ -244,21 +245,15 @@ export class LayoutFormComponent implements OnInit {
   triggerModelDeleteDB(i){
 
     this.currentInteraction = this.interactionTypeRow[i];
-
+    console.log("INTERACAO CORRENTE" + this.currentInteraction)
   }
 
 
   deleteFromDB(){
-
-    let removeId =  this.currentInteraction.id;
-
     // Vai chamar o serviço de delete com o id removeId
-
-    this.getInteractionsByFilters();
-
-
+    this.interactionService.deleteInteraction(this.currentInteraction)
+    .subscribe(()=>this.getInteractionsByFilters()); // Senão tiver aqui no subcribe, ele faz um "fetch" antes de apagar e o delete fica sem efeito
   }
-
 
   public getValues() {
     console.log(this.cliente);
@@ -371,9 +366,7 @@ export class LayoutFormComponent implements OnInit {
 
     //Para dar um "refresh" à tabela por filtros e tudo
 
-
   }
-
 
   // REFACTOR THIS FUNCTION; IT IS REPEATED BEFORE IN addInteraction FUNCTION
   triggerEditModal(i) {
@@ -537,9 +530,7 @@ export class LayoutFormComponent implements OnInit {
         modalCheck.setAttribute('data-toggle', 'modal');
 
       }
-
     }
-
   }
 
   getInteractionsByFilters() {
@@ -547,7 +538,6 @@ export class LayoutFormComponent implements OnInit {
     this.interactionTypeRow = [];
 
     let params = new HttpParams();
-
 
     params = params.append('sel0', !!this.numWeek ? this.numWeek : null); // Para não ir nenhum filtro undefined e sim null
     
@@ -562,8 +552,6 @@ export class LayoutFormComponent implements OnInit {
     } else {
       params = params.append('sel1', this.currentUser.unit.nameUnit);
       params = params.append('sel3', this.currentUser.username);
-
-
     }
 
     params = params.append('sel2', null); // Pelos vistos precisam de ir a null
@@ -582,7 +570,6 @@ export class LayoutFormComponent implements OnInit {
     this.editInteractionButtonMode();
 
   }
-
 
   cancelButton() {
 
