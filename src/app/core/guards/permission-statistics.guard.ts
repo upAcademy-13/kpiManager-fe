@@ -17,7 +17,7 @@ export class PermissionStatisticsGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      if (this.tokenInfo['role'] == "SuperUser") {
+      if (this.tokenInfo['role'] == "director") {
         return true;
       } else {
         this.router.navigate(['layout']);

@@ -3,16 +3,15 @@
 
     <div class="central-container-table">
       <span class="contact100-form-symbol">
-        <img src="assets/imagens/estatistica.jpg">
+        <img src="assets/imagens/estatisticas3.png">
       </span>
 
 
-      <h1 class="form-title text-center ">
-        Statistics </h1>
+      <h1 class="form-title text-center ">STATISTICS </h1>
 
       <div class="row">
         <div class=" search col-lg-3">
-          <input class="search form-control" id="inputSearch" type='text' [(ngModel)]="inputSearch" placeholder='What are you looking for?'
+          <input class="search form-control" id="inputSearch" type='text' [(ngModel)]="inputSearch" placeholder='Search ...'
             (keyup)='updateFilter($event)'>
         </div>
 
@@ -21,7 +20,7 @@
         <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select  [(ngModel)]= "selectWeek" (change)='filtrer()' #myselectSemana class=" form-control selected " id="exampleFormControlSelect1">
+            <select  [(ngModel)]= "selectWeek" (change)='filter()' #myselectSemana class=" form-control selected " id="exampleFormControlSelect1">
               <option value="">Week</option>
               <option  value={{select}}  *ngFor="let select of dataWeek$ | async">{{select}} ª </option>
             </select>
@@ -31,7 +30,7 @@
         <div class=" col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select   [(ngModel)]= "selectUnit" (change)='filtrer()' #myselectUnidade class="form-control selected" id="exampleFormControlSelect1">
+            <select   [(ngModel)]= "selectUnit" (change)='filter()' #myselectUnidade class="form-control selected" id="exampleFormControlSelect1">
               <option value="">Unit</option>
               <option value={{select}} *ngFor="let select of dataUnities$ | async">{{select}}</option>
             </select>
@@ -40,7 +39,7 @@
         <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select [(ngModel)]= "selectClient" (change)='filtrer()' #myselectCliente class="form-control selected" id="exampleFormControlSelect1">
+            <select [(ngModel)]= "selectClient" (change)='filter()' #myselectCliente class="form-control selected" id="exampleFormControlSelect1">
               <option  value="">Client</option>
               <option value={{select}}  *ngFor="let select of dataClients$ | async">{{select}}</option>
             </select>
@@ -49,7 +48,7 @@
         <div class="col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select [(ngModel)]= "selectBM" (change)='filtrer()' #myselectBM class="form-control selected" id="myselectBM">
+            <select [(ngModel)]= "selectBM" (change)='filter()' #myselectBM class="form-control selected" id="myselectBM">
               <option  value="">Business Manager</option>
               <option  value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}} </option>
             </select>
@@ -58,7 +57,7 @@
         <div class="col-sm-2 lastSel">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select  [(ngModel)]= "selectInteraction" (change)='filtrer()' #myselectInteration class="form-control selected " id="myselectInteration">
+            <select  [(ngModel)]= "selectInteraction" (change)='filter()' #myselectInteration class="form-control selected " id="myselectInteration">
               <option value="">Interaction Type</option>
               <option value={{select}} *ngFor="let select of dataInteractions$ | async">{{select}}</option>
             </select>
@@ -70,46 +69,44 @@
 
 
       <div>
-
-        <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='rows'
+        <!-- <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='rows'
           [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"
-          [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unity"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
+          [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unit"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
           [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"' >  
-        </ngx-datatable>
+        </ngx-datatable> -->
+        <div>
+          <h3>
+            Server-side Paging
+          </h3>
+          <ngx-datatable
+            class="material" #table class='prefix-css material striped'
+            [rows]="rows"
+            [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unit"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'            [columnMode]="ColumnMode.force"
+            [sorts]="[{prop: 'name', dir: 'desc'}]"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [externalPaging]="true"
+            rowHeight="auto"
+            [count]="totalElements"
+            [offset]="page.pageNumber"
+            [limit]="page.size"
+            (page)="setPage($event)"
+          >
+          </ngx-datatable>
+        </div>
 
 
 
           <div class="footer row" style=" padding: 5px 10px">
-            <div class="col-5"><strong>  Total number of interactions:</strong> {{rows.length}}</div>
-            <div class="col-4 offset-3 text-right">
-              <button id="btnRefresh" (click)="refreshTable()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Refresh table</button>
+            <div class="col-5">
+              <strong>Total interactions:</strong> {{totalElements}}
             </div>
-
+            <div class="col-4 offset-3 text-right">
+              <button id="btnRefresh" (click)="refreshTable()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Reset </button>
+            </div>
           </div>
-     
-
       </div>
 
-      <!-- <div *ngIf="isFiltro==false">
-        <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='rows' [scrollbarV]="false"
-          [sorts]="[{prop: 'name', dir: 'desc'}]"
-          [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unity"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
-          [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"'>
-
-
-        </ngx-datatable>
-
-          <div class="footer row" style=" padding: 5px 10px">
-            <div class="col-5"><strong> 
-              Total number of interactions:</strong> {{(rows).length}}</div>
-            <div class="col-4 offset-3 text-right">
-              <button id="btnRefresh" (click)="refreshTabela()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1">
-                Refresh table</button>
-            </div>
-
-          </div>
-
-      </div> -->
 
 
       <!-- <ngx-datatable  #table class='material striped' [limit]="5" [rows]='rows ' [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"

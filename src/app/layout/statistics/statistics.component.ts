@@ -18,7 +18,8 @@ export class StatisticsComponent implements OnInit {
   public allClients$:Observable<any>;
   public allBManagers$:Observable<any>;
   public allInteractions$:Observable<any>;
-  public allUnities$:Observable<any>; 
+  public allUnities$:Observable<any>;
+  public allBetween$:Observable<any[]>;
 
 
   constructor(private http: HttpClient,
@@ -38,7 +39,7 @@ export class StatisticsComponent implements OnInit {
     this.allBManagers$ = this.data.getAllBManagers();
     this.allInteractions$ = this.data.getAllInteractions();
     this.allUnities$ = this.data.getAllUnities();
-
+    
     // this.data.getAllData().subscribe(res => {
     //   console.log('AllData = ', res);
     // });
@@ -62,6 +63,7 @@ export class StatisticsComponent implements OnInit {
     // this.data.getAllUnities().subscribe(res => {
     //   console.log('ALLUnities = ', res);
     // });
+
   }
 
 
