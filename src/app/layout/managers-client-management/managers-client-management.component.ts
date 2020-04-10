@@ -172,5 +172,9 @@ unit: row.unit
   }); */
 }
 
+public delete(row: any) {
+  
+}
+
 
 }
