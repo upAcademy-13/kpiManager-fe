@@ -26,9 +26,9 @@ export class ManagersClientManagementComponent implements OnInit {
   selectUnit: string;
   managerForm : FormGroup;
   isEdit : boolean = false;
-isCreate : boolean = false;
-clientForm : FormGroup;
-isManager : boolean = false;
+  isCreate : boolean = false;
+  clientForm : FormGroup;
+  isManager : boolean = false;
   
   constructor(
     private clients: ClientsService,
@@ -61,9 +61,6 @@ isManager : boolean = false;
       nipc : new FormControl('',Validators.required),
     })
   }
-
-  
-
 
   getAllClients() {
     
