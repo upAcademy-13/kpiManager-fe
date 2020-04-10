@@ -20,15 +20,19 @@ export class ManagersClientManagementComponent implements OnInit {
 
   public clientsData: Client[] = [];
   public managersData: User[] = [];
-  private apiUrl: 'http://localhost:8080/kpiManager/api';
+  private apiUrlUpdManagers = 'http://localhost:8080/kpiManager/api/users/';
+  private apiUrlUpdClient = 'http://localhost:8080/kpiManager/api/clients/';
   modalRef: BsModalRef;
   public units$: Observable<Object>;
   selectUnit: string;
   managerForm : FormGroup;
   isEdit : boolean = false;
-  isCreate : boolean = false;
-  clientForm : FormGroup;
-  isManager : boolean = false;
+isCreate : boolean = false;
+clientForm : FormGroup;
+isManager : boolean = false;
+formSelected : FormGroup;
+currentType: string;
+postData;
   
   constructor(
     private clients: ClientsService,
@@ -41,7 +45,6 @@ export class ManagersClientManagementComponent implements OnInit {
       this.fetch(data => {
         this.rows = data;
         this.columns = [{ name: 'Name' }, { name: 'NIPC' }, {name: 'Actions'}]
-        console.log(this.rows);
         
       }); 
 }
@@ -50,13 +53,14 @@ export class ManagersClientManagementComponent implements OnInit {
 
     this.getFormData();
     this.managerForm = new FormGroup({
+      id : new FormControl(''),
       name : new FormControl('',Validators.required),
-      nipc : new FormControl('',Validators.required),
       unit : new FormGroup(
         {id: new FormControl('',Validators.required),
       })
     })
     this.clientForm = new FormGroup({
+      id: new FormControl(''),
       name : new FormControl('',Validators.required),
       nipc : new FormControl('',Validators.required),
     })
@@ -65,10 +69,8 @@ export class ManagersClientManagementComponent implements OnInit {
   getAllClients() {
     
     this.clients.getAllClients(this.clientsData).subscribe((res:any) =>   {
-      console.log('resultado', res);
       this.rows = [...res];
       this.columns = [{ name: 'Name' }, { name: 'NIPC' }, {name: 'Actions'}];
-      console.log(this.rows , " Clientes");
       this.isManager = false;
     });
   }
@@ -76,19 +78,14 @@ export class ManagersClientManagementComponent implements OnInit {
   getAllManagers() {
     
     this.managers.getAllManagers(this.managersData).subscribe((res:any) =>   {
-      
-      console.log('resultadoM', res);
+    
       this.rows = [...res];
       this.columns = [{ name: 'Name' }, { name: 'Unit', sortable: false }, {name:'Actions'}];
-      console.log(this.rows , " Managers");
       this.isManager = true;
     });
   }
 
-  test(obj){
-    console.log(obj);
 
-  }
   
   /* TABLE */
   temp = [];
@@ -130,49 +127,102 @@ public getFormData() {
 }
 
 public hide(){
-/*   this.profileForm.reset(); */
+  this.clientForm.reset();
   this.lgModal.hide();
+  this.postData = "";
 }
 
 
 @ViewChild('lgModal') public lgModal: ModalDirective;
-public addClient(){
+public addClient(row){
+  const requestOptions: Object = {
+    responseType: 'text'
+  }
+
   
-  this.http.post<any>(this.apiUrlClient,this.clientForm.value).subscribe(data => {
+  this.http.post<any>(this.apiUrlClient,this.clientForm.value,requestOptions).subscribe(data => {
+    this.clientForm.reset();
+  this.lgModal.hide();
+  let element: HTMLElement = document.getElementById('client') as HTMLElement;
+  element.click();
   },
   error => {
-    console.log(error);
+    this.postData = error['error'];
   });
-  this.http.get(this.apiUrlClient ).subscribe(data =>{
-  })
-  this.clientForm.reset();
-  this.lgModal.hide();
+  
+  
 
 }
+
+id;
+public editUser(){
+  const requestOptions: Object = {
+    responseType: 'text'
+  }
+  if(this.isManager == true){
+    this.id = this.managerForm.get('id').value;
+    this.http.put(this.apiUrlUpdManagers + this.id,this.managerForm.value,requestOptions).subscribe(data => {
+      this.managerForm.reset();
+    this.lgModal.hide();
+    let element: HTMLElement = document.getElementById('manager') as HTMLElement;
+    element.click();
+    },
+    error => {
+      this.postData = error['error'];
+    });
+  }
+  else{
+    this.id = this.clientForm.get('id').value;
+    this.http.put(this.apiUrlUpdClient + this.id,this.clientForm.value,requestOptions).subscribe(data => {
+      this.clientForm.reset();
+    this.lgModal.hide();
+    let element: HTMLElement = document.getElementById('client') as HTMLElement;
+    element.click();
+    },
+    error => {
+      this.postData = error['error'];
+    });
+  }
+  
+  
+  
+
+}
+
 public add(){
-  this.isEdit = true;
+  let element: HTMLElement = document.getElementById('client') as HTMLElement;
+  element.click();
+  this.isEdit = false;
   this.isCreate = true;
   this.isManager = false;
   this.lgModal.show();
-  let element: HTMLElement = document.getElementById('client') as HTMLElement;
-  element.click();
+  
 }
 
 
 public edit(row: any){
   this.isEdit = true;
-  this.isCreate = true;
+  this.isCreate = false;
   this.lgModal.show();
 
-  console.log(row);
-/*   this.profileForm.patchValue({
-name:    row.name,
-nipc: row.nipc,
-unit: row.unit
-  }); */
-}
-
-public delete(row: any) {
+  if(this.isManager == true){
+    this.currentType = 'Manager'
+    this.managerForm.patchValue({
+      id: row.id,
+      name: row.name,
+      nipc: row.nipc,
+      unit: row.unit
+        });
+        console.log(this.managerForm.value)
+  }
+  else{
+    this.currentType = 'Client'
+    this.clientForm.patchValue({
+      id : row.id,
+      name: row.name,
+      nipc: row.nipc,
+        });
+  }
   
 }
 

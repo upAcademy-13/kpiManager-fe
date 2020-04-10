@@ -13,10 +13,10 @@
         <input type="radio" id="tab1" name="tab-control" checked>
         <input type="radio" id="tab2" name="tab-control">
         <ul>
-          <li><label for="tab1" role="button"><span (click)="getAllClients()">Clients</span></label></li>
-          <li><label for="tab2" role="button"><span (click)="getAllManagers()">Managers</span></label></li>
-          <li class="nav-item float-right">
-            <button *ngIf="isManager==false" type="button" class="nav-link btnAdd" (click)="add()">
+          <li><label for="tab1" role="button"><span id="client" (click)="getAllClients()">Clients</span></label></li>
+          <li><label for="tab2" role="button"><span id="manager" (click)="getAllManagers()">Managers</span></label></li>
+          <li class="nav-item float-right w-auto mr-2">
+            <button *ngIf="isManager==false" type="button" class="nav-link btnAdd " (click)="add()">
               <img src="assets/imagens/plus.png" class="addBtn-style">
             </button>
           </li>
@@ -41,16 +41,15 @@
         <ngx-datatable-column name="Unit"  *ngIf="isManager == true">
           <ng-template let-row="row" ngx-datatable-cell-template>
             {{row.unit?.nameUnit || ""}}
-            {{test(row)}}
           </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Action" [sortable]="false">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <button class="btn btn-warning" id="editButton" (click)="edit(row)"><img src="assets/imagens/edit.png" width="25"
-              height="25"></button>
-            <button class="btn btn-danger" id="delButton" (click)="delete(row)"><img src="assets/imagens/trashIcon.png" width="25"
-              height="25"></button>
+            <button class="btn btn-warning" id="editButton" (click)="edit(row)"><img src="assets/imagens/edit.png" width="15"
+              height="15"></button>
+            <button class="btn btn-danger" id="delButton" ><img src="assets/imagens/trashIcon.png" width="15"
+              height="15"></button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
@@ -67,8 +66,8 @@
 
             <div class="modal-header">
               <h4 id="dialog-sizes-name1" class="modal-title pull-left">
-                <strong *ngIf="isEdit == false"> Create User</strong>
-                <strong *ngIf="isEdit == true"> Edit User</strong>
+                <strong *ngIf="isEdit == false"> Create Client</strong>
+                <strong *ngIf="isEdit == true"> Edit {{currentType}}</strong>
               </h4>
               <button type="button" class="close pull-right" (click)="hide()" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -76,7 +75,7 @@
             </div>
 
             <div class="modal-body">
-              <form [formGroup]="clientForm" *ngIf="isManager == false" (ngSubmit)="addClient()">
+              <form [formGroup]="clientForm" *ngIf="isManager==false"  >
 
                 <div class="row form-group">
                   <div class="col-2 pt-1">
@@ -88,7 +87,7 @@
                   </div>
                 </div>
 
-                <div class="row form-group" *ngIf="isEdit == true && isManager == false && isCreate == true">
+                <div class="row form-group" >
                   <div class="col-2 pt-1">
                     <label for="">NIPC: </label>
                   </div>
@@ -98,7 +97,7 @@
                   </div>
 
                 </div>
-                <div class="row form-group" [formGroup]="profileForm" *ngIf="isEdit == true && isManager == true">
+                <div class="row form-group" [formGroup]="managerForm" *ngIf="isEdit == true && isManager == true">
                   <div class="col-2 pt-1">
                     <label for="">Unit: </label>
                   </div>
@@ -111,9 +110,41 @@
                     </select>
                   </div>
                 </div>
-                <button class="btn btn-primary" [disabled]="clientForm.status !== 'VALID'">Add</button>
+                
+                <button class="btn btn-primary" [disabled]="clientForm.status !== 'VALID'" *ngIf="isCreate==true" (click)="addClient()">Add</button>
+                <button class="btn btn-primary" [disabled]="clientForm.status !== 'VALID'" *ngIf="isCreate==false" (click)="editUser()">Edit</button>
+                <p>{{postData}}</p> 
               </form>
-              <form ></form>
+
+              <form [formGroup]="managerForm"  *ngIf="isManager==true"  (ngSubmit)="editUser()">
+                <div class="row form-group">
+                  <div class="col-2 pt-1">
+                    <label for="">Name: </label>
+                  </div>
+                  <div class="col-10">
+                    <input type="text" name="name" formControlName="name" class="form-control w-75 form-control-sm mb-4"
+                      placeholder="Insert your name" required />
+                  </div>
+                </div>
+                <div class="row form-group" [formGroup]="managerForm" *ngIf="isEdit == true && isManager == true">
+                  <div class="col-2 pt-1">
+                    <label for="">Unit: </label>
+                  </div>
+                  <div class="col-10" formGroupName="unit">
+                    <select class="form-control w-75 form-control-sm mb-4" formControlName="id" name="unit" >
+                      <option value="" disabled hidden>Please select one unit</option>
+                      <option *ngFor="let unit of units$ | async ; let i = index" value={{unit.id}}>
+                        {{unit.nameUnit}}
+                      </option>
+                    </select>
+                  </div>
+                  
+                </div>
+                
+                <button class="btn btn-primary" [disabled]="managerForm.status !== 'VALID'">Add</button>
+                <p>{{postData}}</p> 
+              </form>
+
             </div>
           </div>
         </div>

@@ -339,9 +339,6 @@ body {
           fill: $accent;
         }
         
-        /* @media (max-width: map-get($breakpoints, small)) {
-          background: rgba(0, 0, 0, 0.08);
-        } */
       }
     }
   }
@@ -357,40 +354,16 @@ body {
     }
   }
   
-  /* @media (max-width: map-get($breakpoints, medium)) {
-    ul li label {
-      white-space: initial;
-      
-      br {
-        display: initial;
-      }
-      
-      svg {
-        height: 1.5em;
-      }
-    }
-  }
-   */
- /*  @media (max-width: map-get($breakpoints, small)) {
-    ul li label {
-      padding: 5px;
-      border-radius: 5px;
-      
-      span {
-        display: none;
-
-      }
-    }
-    
-    .slider {
-      display: none;
-    }
-    
-    .content {
-      margin-top: 20px; 
-      section h2 {
-        display: block;
-      }
-    }
-  }*/
+ .datatable-body .datatable-body-row .datatable-body-cell {
+    text-align: left;
+    padding: 0.9rem 1.2rem;
+    vertical-align: top;
+    border-top: 0;
+    color: rgba(0, 0, 0, 0.87);
+    transition: width 0.3s ease;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
 } 
