@@ -73,6 +73,8 @@ postData;
       this.columns = [{ name: 'Name' }, { name: 'NIPC' }, {name: 'Actions'}];
       this.isManager = false;
     });
+    let element: HTMLElement = document.getElementById('client') as HTMLElement;
+    element.click();
   }
 
   getAllManagers() {
@@ -187,6 +189,33 @@ public editUser(){
   
   
 
+}
+
+public remove(row){
+  if(this.isManager == true){
+    this.id = row.id;
+    this.http.delete(this.apiUrlUpdManagers + this.id).subscribe(data => {
+      this.managerForm.reset();
+    this.lgModal.hide();
+    let element: HTMLElement = document.getElementById('manager') as HTMLElement;
+    element.click();
+    },
+    error => {
+      this.postData = error['error'];
+    });
+  }
+  else{
+    this.id = this.clientForm.get('id').value;
+    this.http.delete(this.apiUrlUpdClient + this.id).subscribe(data => {
+      this.clientForm.reset();
+    this.lgModal.hide();
+    let element: HTMLElement = document.getElementById('client') as HTMLElement;
+    element.click();
+    },
+    error => {
+      this.postData = error['error'];
+    });
+  }
 }
 
 public add(){
