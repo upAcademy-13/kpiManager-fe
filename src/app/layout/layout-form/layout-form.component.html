@@ -38,14 +38,14 @@
       </div>
       <div class="container">
         <div class="row">
-          <button id="myInteractions" (click)="getInteractionsByFilters()" [disabled]="btnDisableEditInt"
+          <button id="myInteractions" (click)="getInteractionsByFilters()" type="button" [disabled]="btnDisableEditInt"
             class="btn btn-lg col mr-2 mb-2">
             Edit
             Interactions
             <img class="" src="assets\imagens\AddInteractions.png" width="25" height="25">
           </button>
 
-          <button id="modalButton" (click)="checkFields(selectedDate.value)" [disabled]="btnDisableAddInt"
+          <button type="button" id="modalButton" (click)="checkFields(selectedDate.value)" [disabled]="btnDisableAddInt"
             class="btn btn-lg col  mb-2" data-target="#exampleModal">
             Add
             Interactions <img class="ml-2" src="assets/imagens/iconMore.png" width="25" height="25">
@@ -106,7 +106,7 @@
                       id="selectionClient" [(ngModel)]="selectClient" name="selectClient">
                       <option [ngValue]="undefined" disabled hidden selected>Select the client</option>
                       <option *ngFor="let client of clients$ | async ; let i = index"
-                        value="{{client.id}}+{{client.name}}">{{client.name}}</option>
+                        value="{{client.id}}+{{client.name}}+{{client.potentialRevenue}}">{{client.name}}</option>
                     </select>
                     <select (click)="removeBorderInteraction()" class="custom-select my-1 mr-sm-2" type="number"
                       id="selectionType" [(ngModel)]="selectType" name="selectType">
@@ -114,6 +114,7 @@
                       <option *ngFor="let int of interactionTypes$ | async ; let i = index"
                         value="{{int.id}}+{{int.interactionType}}">{{int.interactionType}}</option>
                     </select>
+                    <input *ngIf ="selectType =='2+Aprovação'" [(ngModel)]="contractValue" name="contractValue" placeholder="Digite o valor do contrato" pattern="[0-9]*" type="text" size="35">
                   </div>
 
                 </div>
@@ -123,7 +124,7 @@
               <button type="button" style="background-color:#a7a6a5; border-style: none;" class="btn btn-secondary"
                 data-dismiss="modal">Close</button>
               <button type="button" style="background-color: #e46310; border-style: none;" class="btn btn-primary"
-                (click)="addInteraction(selectedDate.value)">Save changes</button>
+                (click)="addInteraction(selectedDate.value)" (keyup.enter)="addInteraction(selectedDate.value)">Save changes</button>
             </div>
           </div>
         </div>
@@ -133,11 +134,11 @@
 
 
         <div id="sendDiv" class="">
-          <button (click)="sendData(selectedDate.value)" type="submit" class="btn btn-lg btn-block ">Send<img
+          <button (click)="sendData(selectedDate.value)" type="button" class="btn btn-lg btn-block ">Send<img
               class="ml-2" src="assets/imagens/sendIcon.png" width="25" height="25"> </button>
         </div>
         <div id="cancelDiv" class='d-none'>
-          <button (click)="cancelButton()" type="submit" class="btn btn-lg btn-block">Cancel<img class="ml-2"
+          <button (click)="cancelButton()" type="button" class="btn btn-lg btn-block">Cancel<img class="ml-2"
               src="assets/imagens/cancel.png" width="25" height="25"> </button>
         </div>
       </div>
@@ -181,7 +182,7 @@
               <button type="button" style="background-color:#a7a6a5; border-style: none;" class="btn btn-secondary"
                 data-dismiss="modal">Close</button>
               <button type="button" style="background-color: #e46310; border-style: none;" class="btn btn-primary"
-                (click)="putInteraction()" data-dismiss="modal">Save changes</button>
+                (click)="putInteraction()" (keyup)="putInteraction($event)" data-dismiss="modal">Save changes</button>
             </div>
           </div>
         </div>
@@ -195,21 +196,21 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Interaction</h5>
+              <h2 class="modal-title" id="exampleModalLabel">Delete Interaction</h2>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <div class="container">
-                <p> Are You Sure ? </p>
+                <p> This action will delete this interaction permanently, are you sure ? </p>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" style="background-color:#a7a6a5; border-style: none;" class="btn btn-secondary"
-                data-dismiss="modal">Close</button>
+                data-dismiss="modal">Cancel</button>
               <button type="button" style="background-color: #e46310; border-style: none;" class="btn btn-primary"
-                (click)="deleteFromDB()" data-dismiss="modal">Save changes</button>
+                (click)="deleteFromDB()" (keyup.enter)="deleteFromDB()" data-dismiss="modal">Yes</button>
             </div>
           </div>
         </div>

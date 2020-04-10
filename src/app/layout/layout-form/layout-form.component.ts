@@ -34,6 +34,7 @@ export class LayoutFormComponent implements OnInit {
   selectClient: string; //id do cliente
   selectType: string; //id do tipo de interacao
   selectUnit: string; // Select Unit
+  contractValue:number = null;//valor contrato
   interactionTemp: any;
   interactionTypeRow = [];
   isAuthorized: Boolean;
@@ -173,12 +174,14 @@ export class LayoutFormComponent implements OnInit {
       choosenInteraction.className =
         "custom-select my-1 mr-sm-2 animated bounce error ng-untouched ng-pristine ng-valid";
     } else {
-
+      console.log(parseInt(this.selectClient.split("+")[2]));
+      this.contractValue = Number(this.contractValue) + Number(parseInt(this.selectClient.split("+")[2])) ;
       this.interactionTemp = {
-
+        
         client: {
           name: this.selectClient.split("+")[1],
-          id: this.selectClient.split("+")[0]
+          id: this.selectClient.split("+")[0], 
+          potentialRevenue: this.contractValue
         },
         person: {
           name: this.tokenInfo.role != "manager" ? this.selectPerson.split("+")[1] : this.tokenInfo.iss,
@@ -194,7 +197,8 @@ export class LayoutFormComponent implements OnInit {
           id: this.selectType.split("+")[0]
         },
 
-        week: this.numWeek
+        week: this.numWeek,
+        potentialRevenue: this.contractValue 
       }
 
       /*       console.log(this.selectClient);
@@ -319,6 +323,7 @@ export class LayoutFormComponent implements OnInit {
 
       let interactionPOST = { // De acordo com a estrutura do interactionTemp que vai popular o interactionTypeRow
         dateInteraction: interaction.week,
+        potentialRevenue: interaction.potentialRevenue ,
         client: { id: interaction.client.id },
         interactionType: { id: interaction.interactionType.id },
         person: { id: interaction.person.id },
@@ -338,14 +343,15 @@ export class LayoutFormComponent implements OnInit {
 
   }
 
-  putInteraction() {
-
-
-    console.log(this.currentInteraction);
+  putInteraction(event) {
+    console.log(event);
+    if(event.key=="Enter"){
+      console.log(this.currentInteraction);
 
     let interactionPUT = { // De acordo com a estrutura do interactionTemp que vai popular o interactionTypeRow
       id: this.currentInteraction.id,
       dateInteraction: this.currentInteraction.dateInteraction,
+      potentialRevenue:this.currentInteraction.potentialRevenue,
       client: { id: this.selectClient.split("+")[0] },
       interactionType: { id: this.selectType.split("+")[0] },
       person: { id: this.currentInteraction.person.id },
@@ -362,7 +368,10 @@ export class LayoutFormComponent implements OnInit {
 
     this.btnDisableAddInt = false;
 
-    this.updateTableHeader();
+    this.updateTableHeader()
+    }
+
+    ;
 
     //Para dar um "refresh" à tabela por filtros e tudo
 
