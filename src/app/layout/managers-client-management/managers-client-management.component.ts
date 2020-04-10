@@ -133,7 +133,7 @@ public getFormData() {
 }
 
 public hide(){
-  this.profileForm.reset();
+/*   this.profileForm.reset(); */
   this.lgModal.hide();
 }
 
@@ -168,11 +168,11 @@ public edit(row: any){
   this.lgModal.show();
 
   console.log(row);
-  this.profileForm.patchValue({
+/*   this.profileForm.patchValue({
 name:    row.name,
 nipc: row.nipc,
 unit: row.unit
-  });
+  }); */
 }
 
 

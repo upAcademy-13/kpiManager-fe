@@ -18,9 +18,19 @@
         <ul>
           <li  ><label for="tab1" role="button" ><span  (click)="getAllClients()">Clients</span></label></li>
           <li  ><label for="tab2" role="button"  ><span  (click)="getAllManagers()">Managers</span></label></li>
+
+              <li class="nav-item float-right">
+                <button type="button" class="nav-link btnAdd" (click)="add()">
+                  <img src="assets/imagens/plus.png" class="addBtn-style">
+                </button>
+              </li>
+
+
         </ul>
         
-        <div class="slider"><div class="indicator"></div></div>
+        <div class="slider"><div class="indicator"></div>
+        
+      </div>
       <!-- <div class="row">
 
         <div class="col-2">
@@ -29,20 +39,8 @@
             <li class="nav-item"><button id="client"  [ngClass]="{'active': isManager == false}" [disabled]="isManager == false" class="nav-link active" (click)="getAllClients()">Clients</button></li>
 
           </ul>
-        </div>
+        </div> -->
 
-        <div class="col-10">
-          <ul class="nav nav-tabs float-right">
-            <li class="nav-item ">
-              <button type="button" class=" nav-link" (click)="add()">
-                New...
-              </button>
-            </li>
-          </ul>
-         
-          
-        </div>
-      </div> -->
 
 
       <!-- <button class="btn btn-custom mr-2" (click)="getAllManagers()">Manager</button>

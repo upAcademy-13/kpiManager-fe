@@ -105,6 +105,18 @@ label{
     font-size: 1rem;
 }
 
+.addBtn-style {
+  width: 35%;
+}
+
+.btnAdd {
+  padding: 0.5px;
+  border-color: #e46310;
+  border-radius: 10px;
+  background-color: white;
+  width: 5em;
+  height: 2.5em;
+}
 
 
 /* colors */
@@ -197,6 +209,7 @@ body {
   }
   
   ul {
+    padding-top: 10px;
     list-style-type: none;
     padding-left: 0;
     flex-direction: row;
