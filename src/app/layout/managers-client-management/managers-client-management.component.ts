@@ -9,6 +9,7 @@ import { BsModalService, BsModalRef, ModalDirective, ModalOptions } from 'ngx-bo
 import { Observable } from 'rxjs';
 import { InteractionsService } from 'src/app/core/services/interactions.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core/services/auth.service';
 declare var $: any;
 @Component({
   selector: 'app-managers-client-management',
@@ -40,6 +41,7 @@ postData;
     private http: HttpClient,
     private modalService: BsModalService,
     private interactionService: InteractionsService,
+    private auth : AuthService
 
   ) { 
       this.fetch(data => {
@@ -48,9 +50,10 @@ postData;
         
       }); 
 }
-
+tokenInfo;
   ngOnInit(): void {
-
+    const token = localStorage.getItem("token");
+    this.tokenInfo = this.auth.getDecodedAccessToken(token); 
     this.getFormData();
     this.managerForm = new FormGroup({
       id : new FormControl(''),

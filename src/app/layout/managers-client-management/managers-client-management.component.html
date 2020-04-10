@@ -16,7 +16,7 @@
           <li><label for="tab1" role="button"><span id="client" (click)="getAllClients()">Clients</span></label></li>
           <li><label for="tab2" role="button"><span id="manager" (click)="getAllManagers()">Managers</span></label></li>
           <li class="nav-item float-right w-auto mr-2">
-            <button *ngIf="isManager==false" type="button" class="nav-link btnAdd " (click)="add()">
+            <button  type="button" class="nav-link btnAdd " (click)="add()">
               <img src="assets/imagens/plus.png" class="addBtn-style">
             </button>
           </li>
@@ -48,7 +48,7 @@
           <ng-template let-row="row" ngx-datatable-cell-template>
             <button class="btn btn-warning" id="editButton" (click)="edit(row)"><img src="assets/imagens/edit.png" width="15"
               height="15"></button>
-            <button class="btn btn-danger" id="delButton" (click)="remove(row)" ><img src="assets/imagens/trashIcon.png" width="15"
+            <button class="btn btn-danger" id="delButton" (click)="remove(row)" *ngIf="tokenInfo['role'] == 'SuperUser' || isManager==false && tokenInfo['role'] == 'director'"><img src="assets/imagens/trashIcon.png" width="15"
               height="15"></button>
           </ng-template>
         </ngx-datatable-column>
