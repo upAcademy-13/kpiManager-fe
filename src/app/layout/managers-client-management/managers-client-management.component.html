@@ -48,7 +48,7 @@
           <ng-template let-row="row" ngx-datatable-cell-template>
             <button class="btn btn-warning" id="editButton" (click)="edit(row)"><img src="assets/imagens/edit.png" width="15"
               height="15"></button>
-            <button class="btn btn-danger" id="delButton" (click)="remove(row)" *ngIf="tokenInfo['role'] == 'SuperUser' || isManager==false && tokenInfo['role'] == 'director'"><img src="assets/imagens/trashIcon.png" width="15"
+            <button class="btn btn-danger" id="delButton" (click)="remove(row)" *ngIf="tokenInfo['role'] == 'SuperUser' || (isManager==false && tokenInfo['role'] == 'director' && row.count == 0)"><img src="assets/imagens/trashIcon.png" width="15"
               height="15"></button>
           </ng-template>
         </ngx-datatable-column>
@@ -97,15 +97,15 @@
                   </div>
 
                 </div>
-                <div class="row form-group" [formGroup]="managerForm" *ngIf="isEdit == true && isManager == true">
+                <div class="row form-group" [formGroup]="managerForm" *ngIf="isManager == true">
                   <div class="col-2 pt-1">
                     <label for="">Unit: </label>
                   </div>
                   <div class="col-10" formGroupName="unit">
                     <select class="form-control w-75 form-control-sm mb-4" formControlName="id" name="unit" >
                       <option value="" disabled hidden>Please select one unit</option>
-                      <option *ngFor="let unit of units$ | async ; let i = index" value={{unit.id}}>
-                        {{unit.nameUnit}}
+                      <option *ngFor="let unit of units$ | async ; let i = index" value={{unit.id}}> 
+                        {{unit.nameUnit}} 
                       </option>
                     </select>
                   </div>
@@ -141,7 +141,7 @@
                   
                 </div>
                 
-                <button class="btn btn-primary" [disabled]="managerForm.status !== 'VALID'">Add</button>
+                <button class="btn btn-primary" [disabled]="managerForm.status !== 'VALID'">Edit</button>
                 <p>{{postData}}</p> 
               </form>
 

@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class ClientsService {
 
   private apiUrl = 'http://localhost:8080/kpiManager/api/clients';
+  private apiUrlCount = 'http://localhost:8080/kpiManager/api/clients/count';
 
   constructor(
     private http: HttpClient
@@ -15,6 +16,10 @@ export class ClientsService {
 
   public getAllClients(clients: Client[]) {
     return this.http.get<Client[]>(this.apiUrl);
+  }
+
+  public getCount(clients: Client[]){
+    return this.http.get<Client[]>(this.apiUrlCount);
   }
   
   

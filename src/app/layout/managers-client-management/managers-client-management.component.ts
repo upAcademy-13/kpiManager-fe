@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, NgModule, ViewChild  } from '@angular/core';
+import { Component, OnInit, TemplateRef, NgModule, ViewChild } from '@angular/core';
 import { ClientsService } from 'src/app/core/services/clients.service';
 import { Client } from 'src/app/core/models/client';
 import { ColumnMode } from '@swimlane/ngx-datatable';
@@ -26,72 +26,84 @@ export class ManagersClientManagementComponent implements OnInit {
   modalRef: BsModalRef;
   public units$: Observable<Object>;
   selectUnit: string;
-  managerForm : FormGroup;
-  isEdit : boolean = false;
-isCreate : boolean = false;
-clientForm : FormGroup;
-isManager : boolean = false;
-formSelected : FormGroup;
-currentType: string;
-postData;
-  
+  managerForm: FormGroup;
+  isEdit: boolean = false;
+  isCreate: boolean = false;
+  clientForm: FormGroup;
+  isManager: boolean = false;
+  formSelected: FormGroup;
+  currentType: string;
+  postData;
+
   constructor(
     private clients: ClientsService,
     private managers: ManagersService,
     private http: HttpClient,
     private modalService: BsModalService,
     private interactionService: InteractionsService,
-    private auth : AuthService
+    private auth: AuthService
 
-  ) { 
-      this.fetch(data => {
-        this.rows = data;
-        this.columns = [{ name: 'Name' }, { name: 'NIPC' }, {name: 'Actions'}]
-        
-      }); 
-}
-tokenInfo;
+  ) {
+    this.fetch(data => {
+      this.rows = data;
+      this.columns = [{ name: 'Name' }, { name: 'NIPC' }, { name: 'Actions' }]
+      console.log(this.rows)
+    });
+    
+  }
+  tokenInfo;
   ngOnInit(): void {
+    let element: HTMLElement = document.getElementById('client') as HTMLElement;
+      element.click();
     const token = localStorage.getItem("token");
-    this.tokenInfo = this.auth.getDecodedAccessToken(token); 
+    this.tokenInfo = this.auth.getDecodedAccessToken(token);
     this.getFormData();
     this.managerForm = new FormGroup({
-      id : new FormControl(''),
-      name : new FormControl('',Validators.required),
-      unit : new FormGroup(
-        {id: new FormControl('',Validators.required),
-      })
+      id: new FormControl(''),
+      name: new FormControl('', Validators.required),
+      unit: new FormGroup(
+        {
+          id: new FormControl('', Validators.required),
+        })
     })
     this.clientForm = new FormGroup({
       id: new FormControl(''),
-      name : new FormControl('',Validators.required),
-      nipc : new FormControl('',Validators.required),
+      name: new FormControl('', Validators.required),
+      nipc: new FormControl('', Validators.required),
     })
   }
 
   getAllClients() {
-    
-    this.clients.getAllClients(this.clientsData).subscribe((res:any) =>   {
-      this.rows = [...res];
-      this.columns = [{ name: 'Name' }, { name: 'NIPC' }, {name: 'Actions'}];
-      this.isManager = false;
+    this.clients.getCount(this.clientsData).subscribe((res: any) => {
+      const data = res.map(element => {
+        return {
+          ...element[0],
+          count: element[1]
+        }
+      });
+      this.rows = [...data];
+      this.columns = [{ name: 'Name' }, { name: 'NIPC' }, { name: 'Actions' }];
+      this.isManager = false
+      
+      console.log(this.rows);
     });
     let element: HTMLElement = document.getElementById('client') as HTMLElement;
     element.click();
   }
 
   getAllManagers() {
-    
-    this.managers.getAllManagers(this.managersData).subscribe((res:any) =>   {
-    
+
+    this.managers.getAllManagers(this.managersData).subscribe((res: any) => {
+
       this.rows = [...res];
-      this.columns = [{ name: 'Name' }, { name: 'Unit', sortable: false }, {name:'Actions'}];
+      this.columns = [{ name: 'Name' }, { name: 'Unit', sortable: false }, { name: 'Actions' }];
       this.isManager = true;
     });
+
   }
 
 
-  
+
   /* TABLE */
   temp = [];
   rows = [];
@@ -116,147 +128,147 @@ tokenInfo;
   public client: Client = new Client();
 
 
-  
+
 
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 
-  
-public getFormData() {
 
-  this.units$ = this.interactionService.getUnits();
+  public getFormData() {
 
-  
-}
-
-public hide(){
-  this.clientForm.reset();
-  this.lgModal.hide();
-  this.postData = "";
-}
+    this.units$ = this.interactionService.getUnits();
 
 
-@ViewChild('lgModal') public lgModal: ModalDirective;
-public addClient(row){
-  const requestOptions: Object = {
-    responseType: 'text'
   }
 
-  
-  this.http.post<any>(this.apiUrlClient,this.clientForm.value,requestOptions).subscribe(data => {
+  public hide() {
     this.clientForm.reset();
-  this.lgModal.hide();
-  let element: HTMLElement = document.getElementById('client') as HTMLElement;
-  element.click();
-  },
-  error => {
-    this.postData = error['error'];
-  });
-  
-  
-
-}
-
-id;
-public editUser(){
-  const requestOptions: Object = {
-    responseType: 'text'
-  }
-  if(this.isManager == true){
-    this.id = this.managerForm.get('id').value;
-    this.http.put(this.apiUrlUpdManagers + this.id,this.managerForm.value,requestOptions).subscribe(data => {
-      this.managerForm.reset();
     this.lgModal.hide();
-    let element: HTMLElement = document.getElementById('manager') as HTMLElement;
-    element.click();
-    },
-    error => {
-      this.postData = error['error'];
-    });
+    this.postData = "";
   }
-  else{
-    this.id = this.clientForm.get('id').value;
-    this.http.put(this.apiUrlUpdClient + this.id,this.clientForm.value,requestOptions).subscribe(data => {
+
+
+  @ViewChild('lgModal') public lgModal: ModalDirective;
+  public addClient() {
+    const requestOptions: Object = {
+      responseType: 'text'
+    }
+
+
+    this.http.post<any>(this.apiUrlClient, this.clientForm.value, requestOptions).subscribe(data => {
       this.clientForm.reset();
-    this.lgModal.hide();
+      this.lgModal.hide();
+      let element: HTMLElement = document.getElementById('client') as HTMLElement;
+      element.click();
+    },
+      error => {
+        this.postData = error['error'];
+      });
+
+
+
+  }
+
+  id;
+  public editUser() {
+    const requestOptions: Object = {
+      responseType: 'text'
+    }
+    if (this.isManager == true) {
+      this.id = this.managerForm.get('id').value;
+      this.http.put(this.apiUrlUpdManagers + this.id, this.managerForm.value, requestOptions).subscribe(data => {
+        this.managerForm.reset();
+        this.lgModal.hide();
+        let element: HTMLElement = document.getElementById('manager') as HTMLElement;
+        element.click();
+      },
+        error => {
+          this.postData = error['error'];
+        });
+    }
+    else {
+      this.id = this.clientForm.get('id').value;
+      this.http.put(this.apiUrlUpdClient + this.id, this.clientForm.value, requestOptions).subscribe(data => {
+        this.clientForm.reset();
+        this.lgModal.hide();
+        let element: HTMLElement = document.getElementById('client') as HTMLElement;
+        element.click();
+      },
+        error => {
+          this.postData = error['error'];
+        });
+    }
+
+
+
+
+  }
+
+  public remove(row) {
+    if (this.isManager == true) {
+      this.id = row.id;
+      console.log(this.id);
+      this.http.delete(this.apiUrlUpdManagers + this.id).subscribe(data => {
+        this.managerForm.reset();
+      
+        
+      },
+        error => {
+          this.postData = error['error'];
+        });
+        this.getAllManagers();
+    }
+    else {
+      this.id = row.id;
+      this.http.delete(this.apiUrlUpdClient + this.id).subscribe(data => {
+        this.clientForm.reset();
+        
+      },
+        error => {
+          this.postData = error['error'];
+        });
+        this.getAllClients();
+    }
+  }
+
+  public add() {
     let element: HTMLElement = document.getElementById('client') as HTMLElement;
     element.click();
-    },
-    error => {
-      this.postData = error['error'];
-    });
+    this.isEdit = false;
+    this.isCreate = true;
+    this.isManager = false;
+    this.lgModal.show();
+
   }
-  
-  
-  
 
-}
 
-public remove(row){
-  if(this.isManager == true){
-    this.id = row.id;
-    this.http.delete(this.apiUrlUpdManagers + this.id).subscribe(data => {
-      this.managerForm.reset();
-    this.lgModal.hide();
-    let element: HTMLElement = document.getElementById('manager') as HTMLElement;
-    element.click();
-    },
-    error => {
-      this.postData = error['error'];
-    });
+  public edit(row: any) {
+    this.isEdit = true;
+    this.isCreate = false;
+    this.lgModal.show();
+
+    if (this.isManager == true) {
+      this.currentType = 'Manager'
+      this.managerForm.patchValue({
+        id: row.id,
+        name: row.name,
+        nipc: row.nipc,
+        unit: row.unit
+      });
+      console.log(this.managerForm.value)
+    }
+    else {
+      this.currentType = 'Client'
+      this.clientForm.patchValue({
+        id: row.id,
+        name: row.name,
+        nipc: row.nipc,
+      });
+    }
+
   }
-  else{
-    this.id = this.clientForm.get('id').value;
-    this.http.delete(this.apiUrlUpdClient + this.id).subscribe(data => {
-      this.clientForm.reset();
-    this.lgModal.hide();
-    let element: HTMLElement = document.getElementById('client') as HTMLElement;
-    element.click();
-    },
-    error => {
-      this.postData = error['error'];
-    });
-  }
-}
-
-public add(){
-  let element: HTMLElement = document.getElementById('client') as HTMLElement;
-  element.click();
-  this.isEdit = false;
-  this.isCreate = true;
-  this.isManager = false;
-  this.lgModal.show();
-  
-}
-
-
-public edit(row: any){
-  this.isEdit = true;
-  this.isCreate = false;
-  this.lgModal.show();
-
-  if(this.isManager == true){
-    this.currentType = 'Manager'
-    this.managerForm.patchValue({
-      id: row.id,
-      name: row.name,
-      nipc: row.nipc,
-      unit: row.unit
-        });
-        console.log(this.managerForm.value)
-  }
-  else{
-    this.currentType = 'Client'
-    this.clientForm.patchValue({
-      id : row.id,
-      name: row.name,
-      nipc: row.nipc,
-        });
-  }
-  
-}
 
 
 }
