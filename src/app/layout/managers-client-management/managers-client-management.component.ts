@@ -206,7 +206,11 @@ export class ManagersClientManagementComponent implements OnInit {
 
   }
 
-  public remove(row) {
+   delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
+  public async remove(row) {
     if (this.isManager == true) {
       this.id = row.id;
       console.log(this.id);
@@ -218,10 +222,13 @@ export class ManagersClientManagementComponent implements OnInit {
         error => {
           this.postData = error['error'];
         });
+        await this.delay(300);
         this.getAllManagers();
+        
     }
     else {
       this.id = row.id;
+      console.log(this.id);
       this.http.delete(this.apiUrlUpdClient + this.id).subscribe(data => {
         this.clientForm.reset();
         
@@ -229,8 +236,10 @@ export class ManagersClientManagementComponent implements OnInit {
         error => {
           this.postData = error['error'];
         });
+        await this.delay(300);
         this.getAllClients();
     }
+    
   }
 
   public add() {
