@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, NgModule, ViewChild } from '@angular/core';
 import { ClientsService } from 'src/app/core/services/clients.service';
 import { Client } from 'src/app/core/models/client';
-import { ColumnMode } from '@swimlane/ngx-datatable';
+import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { HttpClient } from '@angular/common/http';
 import { ManagersService } from 'src/app/core/services/managers.service';
 import { User } from 'src/app/core/models/user';
@@ -45,9 +45,10 @@ export class ManagersClientManagementComponent implements OnInit {
 
   ) {
     this.fetch(data => {
+      this.temp = [...data];
       this.rows = data;
       this.columns = [{ name: 'Name' }, { name: 'NIPC' }, { name: 'Actions' }]
-      console.log(this.rows)
+
     });
     
   }
@@ -73,6 +74,9 @@ export class ManagersClientManagementComponent implements OnInit {
     })
   }
 
+
+  
+  //Function to Add client data to Table
   getAllClients() {
     this.clients.getCount(this.clientsData).subscribe((res: any) => {
       const data = res.map(element => {
@@ -81,20 +85,21 @@ export class ManagersClientManagementComponent implements OnInit {
           count: element[1]
         }
       });
+      this.temp = [...data];
       this.rows = [...data];
       this.columns = [{ name: 'Name' }, { name: 'NIPC' }, { name: 'Actions' }];
       this.isManager = false
       
-      console.log(this.rows);
     });
     let element: HTMLElement = document.getElementById('client') as HTMLElement;
     element.click();
   }
-
+  
+  //Function to Add manager data to Table 
   getAllManagers() {
 
     this.managers.getAllManagers(this.managersData).subscribe((res: any) => {
-
+      this.temp = [...res];
       this.rows = [...res];
       this.columns = [{ name: 'Name' }, { name: 'Unit', sortable: false }, { name: 'Actions' }];
       this.isManager = true;
@@ -139,10 +144,9 @@ export class ManagersClientManagementComponent implements OnInit {
   public getFormData() {
 
     this.units$ = this.interactionService.getUnits();
-
-
   }
 
+  //Hide Modal and reset
   public hide() {
     this.clientForm.reset();
     this.lgModal.hide();
@@ -150,6 +154,7 @@ export class ManagersClientManagementComponent implements OnInit {
   }
 
 
+  //Add client
   @ViewChild('lgModal') public lgModal: ModalDirective;
   public addClient() {
     const requestOptions: Object = {
@@ -171,6 +176,8 @@ export class ManagersClientManagementComponent implements OnInit {
 
   }
 
+
+  //Edit User
   id;
   public editUser() {
     const requestOptions: Object = {
@@ -205,15 +212,15 @@ export class ManagersClientManagementComponent implements OnInit {
 
 
   }
-
+//delay for async
    delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
 }
 
+//Remove row
   public async remove(row) {
     if (this.isManager == true) {
       this.id = row.id;
-      console.log(this.id);
       this.http.delete(this.apiUrlUpdManagers + this.id).subscribe(data => {
         this.managerForm.reset();
       
@@ -228,7 +235,6 @@ export class ManagersClientManagementComponent implements OnInit {
     }
     else {
       this.id = row.id;
-      console.log(this.id);
       this.http.delete(this.apiUrlUpdClient + this.id).subscribe(data => {
         this.clientForm.reset();
         
@@ -242,6 +248,7 @@ export class ManagersClientManagementComponent implements OnInit {
     
   }
 
+  //show Modal
   public add() {
     let element: HTMLElement = document.getElementById('client') as HTMLElement;
     element.click();
@@ -252,7 +259,7 @@ export class ManagersClientManagementComponent implements OnInit {
 
   }
 
-
+//show Modal edit
   public edit(row: any) {
     this.isEdit = true;
     this.isCreate = false;
@@ -266,7 +273,6 @@ export class ManagersClientManagementComponent implements OnInit {
         nipc: row.nipc,
         unit: row.unit
       });
-      console.log(this.managerForm.value)
     }
     else {
       this.currentType = 'Client'
@@ -280,4 +286,40 @@ export class ManagersClientManagementComponent implements OnInit {
   }
 
 
+  //Filter Search
+  @ViewChild(DatatableComponent) table: DatatableComponent;
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    // filter our data
+
+    if(val == "" && this.isManager== true){
+      this.getAllManagers();
+    }
+    else if(val == "" && this.isManager== false){
+      this.getAllClients();
+    }
+    else if(this.isManager == true){
+      const temp = this.temp.filter(function (d) {
+        return d.name.toLowerCase().indexOf(val) !== -1;
+      });
+      // update the rows
+      this.rows = temp;
+      // Whenever the filter changes, always go back to the first page
+      this.table.offset = 0;
+    }
+    else{
+      const temp = this.temp.filter(function (d) {
+        return d.name.toLowerCase().indexOf(val) !== -1 || d.nipc.toString().indexOf(val) !== -1;
+      });
+  
+      // update the rows
+      this.rows = temp;
+      // Whenever the filter changes, always go back to the first page
+      this.table.offset = 0;
+    }
+    }
+    
+  
 }
