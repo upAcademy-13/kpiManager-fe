@@ -62,6 +62,9 @@ export class TableComponent implements OnInit {
   array = [];
   arrayManager = [];
   taxaClient;
+  aux3 = [];
+  aux4 = [];
+
 
 
   ngOnInit() {
@@ -95,11 +98,6 @@ export class TableComponent implements OnInit {
     this.page.size = 10;
   }
 
-  taxaConversaoClient(array ){
-
-    return this.taxaClient=array[0][0]/(array[0][0]+array[1][0])*100;
-  }
-
 
   refreshTable() {
     this.filterClearSelect();
@@ -131,33 +129,26 @@ export class TableComponent implements OnInit {
   }
 
   filterClient() {
-    // let client;
-    // client = this.client !== '' ? this.client : null;
-    // let params = new HttpParams();
-    // params = params.append('selecClient', client);
     this.filterClient$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter/client');
     this.filterClient$.subscribe((res) => {
       this.array = [...res];
       console.log("teste", this.array);
       //this.table.offset = 0;
       this.cdr.detectChanges();
-      this.taxaConversaoClient( this.array );
+      this.conversionArray('client');
     });
   }
 
 
 
   filterManager() {
-    // let manager;
-    // manager = this.manager !== '' ? this.manager : null;
-    // let params = new HttpParams();
-    // params = params.append('selecManager', manager);
     this.filterManager$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter/manager');
     this.filterManager$.subscribe((res) => {
       this.arrayManager = [...res];
       console.log("teste", this.arrayManager);
       //this.table.offset = 0;
       this.cdr.detectChanges();
+      this.conversionArray('businessManager');
     });
   }
 
@@ -257,11 +248,47 @@ export class TableComponent implements OnInit {
 
   }
 
+  conversionArray(varType) {
+    const aux = [];
+    const aux2 = [];
+    if (varType == "client") {
+      this.array.map(elem => {
+        console.log(elem)
+        const prop = elem[2] == 'Proposta aceite' ? 'accepted' : 'rejected';
+        const obj = { [varType]: elem[1]};
+        obj[prop] = elem[0];
+        aux.push(obj)
+      })
+    } else {
+      this.arrayManager.map(elem => {
+        console.log(elem)
+        const prop = elem[2] == 'Proposta aceite' ? 'accepted' : 'rejected';
+        const obj = { [varType]: elem[1]};
+        obj[prop] = elem[0];
+        aux.push(obj)
+      })
+    }
 
-
-
-
-
+    console.log(aux);
+    aux.forEach(elem => {
+      const index = aux2.findIndex(i=>i[varType]==elem[varType]);
+      if(index != -1) {
+        aux2[index] = {...aux2[index], ...elem};
+        aux2[index].conversion = Math.round((aux2[index].accepted / (aux2[index].accepted + aux2[index].rejected) * 100));
+      } else {
+        aux2.push(elem);
+      }
+    })
+    aux2.forEach(elem => {
+      const conversion = elem.rejected==undefined ? 100 : elem.accepted ==undefined ? 0 : elem.conversion;
+      if (varType == "client") {
+        this.aux3.push({...elem, conversion: conversion});
+      } else {
+        this.aux4.push({...elem, conversion: conversion});
+      }
+    })
+  }
+  
 }
 
 

@@ -105,16 +105,18 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">Client</th>
-                      <th scope="col">Tipo de interação</th>
-                      <th scope="col">Quantidade de interação</th>
+                      <th scope="col">Clients</th>
+                      <th scope="col">Accepted Contracts</th>
+                      <th scope="col">Rejected Contracts</th>
+                      <th scope="col">Success Rate</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let test of array">
-                      <td>{{test[1]}}</td>
-                      <td>{{test[2]}}</td>
-                      <td>{{test[0]}}</td>
+                    <tr *ngFor="let test of aux3">
+                      <td>{{test.client}}</td>
+                      <td>{{test.accepted}}</td>
+                      <td>{{test.rejected}}</td>
+                      <td>{{test.conversion}} %</td>
                     </tr>
                   </tbody>
                 </table>
@@ -130,44 +132,32 @@
     
                 <!-- </div> --> 
 
-                <div class="footer row" style=" padding: 5px 10px">
-                  <div class="col-5">
-                    <strong>Taxa de conversão:</strong> {{taxaClient}}
-                  </div>
+
                   <!-- <div class="col-4 offset-3 text-right">
                     <button id="btnRefresh" (click)="refreshTable()"
                       class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Reset </button>
                   </div> -->
                 </div>
-              </div>  
             </mat-tab>
             <mat-tab label="Manager"> 
             
               
               <div>
-                <div class="col-sm-2 ">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1"></label>
-                    <select [(ngModel)]="manager" (change)='filterManager()' #myselectCliente
-                      class="form-control selected" id="exampleFormControlSelect1">
-                      <option value="">Client</option>
-                      <option value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}}</option>
-                    </select>
-                  </div>
-                </div>
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">Business Manager</th>
-                      <th scope="col">Tipo de interação</th>
-                      <th scope="col">Quantidade de interação</th>
+                      <th scope="col">Business Managers</th>
+                      <th scope="col">Accepted Contracts</th>
+                      <th scope="col">Rejected Contracts</th>
+                      <th scope="col">Success Rate</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let test of arrayManager">
-                      <td>{{test[1]}}</td>
-                      <td>{{test[2]}}</td>
-                      <td>{{test[0]}}</td>
+                    <tr *ngFor="let test of aux4">
+                      <td>{{test.businessManager}}</td>
+                      <td>{{test.accepted}}</td>
+                      <td>{{test.rejected}}</td>
+                      <td>{{test.conversion}} %</td>
                     </tr>
                   </tbody>
                 </table>
@@ -182,17 +172,11 @@
                    </ngx-datatable>  Colocar aqui uma propriedade -->
     
                 <!-- </div> --> 
-
-                <div class="footer row" style=" padding: 5px 10px">
-                  <div class="col-5">
-                    <strong>Taxa de conversão:</strong> {{taxaClient}}
-                  </div>
                   <!-- <div class="col-4 offset-3 text-right">
                     <button id="btnRefresh" (click)="refreshTable()"
                       class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Reset </button>
                   </div> -->
                 </div>
-              </div> 
             </mat-tab>
 
 
