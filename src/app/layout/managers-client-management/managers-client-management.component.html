@@ -27,7 +27,7 @@
               (keyup)="updateFilter($event)"
             /></li>
           <li class="nav-item float-right w-auto mr-2">
-            <button  type="button" class="nav-link btnAdd " (click)="add()">
+            <button  type="button" class="nav-link btnAdd " (click)="add()" *ngIf="isManager == false">
               <img src="assets/imagens/plus.png" class="addBtn-style">
             </button>
           </li>
