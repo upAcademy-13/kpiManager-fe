@@ -11,6 +11,7 @@ import { InteractionsService } from 'src/app/core/services/interactions.service'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Page } from './page';
+import { isEmpty } from 'rxjs/operators';
 
 declare var $: any;
 @Component({
@@ -89,11 +90,13 @@ else{
 
 }
   }
-  
+
+
   //Function to Add client data to Table
   getAllClients() {
+     
     let httpParams = new HttpParams();
-      const pageNum = this.pageInfo.offset * this.pageInfo.limit;
+    let pageNum = this.pageInfo.offset * this.pageInfo.limit;
     httpParams = httpParams.append('startIndex', pageNum.toString()); 
     httpParams = httpParams.append('quantity', '5');
 
@@ -114,20 +117,22 @@ else{
   
   //Function to Add manager data to Table 
   getAllManagers() {
-
     let httpParams = new HttpParams();
-    const pageNum = this.pageInfo.offset * this.pageInfo.limit;
+    let pageNum = this.pageInfo.offset * this.pageInfo.limit;
   httpParams = httpParams.append('startIndex', pageNum.toString()); 
   httpParams = httpParams.append('quantity', '5');
 
     this.managers.getAllManagers(this.managersData, httpParams).subscribe((res: any) => {
-      const data = res.elements;
 
-      this.page.totalElements = res.totalElements;
-      this.temp = [...data];
-      this.rows = [...data];
-      this.columns = [{ name: 'Name' }, { name: 'Unit', sortable: false }, { name: 'Actions' }];
-      this.isManager = true;
+        const data = res.elements; 
+
+        this.page.totalElements = res.totalElements;
+        this.temp = [...data];
+        this.rows = [...data];
+        this.columns = [{ name: 'Name' }, { name: 'Unit', sortable: false }, { name: 'Actions' }];
+        this.isManager = true;
+    
+      
     });
 
   }

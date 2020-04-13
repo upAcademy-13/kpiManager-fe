@@ -7,7 +7,7 @@ import { User } from '../models/user';
 })
 export class ManagersService {
 
-  private apiUrl = 'http://localhost:8080/kpiManager/api/users/managers';
+  private apiUrl = 'http://localhost:8080/kpiManager/api/users/managers/count';
 
   constructor(
     private http: HttpClient
