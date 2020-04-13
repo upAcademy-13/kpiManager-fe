@@ -53,12 +53,7 @@ export class DataService {
 }
 
 public getAllRevenueManager():Observable<any> {
-  let params = new HttpParams();
-  params = params.append('name', "ManagerA");
-  params = params.append('interaction', "contrato")
-  return this.http.get<any>(this.apiUrl + 'interactions/revenue/manager', {
-    params
-  });
+  return this.http.get<any>(this.apiUrl + 'interactions/filter/manager');
 }
 
 // interactions/revenue/manager?id=2&interaction=Contrato

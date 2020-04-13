@@ -102,16 +102,6 @@
           <mat-tab-group mat-align-tabs="end">
             <mat-tab label="Client">
               <div>
-                <div class="col-sm-2 ">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1"></label>
-                    <select [(ngModel)]="client" (change)='test()' #myselectCliente
-                      class="form-control selected" id="exampleFormControlSelect1">
-                      <option value="">Client</option>
-                      <option value={{select}} *ngFor="let select of dataClients$ | async">{{select}}</option>
-                    </select>
-                  </div>
-                </div>
                 <table class="table">
                   <thead>
                     <tr>
@@ -142,16 +132,72 @@
 
                 <div class="footer row" style=" padding: 5px 10px">
                   <div class="col-5">
-                    <strong>Taxa de conversão:</strong> {{totalElements}}
+                    <strong>Taxa de conversão:</strong> {{taxaClient}}
                   </div>
-                  <div class="col-4 offset-3 text-right">
+                  <!-- <div class="col-4 offset-3 text-right">
                     <button id="btnRefresh" (click)="refreshTable()"
                       class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Reset </button>
-                  </div>
+                  </div> -->
                 </div>
               </div>  
             </mat-tab>
-            <mat-tab label="Manager">  </mat-tab>
+            <mat-tab label="Manager"> 
+            
+              
+              <div>
+                <div class="col-sm-2 ">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1"></label>
+                    <select [(ngModel)]="manager" (change)='filterManager()' #myselectCliente
+                      class="form-control selected" id="exampleFormControlSelect1">
+                      <option value="">Client</option>
+                      <option value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}}</option>
+                    </select>
+                  </div>
+                </div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Business Manager</th>
+                      <th scope="col">Tipo de interação</th>
+                      <th scope="col">Quantidade de interação</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let test of arrayManager">
+                      <td>{{test[1]}}</td>
+                      <td>{{test[2]}}</td>
+                      <td>{{test[0]}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- <div>
+                  <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="teste"
+                    [columns]='[{prop:"teste[0][0]", name:"Client"},{prop:"person.name", name:"Proposta Aceite"},
+                    {prop:"interactionType.interactionType",name:"Proposta Recusada"},{prop:"", name:"Eficiência"}]'
+                    [columnMode]="ColumnMode.force" [sorts]="[{prop: 'name', dir: 'desc'}]" [headerHeight]="50"
+                    [footerHeight]="50" [externalPaging]="true" rowHeight="auto" [count]="totalElements"
+                    [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
+                   </ngx-datatable>  Colocar aqui uma propriedade -->
+    
+                <!-- </div> --> 
+
+                <div class="footer row" style=" padding: 5px 10px">
+                  <div class="col-5">
+                    <strong>Taxa de conversão:</strong> {{taxaClient}}
+                  </div>
+                  <!-- <div class="col-4 offset-3 text-right">
+                    <button id="btnRefresh" (click)="refreshTable()"
+                      class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Reset </button>
+                  </div> -->
+                </div>
+              </div> 
+            </mat-tab>
+
+
+
+            
           </mat-tab-group>
 
         </mat-tab>

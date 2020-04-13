@@ -34,6 +34,8 @@ export class TableComponent implements OnInit {
   @Input() dataPagination$: Observable<Paginate>;
   @Input() revenueClient$: Observable<any[]>;
   @Input() revenueManager$: Observable<any[]>;
+  @Input() filterClient$: Observable<any[]>;
+  @Input() filterManager$: Observable<any[]>;
 
 
   ColumnMode = ColumnMode;
@@ -45,7 +47,8 @@ export class TableComponent implements OnInit {
   selectClient: string;
   selectUnit: string;
   selectWeek: string;
-  client:string;
+  client: string;
+  manager:string;
   apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
   page = new Page();
   totalElements = 0;
@@ -55,10 +58,15 @@ export class TableComponent implements OnInit {
     count: 0,
   };
 
-teste=[];
-array=[];
+  teste = [];
+  array = [];
+  arrayManager = [];
+  taxaClient;
+
 
   ngOnInit() {
+    this.filterClient();
+    this.filterManager() ;
     console.log('ngOnInit - start');
     this.selectInteraction = !!window.history.state.selectInteraction ? window.history.state.selectInteraction : '';
     this.selectBM = !!window.history.state.selectBM ? window.history.state.selectBM : '';
@@ -71,21 +79,27 @@ array=[];
     });
     this.revenueClient$.subscribe(res => {
       this.teste = [...res];
-      console.log("revenueClient$:",this.teste);
+      console.log("revenueClient$:", this.teste);
 
     });
-    
     console.log('ngOnInit - fim');
 
   }
 
-    constructor(
+
+  constructor(
     private http: HttpClient,
     private cdr: ChangeDetectorRef
   ) {
     this.page.pageNumber = 0;
     this.page.size = 10;
   }
+
+  taxaConversaoClient(array ){
+
+    return this.taxaClient=array[0][0]/(array[0][0]+array[1][0])*100;
+  }
+
 
   refreshTable() {
     this.filterClearSelect();
@@ -106,7 +120,7 @@ array=[];
   updateFilter(event) {
     this.filterClearSelect();
     const val = event.target.value.toLowerCase();
-    const temp = this.temp.filter(function(d) {
+    const temp = this.temp.filter(function (d) {
       return d.person.name.toLowerCase().indexOf(val) !== -1 || d.client.name.toLowerCase().indexOf(val) !== -1 ||
         d.unit.nameUnit.toLowerCase().indexOf(val) !== -1 || d.dateInteraction.toLowerCase().indexOf(val) !== -1 ||
         d.interactionType.interactionType.toLowerCase().indexOf(val) !== -1 || !val;
@@ -116,21 +130,35 @@ array=[];
     console.log('passou', this.rows);
   }
 
-  @Input() filterClient$: Observable<any[]>;
-  test(){
-    let client;
-    client = this.client !== '' ? this.client : null;
-    let params = new HttpParams();
-  params = params.append('selecClient', client);
-  this.filterClient$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter/client', {
-    params
-  });
-  this.filterClient$.subscribe((res) => {
-    this.array = [...res];
-    console.log("teste",this.array);
-    //this.table.offset = 0;
-    this.cdr.detectChanges();
-  });
+  filterClient() {
+    // let client;
+    // client = this.client !== '' ? this.client : null;
+    // let params = new HttpParams();
+    // params = params.append('selecClient', client);
+    this.filterClient$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter/client');
+    this.filterClient$.subscribe((res) => {
+      this.array = [...res];
+      console.log("teste", this.array);
+      //this.table.offset = 0;
+      this.cdr.detectChanges();
+      this.taxaConversaoClient( this.array );
+    });
+  }
+
+
+
+  filterManager() {
+    // let manager;
+    // manager = this.manager !== '' ? this.manager : null;
+    // let params = new HttpParams();
+    // params = params.append('selecManager', manager);
+    this.filterManager$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter/manager');
+    this.filterManager$.subscribe((res) => {
+      this.arrayManager = [...res];
+      console.log("teste", this.arrayManager);
+      //this.table.offset = 0;
+      this.cdr.detectChanges();
+    });
   }
 
 
@@ -229,6 +257,11 @@ array=[];
 
   }
 
+
+
+
+
+
 }
 
 
@@ -238,4 +271,7 @@ export interface Paginate {
   totalElements: number;
 
 }
+
+
+
 
