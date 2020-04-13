@@ -45,6 +45,7 @@ export class TableComponent implements OnInit {
   selectClient: string;
   selectUnit: string;
   selectWeek: string;
+  client:string;
   apiUrl = 'http://127.0.0.1:8080/kpiManager/api/';
   page = new Page();
   totalElements = 0;
@@ -55,6 +56,7 @@ export class TableComponent implements OnInit {
   };
 
 teste=[];
+array=[];
 
   ngOnInit() {
     console.log('ngOnInit - start');
@@ -113,6 +115,25 @@ teste=[];
     this.table.offset = 0;
     console.log('passou', this.rows);
   }
+
+  @Input() filterClient$: Observable<any[]>;
+  test(){
+    let client;
+    client = this.client !== '' ? this.client : null;
+    let params = new HttpParams();
+  params = params.append('selecClient', client);
+  this.filterClient$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter/client', {
+    params
+  });
+  this.filterClient$.subscribe((res) => {
+    this.array = [...res];
+    console.log("teste",this.array);
+    //this.table.offset = 0;
+    this.cdr.detectChanges();
+  });
+  }
+
+
 
   filter(isFilter) {
     console.log(isFilter);

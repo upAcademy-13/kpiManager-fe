@@ -102,36 +102,43 @@
           <mat-tab-group mat-align-tabs="end">
             <mat-tab label="Client">
               <div>
-
+                <div class="col-sm-2 ">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1"></label>
+                    <select [(ngModel)]="client" (change)='test()' #myselectCliente
+                      class="form-control selected" id="exampleFormControlSelect1">
+                      <option value="">Client</option>
+                      <option value={{select}} *ngFor="let select of dataClients$ | async">{{select}}</option>
+                    </select>
+                  </div>
+                </div>
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
                       <th scope="col">Client</th>
-                      <th scope="col">Proposta Aceite</th>
-                      <th scope="col">Proposta Recusada</th>
+                      <th scope="col">Tipo de interação</th>
+                      <th scope="col">Quantidade de interação</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
+                    <tr *ngFor="let test of array">
+                      <td>{{test[1]}}</td>
+                      <td>{{test[2]}}</td>
+                      <td>{{test[0]}}</td>
                     </tr>
                   </tbody>
                 </table>
 
-                <div>
+                <!-- <div>
                   <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="teste"
                     [columns]='[{prop:"teste[0][0]", name:"Client"},{prop:"person.name", name:"Proposta Aceite"},
                     {prop:"interactionType.interactionType",name:"Proposta Recusada"},{prop:"", name:"Eficiência"}]'
                     [columnMode]="ColumnMode.force" [sorts]="[{prop: 'name', dir: 'desc'}]" [headerHeight]="50"
                     [footerHeight]="50" [externalPaging]="true" rowHeight="auto" [count]="totalElements"
                     [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
-                   </ngx-datatable> <!-- Colocar aqui uma propriedade -->
+                   </ngx-datatable>  Colocar aqui uma propriedade -->
     
-                </div>
+                <!-- </div> --> 
 
                 <div class="footer row" style=" padding: 5px 10px">
                   <div class="col-5">

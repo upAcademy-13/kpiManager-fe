@@ -45,12 +45,11 @@ export class DataService {
  }
 
  public getAllRevenueClient():Observable<any> {
-  let params = new HttpParams();
-  params = params.append('selecClient', "Cliente Dois");
-
-  return this.http.get<any>(this.apiUrl + 'interactions/filter/client',  {
-    params
-  });
+  
+  return this.http.get<any>(this.apiUrl + 'interactions/filter/client');
+  // ,  {
+  //   params
+  // });
 }
 
 public getAllRevenueManager():Observable<any> {
