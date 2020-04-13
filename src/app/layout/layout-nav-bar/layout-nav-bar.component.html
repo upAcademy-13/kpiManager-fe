@@ -12,8 +12,8 @@
         <li class="nav-item mr-4">
           <a class="nav-link" href="#" [routerLink]="['/layout/clients&managers']" routerLinkActive="active">Clients & Managers</a>
         </li>
-        <li class="nav-item mr-4">
-          <a class="nav-link" href="#"   [routerLink]="['/layout/statistics']" routerLinkActive="active" >Statistic Module</a>
+        <li class="nav-item mr-4" *ngIf="tokenInfo['role'] == 'SuperUser'">
+          <a class="nav-link" href="#"  [routerLink]="['/layout/statistics']" >Statistics Module</a>
         </li>
         <li class="nav-item mr-4">
           <a class="nav-link" href="#" [routerLink]="['/layout/dashboard']" routerLinkActive="active" >Dashboard</a>

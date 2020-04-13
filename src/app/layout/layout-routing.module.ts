@@ -6,6 +6,8 @@ import { CreateUserComponent } from "./createUser/createUser.component";
 import { PermissionsCOOGuard } from "../core/guards/permissionsCOO.guard";
 import { LayoutFormComponent } from "./layout-form/layout-form.component";
 import { ManagersClientManagementComponent } from './managers-client-management/managers-client-management.component';
+import { PermissionStatisticsGuard } from "../core/guards/permission-statistics.guard";
+
 
 const routes: Routes = [
   {
@@ -29,6 +31,7 @@ const routes: Routes = [
       {
         path: "statistics",
         component: StatisticsComponent,
+        canActivate:[PermissionStatisticsGuard],
       },
       {
         path: "clients&managers",

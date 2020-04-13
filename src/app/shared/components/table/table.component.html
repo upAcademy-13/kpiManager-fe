@@ -3,15 +3,16 @@
 
     <div class="central-container-table">
       <span class="contact100-form-symbol">
-        <img src="assets/imagens/estatistica.webp">
+        <img src="assets/imagens/estatistica.jpg">
       </span>
 
 
-      <h1 class="form-title text-center ">ESTATÍSTICAS </h1>
+      <h1 class="form-title text-center ">
+        Statistics </h1>
 
       <div class="row">
         <div class=" search col-lg-3">
-          <input class="search form-control" id="inputSearch" type='text' [(ngModel)]="inputSearch" placeholder='O que estás à procurar?'
+          <input class="search form-control" id="inputSearch" type='text' [(ngModel)]="inputSearch" placeholder='What are you looking for?'
             (keyup)='updateFilter($event)'>
         </div>
 
@@ -20,17 +21,18 @@
         <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='filtro()' #myselectSemana class=" form-control selected" id="exampleFormControlSelect1">
-              <option value="myselectSemana">Semana</option>
+            <select (change)='filtro()' #myselectSemana class=" form-control selected " id="exampleFormControlSelect1">
+              <option value="myselectSemana">Week</option>
               <option *ngFor="let select of dataWeek$ | async">{{select}}</option>
             </select>
           </div>
         </div>
+   
         <div class=" col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
             <select (change)='filtro()' #myselectUnidade class="form-control selected" id="exampleFormControlSelect1">
-              <option value="myselectUnidade">Unidade</option>
+              <option value="myselectUnidade">Unity</option>
               <option *ngFor="let select of dataUnities$ | async">{{select}}</option>
             </select>
           </div>
@@ -39,7 +41,7 @@
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
             <select (change)='filtro()' #myselectCliente class="form-control selected" id="exampleFormControlSelect1">
-              <option value="myselectCliente">Cliente</option>
+              <option value="myselectCliente">Client</option>
               <option *ngFor="let select of dataClients$ | async">{{select}}</option>
             </select>
           </div>
@@ -53,11 +55,11 @@
             </select>
           </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 lastSel">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select (change)='filtro()' #myselectInteration class="form-control selected" id="myselectInteration">
-              <option value='myselectInteration'>Tipo de interação</option>
+            <select  (change)='filtro()' #myselectInteration class="form-control selected " id="myselectInteration">
+              <option value='myselectInteration'>Interaction Type</option>
               <option *ngFor="let select of dataInteractions$ | async">{{select}}</option>
             </select>
           </div>
@@ -71,16 +73,16 @@
 
         <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='filtro$ | async'
           [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"
-          [columns]='[{prop:"dateInteraction", name:"Semana"},{prop:"unit.nameUnit", name:"Unidade"},{prop:"client.name", name:"Cliente"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Tipo de Interação"}]'
+          [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unity"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
           [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"'>
         </ngx-datatable>
 
 
 
           <div class="footer row" style=" padding: 5px 10px">
-            <div class="col-5"><strong> Número total de interações de:</strong> {{(filtro$ | async)?.length}}</div>
+            <div class="col-5"><strong>  Total number of interactions:</strong> {{(filtro$ | async)?.length}}</div>
             <div class="col-4 offset-3 text-right">
-              <button id="btnRefresh" (click)="refreshTabela()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1">Reiniciar Tabela</button>
+              <button id="btnRefresh" (click)="refreshTabela()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Refresh table</button>
             </div>
 
           </div>
@@ -91,16 +93,18 @@
       <div *ngIf="isFiltro==false">
         <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='rows' [scrollbarV]="false"
           [sorts]="[{prop: 'name', dir: 'desc'}]"
-          [columns]='[{prop:"dateInteraction", name:"Semana"},{prop:"unit.nameUnit", name:"Unidade"},{prop:"client.name", name:"Cliente"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Tipo de Interação"}]'
+          [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unity"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
           [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"'>
 
 
         </ngx-datatable>
 
           <div class="footer row" style=" padding: 5px 10px">
-            <div class="col-5"><strong> Número total de interações de:</strong> {{(rows).length}}</div>
+            <div class="col-5"><strong> 
+              Total number of interactions:</strong> {{(rows).length}}</div>
             <div class="col-4 offset-3 text-right">
-              <button id="btnRefresh" (click)="refreshTabela()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1">Reiniciar Tabela</button>
+              <button id="btnRefresh" (click)="refreshTabela()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1">
+                Refresh table</button>
             </div>
 
           </div>
