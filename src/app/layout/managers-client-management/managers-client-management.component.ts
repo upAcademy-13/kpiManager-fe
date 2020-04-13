@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, NgModule, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, NgModule, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ClientsService } from 'src/app/core/services/clients.service';
 import { Client } from 'src/app/core/models/client';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
@@ -21,7 +21,7 @@ declare var $: any;
 })
 
 export class ManagersClientManagementComponent implements OnInit {
-
+  @ViewChild(DatatableComponent) table: DatatableComponent;
   pageInfo = {
     offset : 0,
     limit : 5,
@@ -52,10 +52,10 @@ export class ManagersClientManagementComponent implements OnInit {
     private http: HttpClient,
     private modalService: BsModalService,
     private interactionService: InteractionsService,
-    private auth: AuthService
-
+    private auth: AuthService,
+    private cdr: ChangeDetectorRef
   ) {
-    this.getAllClients();    
+    this.getAllClients(false);    
   }
 
   ngOnInit(): void {
@@ -75,7 +75,7 @@ export class ManagersClientManagementComponent implements OnInit {
     this.clientForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', Validators.required),
-      nipc: new FormControl('', Validators.required),
+      nipc: new FormControl('', [Validators.required,Validators.max(999999999), Validators.min(100000000)]),
     })
   }
 
@@ -83,18 +83,24 @@ export class ManagersClientManagementComponent implements OnInit {
 this.pageInfo = event;
 if(this.isManager == true)
 {
-  this.getAllManagers();
+
+  this.getAllManagers(false);
+
 }
 else{
-  this.getAllClients(); 
-
+  this.getAllClients(false); 
+  
 }
   }
 
 
   //Function to Add client data to Table
-  getAllClients() {
-     
+  getAllClients(toFirstPage : boolean) {
+    if(toFirstPage){
+      this.pageInfo.offset = 0;
+      this.table.offset = 0;
+    }
+    
     let httpParams = new HttpParams();
     let pageNum = this.pageInfo.offset * this.pageInfo.limit;
     httpParams = httpParams.append('startIndex', pageNum.toString()); 
@@ -116,7 +122,11 @@ else{
   }
   
   //Function to Add manager data to Table 
-  getAllManagers() {
+  getAllManagers(toFirstPage : boolean) {
+    if(toFirstPage){
+      this.pageInfo.offset = 0;
+      this.table.offset = 0;
+    }
     let httpParams = new HttpParams();
     let pageNum = this.pageInfo.offset * this.pageInfo.limit;
   httpParams = httpParams.append('startIndex', pageNum.toString()); 
@@ -185,7 +195,7 @@ else{
     this.http.post<any>(this.apiUrlClient, this.clientForm.value, requestOptions).subscribe(data => {
       this.clientForm.reset();
       this.lgModal.hide();
-      this.getAllClients();
+      this.getAllClients(true);
     },
       error => {
         this.postData = error['error'];
@@ -207,7 +217,7 @@ else{
       this.http.put(this.apiUrlUpdManagers + this.id, this.managerForm.value, requestOptions).subscribe(data => {
         this.managerForm.reset();
         this.lgModal.hide();
-        this.getAllManagers();
+        this.getAllManagers(true);
       },
         error => {
           this.postData = error['error'];
@@ -218,10 +228,10 @@ else{
       this.http.put(this.apiUrlUpdClient + this.id, this.clientForm.value, requestOptions).subscribe(data => {
         this.clientForm.reset();
         this.lgModal.hide();
-        this.getAllClients();
+        this.getAllClients(true);
       },
         error => {
-          this.postData = error['error'];
+          this.postData = 'Name or NIPC already exists!';
         });
     }
 
@@ -246,7 +256,7 @@ else{
         error => {
         });
         await this.delay(300);
-        this.getAllManagers();
+        this.getAllManagers(true);
         
     }
     else {
@@ -257,7 +267,7 @@ else{
         error => {
         });
         await this.delay(300);
-        this.getAllClients();
+        this.getAllClients(true);
     }
     
   }
@@ -299,7 +309,7 @@ else{
 
 
   //Filter Search
-  @ViewChild(DatatableComponent) table: DatatableComponent;
+
 
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
@@ -307,10 +317,10 @@ else{
     // filter our data
 
     if(val == "" && this.isManager== true){
-      this.getAllManagers();
+      this.getAllManagers(true);
     }
     else if(val == "" && this.isManager== false){
-      this.getAllClients();
+      this.getAllClients(true);
     }
     else if(this.isManager == true){
       const temp = this.temp.filter(function (d) {
