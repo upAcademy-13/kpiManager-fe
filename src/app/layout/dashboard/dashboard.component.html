@@ -28,6 +28,23 @@
         </span>
         <h1 class="form-title text-center">DASHBOARD</h1>
            <mat-grid-list [cols]="breakpoint" rowHeight="35vh" (window:resize)="onResize($event)">
+
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+              <mat-card class="dashboard-card" style="text-align: center;">
+                <mat-card-header style="text-align: center; justify-content: space-evenly">
+                  <mat-card-title
+                    [routerLink]="['/layout/dashboard/conversao-semanal']"
+                  >
+                  Signed contracts per week
+                </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                  <conversao-semanal></conversao-semanal>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
+
+
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-card class="dashboard-card" style="text-align: center;">
                 <mat-card-header style="text-align: center; justify-content: space-evenly">

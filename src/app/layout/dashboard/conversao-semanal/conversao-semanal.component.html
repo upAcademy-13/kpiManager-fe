@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div *ngIf="displayRoute()" class="container-fluid justify-content-center">
+      <div class="row d-flex justify-content-center" style="margin-top: 114px;">
+        <button
+          class="btn btn-primary-outline mr-2"
+          style="background-color: #e46310; color: white;"
+          mat-raised-button
+          [routerLink]="['/layout/dashboard/']"
+        >
+          Back
+        </button>
+        <h1 class="ml-2">Signed contracts per week</h1>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+      <div class="chart-container responsive">
+        <canvas
+          class="responsive"
+          id="chartContracts"
+        ></canvas>
+      </div>
+    </div>
+  </div>

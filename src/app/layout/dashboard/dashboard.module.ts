@@ -13,9 +13,10 @@ import { Grafico3Component } from './ana/grafico3/grafico3.component';
 import { Grafico4Component } from './vasco/grafico4/grafico4.component';
 import {MatSelectModule} from '@angular/material/select';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ConversaoSemanalComponent } from './conversao-semanal/conversao-semanal.component';
 
 @NgModule({
-  declarations: [DashboardComponent, Grafico1Component, Grafico2Component, Grafico3Component, Grafico4Component],
+  declarations: [DashboardComponent, Grafico1Component, Grafico2Component, Grafico3Component, Grafico4Component, ConversaoSemanalComponent],
   imports: [
     CommonModule,
     MatGridListModule,
