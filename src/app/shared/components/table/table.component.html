@@ -20,7 +20,7 @@
         <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select  [(ngModel)]= "selectWeek" (change)='filter()' #myselectSemana class=" form-control selected " id="exampleFormControlSelect1">
+            <select  [(ngModel)]= "selectWeek" (change)='filter(true)' #myselectSemana class=" form-control selected " id="exampleFormControlSelect1">
               <option value="">Week</option>
               <option  value={{select}}  *ngFor="let select of dataWeek$ | async">{{select}} ª </option>
             </select>
@@ -30,7 +30,7 @@
         <div class=" col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select   [(ngModel)]= "selectUnit" (change)='filter()' #myselectUnidade class="form-control selected" id="exampleFormControlSelect1">
+            <select   [(ngModel)]= "selectUnit" (change)='filter(true)' #myselectUnidade class="form-control selected" id="exampleFormControlSelect1">
               <option value="">Unit</option>
               <option value={{select}} *ngFor="let select of dataUnities$ | async">{{select}}</option>
             </select>
@@ -39,7 +39,7 @@
         <div class="col-sm-2 ">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select [(ngModel)]= "selectClient" (change)='filter()' #myselectCliente class="form-control selected" id="exampleFormControlSelect1">
+            <select [(ngModel)]= "selectClient" (change)='filter(true)' #myselectCliente class="form-control selected" id="exampleFormControlSelect1">
               <option  value="">Client</option>
               <option value={{select}}  *ngFor="let select of dataClients$ | async">{{select}}</option>
             </select>
@@ -48,7 +48,7 @@
         <div class="col-sm-2">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select [(ngModel)]= "selectBM" (change)='filter()' #myselectBM class="form-control selected" id="myselectBM">
+            <select [(ngModel)]= "selectBM" (change)='filter(true)' #myselectBM class="form-control selected" id="myselectBM">
               <option  value="">Business Manager</option>
               <option  value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}} </option>
             </select>
@@ -57,7 +57,7 @@
         <div class="col-sm-2 lastSel">
           <div class="form-group">
             <label for="exampleFormControlSelect1"></label>
-            <select  [(ngModel)]= "selectInteraction" (change)='filter()' #myselectInteration class="form-control selected " id="myselectInteration">
+            <select  [(ngModel)]= "selectInteraction" (change)='filter(true)' #myselectInteration class="form-control selected " id="myselectInteration">
               <option value="">Interaction Type</option>
               <option value={{select}} *ngFor="let select of dataInteractions$ | async">{{select}}</option>
             </select>
