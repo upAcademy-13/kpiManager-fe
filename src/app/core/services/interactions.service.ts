@@ -19,7 +19,9 @@ export class InteractionsService {
   updateInteraction(interaction) {
     return this.http.put(this.apiUrlKpi + 'interactions/' + interaction.id, interaction);
   }
-
+  updateClient(client) {
+    return this.http.put(this.apiUrlKpi + 'clients/' + client.id, client);
+  }
   deleteInteraction(interaction) {
 
     console.log("INTERACTION ID   " + interaction.id);
@@ -50,7 +52,6 @@ export class InteractionsService {
   }
 
   getAllInteractionsFilter(params) {
-
     return this.http.get<any[]>(this.apiUrlKpi + 'interactions/filtro', {
       params: params
     });

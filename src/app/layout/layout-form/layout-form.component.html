@@ -67,7 +67,7 @@
           <tr *ngFor="let col of interactionTypeRow; let i = index">
             <td>{{col.client.name}}</td>
             <td>{{col.interactionType.interactionType}}</td>
-            <td *ngIf="!btnDisableEditInt"><button id="editButton" class="btn btn-warning" (click)="triggerEditModal(i)"
+            <td *ngIf="!btnDisableEditInt"><button *ngIf="col.interactionType.id!=2" id="editButton" class="btn btn-warning" (click)="triggerEditModal(i)"
                 data-target="#exampleModal2" data-toggle="modal"><img src="assets/imagens/edit.png" width="25"
                   height="25"></button></td>
 
@@ -106,7 +106,7 @@
                       id="selectionClient" [(ngModel)]="selectClient" name="selectClient">
                       <option [ngValue]="undefined" disabled hidden selected>Select the client</option>
                       <option *ngFor="let client of clients$ | async ; let i = index"
-                        value="{{client.id}}+{{client.name}}+{{client.potentialRevenue}}">{{client.name}}</option>
+                        value="{{client.id}}+{{client.name}}+{{client.nipc}}+{{client.potentialRevenue}}">{{client.name}}</option>
                     </select>
                     <select (click)="removeBorderInteraction()" class="custom-select my-1 mr-sm-2" type="number"
                       id="selectionType" [(ngModel)]="selectType" name="selectType">
@@ -165,7 +165,7 @@
                       id="selectionClient" [(ngModel)]="selectClient" name="selectClient">
                       <option [ngValue]="undefined" disabled hidden selected>Select the client</option>
                       <option *ngFor="let client of clients$ | async ; let i = index"
-                        value="{{client.id}}+{{client.name}}">{{client.name}}</option>
+                        value="{{client.id}}+{{client.name}}+{{client.nipc}}+{{client.potentialRevenue}}">{{client.name}}</option>
                     </select>
                     <select (click)="removeBorderInteraction()" class="custom-select my-1 mr-sm-2" type="number"
                       id="selectionType" [(ngModel)]="selectType" name="selectType">

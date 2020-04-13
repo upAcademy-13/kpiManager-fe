@@ -174,14 +174,14 @@ export class LayoutFormComponent implements OnInit {
       choosenInteraction.className =
         "custom-select my-1 mr-sm-2 animated bounce error ng-untouched ng-pristine ng-valid";
     } else {
-      console.log(parseInt(this.selectClient.split("+")[2]));
-      this.contractValue = Number(this.contractValue) + Number(parseInt(this.selectClient.split("+")[2])) ;
+      
       this.interactionTemp = {
         
         client: {
           name: this.selectClient.split("+")[1],
-          id: this.selectClient.split("+")[0], 
-          potentialRevenue: this.contractValue
+          id: this.selectClient.split("+")[0],
+          nipc:this.selectClient.split("+")[2], 
+          potentialRevenue:  Number(this.contractValue) + Number(parseInt(this.selectClient.split("+")[3])) 
         },
         person: {
           name: this.tokenInfo.role != "manager" ? this.selectPerson.split("+")[1] : this.tokenInfo.iss,
@@ -198,14 +198,14 @@ export class LayoutFormComponent implements OnInit {
         },
 
         week: this.numWeek,
-        potentialRevenue: this.contractValue 
+        potentialRevenue: this.contractValue
       }
 
       /*       console.log(this.selectClient);
             console.log(this.interactionTemp.idClient);
        */
       this.interactionTypeRow.push(this.interactionTemp);
-      //      console.log(this.interactionTypeRow);
+      console.log(this.interactionTypeRow);
 
 
       if (this.interactionTypeRow.length != 0) {
@@ -256,7 +256,13 @@ export class LayoutFormComponent implements OnInit {
   deleteFromDB(){
     // Vai chamar o serviço de delete com o id removeId
     this.interactionService.deleteInteraction(this.currentInteraction)
-    .subscribe(()=>this.getInteractionsByFilters()); // Senão tiver aqui no subcribe, ele faz um "fetch" antes de apagar e o delete fica sem efeito
+    .subscribe(()=>{
+      this.getInteractionsByFilters();
+      //this.putClientPotentialRevenue()
+    }
+    
+    ); // Senão tiver aqui no subcribe, ele faz um "fetch" antes de apagar e o delete fica sem efeito
+  
   }
 
   public getValues() {
@@ -313,6 +319,7 @@ export class LayoutFormComponent implements OnInit {
       this.btnDisableEditInt = false;
       this.numWeek = null;
       this.updateTableHeader();
+      
     }
   }
 
@@ -324,7 +331,7 @@ export class LayoutFormComponent implements OnInit {
       let interactionPOST = { // De acordo com a estrutura do interactionTemp que vai popular o interactionTypeRow
         dateInteraction: interaction.week,
         potentialRevenue: interaction.potentialRevenue ,
-        client: { id: interaction.client.id },
+        client: { id: interaction.client.id, name: interaction.client.name, nipc: interaction.client.nipc, potentialRevenue: interaction.client.potentialRevenue},
         interactionType: { id: interaction.interactionType.id },
         person: { id: interaction.person.id },
         unit: { id: interaction.unit.id }
@@ -334,6 +341,7 @@ export class LayoutFormComponent implements OnInit {
         .createInteraction(interactionPOST)
         .subscribe(res => {
           console.log(res);
+          //this.putClientPotentialRevenue(interactionPOST);
         });
     }
 
@@ -345,18 +353,36 @@ export class LayoutFormComponent implements OnInit {
 
   putInteraction(event) {
     console.log(event);
-    if(event.key=="Enter"){
+    // if(event.key=="Enter"){
+      let interactionPUT:any;
       console.log(this.currentInteraction);
+    if (this.currentInteraction.interactionType.id==2){
+      let newPotential = Number(this.currentInteraction.client.potentialRevenue)-Number(this.currentInteraction.potentialRevenue);
+       console.log(this.currentInteraction.client.potentialRevenue);
+       console.log(this.currentInteraction.potentialRevenue);
+       console.log(newPotential);
+      interactionPUT = { // De acordo com a estrutura do interactionTemp que vai popular o interactionTypeRow
+        id: this.currentInteraction.id,
+        dateInteraction: this.currentInteraction.dateInteraction,
+        potentialRevenue:this.currentInteraction.potentialRevenue,
+        client: { id: this.selectClient.split("+")[0], name: this.currentInteraction.client.name, nipc: this.currentInteraction.client.nipc, potentialRevenue: newPotential },
+        interactionType: { id: this.selectType.split("+")[0] },
+        person: { id: this.currentInteraction.person.id },
+        unit: { id: this.currentInteraction.unit.id }
+      };
+    }else{
 
-    let interactionPUT = { // De acordo com a estrutura do interactionTemp que vai popular o interactionTypeRow
-      id: this.currentInteraction.id,
-      dateInteraction: this.currentInteraction.dateInteraction,
-      potentialRevenue:this.currentInteraction.potentialRevenue,
-      client: { id: this.selectClient.split("+")[0] },
-      interactionType: { id: this.selectType.split("+")[0] },
-      person: { id: this.currentInteraction.person.id },
-      unit: { id: this.currentInteraction.unit.id }
-    };
+        interactionPUT = {
+        id: this.currentInteraction.id,
+        dateInteraction: this.currentInteraction.dateInteraction,
+        potentialRevenue:this.currentInteraction.potentialRevenue,
+        client: { id: this.selectClient.split("+")[0], name: this.currentInteraction.client.name, nipc: this.currentInteraction.client.nipc, potentialRevenue: this.currentInteraction.client.potentialRevenue },
+        interactionType: { id: this.selectType.split("+")[0] },
+        person: { id: this.currentInteraction.person.id },
+        unit: { id: this.currentInteraction.unit.id }
+      };
+    }
+
 
     this.interactionService
       .updateInteraction(interactionPUT)
@@ -365,15 +391,32 @@ export class LayoutFormComponent implements OnInit {
         this.getInteractionsByFilters()
       });
 
-
+    //this.putClientPotentialRevenue(this.currentInteraction);
     this.btnDisableAddInt = false;
 
-    this.updateTableHeader()
-    }
-
-    ;
+    this.updateTableHeader();
+    //};
 
     //Para dar um "refresh" à tabela por filtros e tudo
+
+  }
+  putClientPotentialRevenue(currentInteraction: any) {
+    console.log(currentInteraction);
+    console.log(currentInteraction.client.potentialRevenue);
+    console.log(currentInteraction.potentialRevenue);
+    let clientPUT = { 
+      id: currentInteraction.client.id,
+      name: currentInteraction.client.name,
+      nipc: currentInteraction.client.nipc,
+      potentialRevenue:currentInteraction.client.potentialRevenue
+    };
+
+    this.interactionService
+      .updateClient(clientPUT)
+      .subscribe(res => {
+        console.log(res);
+        
+      });
 
   }
 
@@ -386,15 +429,16 @@ export class LayoutFormComponent implements OnInit {
 
     console.log(this.interactionTypeRow);
 
-
-    this.selectClient = this.currentInteraction.client.id + "+" + this.currentInteraction.client.name;
+    this.selectClient = this.currentInteraction.client.id + "+" + this.currentInteraction.client.name + "+" +this.currentInteraction.client.nipc + "+" + this.currentInteraction.client.potentialRevenue;
     this.selectType = this.currentInteraction.interactionType.id + "+" + this.currentInteraction.interactionType.interactionType;
 
     this.currentInteraction = { //Copia-se o objecto todo e dá-se override só as que se querem
       ...this.currentInteraction,
       client: {
         name: this.selectClient.split("+")[1],
-        id: this.selectClient.split("+")[0]
+        id: this.selectClient.split("+")[0],
+        nipc: this.selectClient.split("+")[2],
+        potentialRevenue:this.selectClient.split("+")[3]
       },
       interactionType: {
         interactionType: this.selectType.split("+")[1],
