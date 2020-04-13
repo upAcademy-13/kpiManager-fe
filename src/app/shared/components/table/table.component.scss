@@ -21,7 +21,7 @@
     pointer-events: none;
     
   }
-.central-container{
+.central-container-table{
     width: 87%; 
     margin-top: 100px; 
     margin-left: auto;
@@ -98,7 +98,7 @@ label{
     margin-top: 4% !important;
    }
 .col-sm-2{
-    margin-right: 30px;
+    margin-right: 50px;
 }
 
 .selected{
@@ -128,18 +128,81 @@ font-size: 1rem;
     .col-sm-2{
         margin-right: 22px!important;
     }
+    .prefix-css .datatable-header-cell {
+      font-size: 0.8rem!important;
+      padding: 1%;
+    }
   }
+  @media (min-width: 1200px) and (max-width: 1400px){
+    .col-sm-2{
+        margin-right: 22px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      padding: 1%;
+    }
+  }
+  @media (min-width:855px) and (max-width: 950px){
+    .col-sm-2{
+        margin-right:18px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      font-size: 0.8rem!important;
+      padding: 1%;
+    }
+  }
+
   @media (min-width:800px) and (max-width: 950px){
     .col-sm-2{
         margin-right:18px!important;
     }
+    .prefix-css .datatable-header-cell {
+      font-size: 0.7rem!important;
+      padding: 1%;
+    }
+    .prefix-css .datatable-body-cell  {
+      font-size: 0.8rem!important;
+    }
+    .selected{
+      font-size: 0.8rem !important;
+    }
+  
   }
-  @media (min-width:659px) and (max-width: 800px){
+  @media (min-width:629px) and (max-width: 800px){
     .col-sm-2{
         margin-right:13px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      font-size: 0.6rem!important;
+      padding: 1%;
+    }
+    .prefix-css .datatable-body-cell  {
+      font-size: 0.7rem!important;
+    }
+    .selected{
+      font-size: 0.7rem !important;
+    }
+  }
+
+  @media (min-width:320px) and (max-width: 667px){
+    .col-sm-2{
+        margin-right:13px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      font-size: 0.7rem!important;
+    
+    }
+    .prefix-css .datatable-body-cell  {
+      font-size: 0.7rem!important;
+    }
+    .selected{
+      font-size: 0.7rem !important;
+    }
+    .container-100{
+      width: 153%;
     }
   }
 
   .my-btn-orange {background-color:#e46310}
 
   
+
