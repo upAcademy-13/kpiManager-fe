@@ -55,7 +55,7 @@
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Unit"  *ngIf="isManager == true">
+        <ngx-datatable-column name="Unit" [sortable]="false" *ngIf="isManager == true">
           <ng-template let-row="row" ngx-datatable-cell-template>
             {{row.unit?.nameUnit || ""}}
           </ng-template>
@@ -129,9 +129,9 @@
                   </div>
                 </div>
                 
-                <button class="btn btn-primary" [disabled]="clientForm.status !== 'VALID'" *ngIf="isCreate==true" (click)="addClient()">Add</button>
-                <button class="btn btn-primary" [disabled]="clientForm.status !== 'VALID'" *ngIf="isCreate==false" (click)="editUser()">Edit</button>
-                <p>{{postData}}</p> 
+                <button class="btn btn-custom" [disabled]="clientForm.status !== 'VALID'" *ngIf="isCreate==true" (click)="addClient()">Add</button>
+                <button class="btn btn-custom" [disabled]="clientForm.status !== 'VALID'" *ngIf="isCreate==false" (click)="editUser()">Edit</button>
+                <p class="error-custom">{{postData}}</p> 
               </form>
 
               <form [formGroup]="managerForm"  *ngIf="isManager==true"  (ngSubmit)="editUser()">
@@ -159,7 +159,7 @@
                   
                 </div>
                 
-                <button class="btn btn-primary" [disabled]="managerForm.status !== 'VALID'">Edit</button>
+                <button class="btn btn-custom" [disabled]="managerForm.status !== 'VALID'">Edit</button>
                 <p>{{postData}}</p> 
               </form>
 

@@ -9,7 +9,7 @@
         <li class="nav-item mr-4">
           <a class="nav-link" [routerLink]="['/layout/layoutform']" routerLinkActive="active">Interactions</a>
         </li>
-        <li class="nav-item mr-4">
+        <li class="nav-item mr-4" *ngIf="(tokenInfo['role'] == 'SuperUser' || tokenInfo['role'] == 'director')">
           <a class="nav-link" href="#" [routerLink]="['/layout/clients&managers']" routerLinkActive="active">Clients & Managers</a>
         </li>
         <li class="nav-item mr-4" *ngIf="tokenInfo['role'] == 'SuperUser'">

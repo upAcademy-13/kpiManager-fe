@@ -29,7 +29,6 @@ export class CreateUserComponent implements OnInit {
     }
 
     this.http.post<any>(this.apiUrl,this.user,requestOptions).subscribe(data => {
-      this.postData = "Utilizador criado!";
       this.router.navigate(['layout']);
     },
     error => {
