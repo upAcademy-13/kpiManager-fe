@@ -10,6 +10,29 @@ import { Grafico3Component } from "src/app/layout/dashboard/ana/grafico3/grafico
 export class DashboardService {
   constructor(public http: HttpClient) {}
 
+  public countAllInterviewsPerWeek() {
+    return this.http
+      .get("http://127.0.0.1:8080/kpiManager/api/interactions/allWeeks")
+      .pipe(
+        switchMap((weeks: any[]) =>
+          forkJoin(
+            weeks.map((week) =>
+              this.http
+                .get(
+                  "http://127.0.0.1:8080/kpiManager/api/interactions/count/interviewsPerWeek?week=" +
+                    week
+                )
+                .pipe(
+                  map((interviews) => {
+                    return { week, interviews };
+                  })
+                )
+            )
+          )
+        )
+      );
+  }
+
   public countAllContratsPerWeek() {
     return this.http
       .get("http://127.0.0.1:8080/kpiManager/api/interactions/allWeeks")
