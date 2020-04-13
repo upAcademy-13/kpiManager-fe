@@ -46,10 +46,9 @@ export class DataService {
 
  public getAllRevenueClient():Observable<any> {
   let params = new HttpParams();
-  params = params.append('name', "Cliente Dois");
-  params = params.append('interaction', "contrato");
+  params = params.append('selecClient', "Cliente Dois");
 
-  return this.http.get<any>(this.apiUrl + 'interactions/revenue/client',  {
+  return this.http.get<any>(this.apiUrl + 'interactions/filter/client',  {
     params
   });
 }

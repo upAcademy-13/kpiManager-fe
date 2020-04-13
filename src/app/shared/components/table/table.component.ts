@@ -54,7 +54,7 @@ export class TableComponent implements OnInit {
     count: 0,
   };
 
-
+teste=[];
 
   ngOnInit() {
     console.log('ngOnInit - start');
@@ -67,8 +67,9 @@ export class TableComponent implements OnInit {
     this.fetch(data => {
       this.temp = [...data]
     });
-    this.dataClients$.subscribe(res => {
-      console.log("LGOGOGOGOOGOG:",res);
+    this.revenueClient$.subscribe(res => {
+      this.teste = [...res];
+      console.log("revenueClient$:",this.teste);
 
     });
     

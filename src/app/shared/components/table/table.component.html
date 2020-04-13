@@ -103,22 +103,36 @@
             <mat-tab label="Client">
               <div>
 
-                <div class="col-sm-2 ">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1"></label>
-                      <option value="">Client</option>
-                      <option value={{select}} *ngFor="let select of dataClients$ | async">{{select}}</option>
-                  </div>
-                </div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Client</th>
+                      <th scope="col">Proposta Aceite</th>
+                      <th scope="col">Proposta Recusada</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                    </tr>
+                  </tbody>
+                </table>
+
                 <div>
-                  <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="dataClients$ | async"
-                    [columns]='[{prop:"client.name", name:"Client"},{prop:"person.name", name:"Proposta Aceite"},
+                  <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="teste"
+                    [columns]='[{prop:"teste[0][0]", name:"Client"},{prop:"person.name", name:"Proposta Aceite"},
                     {prop:"interactionType.interactionType",name:"Proposta Recusada"},{prop:"", name:"Eficiência"}]'
                     [columnMode]="ColumnMode.force" [sorts]="[{prop: 'name', dir: 'desc'}]" [headerHeight]="50"
                     [footerHeight]="50" [externalPaging]="true" rowHeight="auto" [count]="totalElements"
                     [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
                    </ngx-datatable> <!-- Colocar aqui uma propriedade -->
+    
                 </div>
+
                 <div class="footer row" style=" padding: 5px 10px">
                   <div class="col-5">
                     <strong>Taxa de conversão:</strong> {{totalElements}}
