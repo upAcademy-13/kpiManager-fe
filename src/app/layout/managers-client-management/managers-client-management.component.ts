@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, NgModule, ViewChild } from '@angular/co
 import { ClientsService } from 'src/app/core/services/clients.service';
 import { Client } from 'src/app/core/models/client';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ManagersService } from 'src/app/core/services/managers.service';
 import { User } from 'src/app/core/models/user';
 import { BsModalService, BsModalRef, ModalDirective, ModalOptions } from 'ngx-bootstrap/modal';
@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 import { InteractionsService } from 'src/app/core/services/interactions.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Page } from './page';
+
 declare var $: any;
 @Component({
   selector: 'app-managers-client-management',
@@ -19,6 +21,12 @@ declare var $: any;
 
 export class ManagersClientManagementComponent implements OnInit {
 
+  pageInfo = {
+    offset : 0,
+    limit : 5,
+    count : 0
+  };
+  page : Page = new Page();
   public clientsData: Client[] = [];
   public managersData: User[] = [];
   private apiUrlUpdManagers = 'http://localhost:8080/kpiManager/api/users/';
@@ -34,6 +42,8 @@ export class ManagersClientManagementComponent implements OnInit {
   formSelected: FormGroup;
   currentType: string;
   postData;
+  id;
+  tokenInfo;
 
   constructor(
     private clients: ClientsService,
@@ -44,21 +54,15 @@ export class ManagersClientManagementComponent implements OnInit {
     private auth: AuthService
 
   ) {
-    this.fetch(data => {
-      this.temp = [...data];
-      this.rows = data;
-      this.columns = [{ name: 'Name' }, { name: 'NIPC' }, { name: 'Actions' }]
-
-    });
-    
+    this.getAllClients();    
   }
-  tokenInfo;
+
   ngOnInit(): void {
-    let element: HTMLElement = document.getElementById('client') as HTMLElement;
-      element.click();
     const token = localStorage.getItem("token");
     this.tokenInfo = this.auth.getDecodedAccessToken(token);
     this.getFormData();
+    this.page.size = 5;
+    this.page.pageNumber = 0;
     this.managerForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', Validators.required),
@@ -74,33 +78,54 @@ export class ManagersClientManagementComponent implements OnInit {
     })
   }
 
+  setPage(event){
+this.pageInfo = event;
+if(this.isManager == true)
+{
+  this.getAllManagers();
+}
+else{
+  this.getAllClients(); 
 
+}
+  }
   
   //Function to Add client data to Table
   getAllClients() {
-    this.clients.getCount(this.clientsData).subscribe((res: any) => {
-      const data = res.map(element => {
+    let httpParams = new HttpParams();
+      const pageNum = this.pageInfo.offset * this.pageInfo.limit;
+    httpParams = httpParams.append('startIndex', pageNum.toString()); 
+    httpParams = httpParams.append('quantity', '5');
+
+    this.clients.getCount(this.clientsData, httpParams).subscribe((res: any) => {
+          const data = res.elements.map(element => {
         return {
-          ...element[0],
-          count: element[1]
+            ...element[0],
+            count: element[1]
         }
-      });
+      });    
+      this.page.totalElements = res.totalElements;
       this.temp = [...data];
-      this.rows = [...data];
+      this.rows = [...data];  
       this.columns = [{ name: 'Name' }, { name: 'NIPC' }, { name: 'Actions' }];
       this.isManager = false
-      
     });
-    let element: HTMLElement = document.getElementById('client') as HTMLElement;
-    element.click();
   }
   
   //Function to Add manager data to Table 
   getAllManagers() {
 
-    this.managers.getAllManagers(this.managersData).subscribe((res: any) => {
-      this.temp = [...res];
-      this.rows = [...res];
+    let httpParams = new HttpParams();
+    const pageNum = this.pageInfo.offset * this.pageInfo.limit;
+  httpParams = httpParams.append('startIndex', pageNum.toString()); 
+  httpParams = httpParams.append('quantity', '5');
+
+    this.managers.getAllManagers(this.managersData, httpParams).subscribe((res: any) => {
+      const data = res.elements;
+
+      this.page.totalElements = res.totalElements;
+      this.temp = [...data];
+      this.rows = [...data];
       this.columns = [{ name: 'Name' }, { name: 'Unit', sortable: false }, { name: 'Actions' }];
       this.isManager = true;
     });
@@ -118,16 +143,6 @@ export class ManagersClientManagementComponent implements OnInit {
 
   ColumnMode = ColumnMode;
 
-  fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', `http://localhost:8080/kpiManager/api/clients`);
-
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    };
-
-    req.send();
-  }
 
   private apiUrlClient = 'http://localhost:8080/kpiManager/api/clients';
   public client: Client = new Client();
@@ -165,8 +180,7 @@ export class ManagersClientManagementComponent implements OnInit {
     this.http.post<any>(this.apiUrlClient, this.clientForm.value, requestOptions).subscribe(data => {
       this.clientForm.reset();
       this.lgModal.hide();
-      let element: HTMLElement = document.getElementById('client') as HTMLElement;
-      element.click();
+      this.getAllClients();
     },
       error => {
         this.postData = error['error'];
@@ -178,7 +192,7 @@ export class ManagersClientManagementComponent implements OnInit {
 
 
   //Edit User
-  id;
+
   public editUser() {
     const requestOptions: Object = {
       responseType: 'text'
@@ -188,8 +202,7 @@ export class ManagersClientManagementComponent implements OnInit {
       this.http.put(this.apiUrlUpdManagers + this.id, this.managerForm.value, requestOptions).subscribe(data => {
         this.managerForm.reset();
         this.lgModal.hide();
-        let element: HTMLElement = document.getElementById('manager') as HTMLElement;
-        element.click();
+        this.getAllManagers();
       },
         error => {
           this.postData = error['error'];
@@ -200,8 +213,7 @@ export class ManagersClientManagementComponent implements OnInit {
       this.http.put(this.apiUrlUpdClient + this.id, this.clientForm.value, requestOptions).subscribe(data => {
         this.clientForm.reset();
         this.lgModal.hide();
-        let element: HTMLElement = document.getElementById('client') as HTMLElement;
-        element.click();
+        this.getAllClients();
       },
         error => {
           this.postData = error['error'];
@@ -247,8 +259,6 @@ export class ManagersClientManagementComponent implements OnInit {
 
   //show Modal
   public add() {
-    let element: HTMLElement = document.getElementById('client') as HTMLElement;
-    element.click();
     this.isEdit = false;
     this.isCreate = true;
     this.isManager = false;

@@ -15,7 +15,7 @@
         <ul>
           <li><label for="tab1" role="button"><span id="client" (click)="getAllClients()">Clients</span></label></li>
           <li><label for="tab2" role="button"><span id="manager" (click)="getAllManagers()">Managers</span></label></li>
-          <li>
+          <li class="custom-width">
             <input
               #search
               id="search"
@@ -36,7 +36,13 @@
       </div>
 
       <ngx-datatable #table class="material" [rows]="rows" [columnMode]="ColumnMode.force" headerHeight="50" footerHeight="50"
-        rowHeight="auto">
+        rowHeight="auto"   
+        [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        (page)="setPage($event)"
+        >
         <ngx-datatable-column name="Name">
           <ng-template let-row="row"  ngx-datatable-cell-template>
             {{row.name}}

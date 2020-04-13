@@ -353,7 +353,13 @@ body {
       transform: translateY(0%);
     }
   }
-  
+
+  .custom-width{
+    width: 15% !important;
+  }
+  .form-control{
+    border: 2px solid #ced4da !important;
+  }
  .datatable-body .datatable-body-row .datatable-body-cell {
     text-align: left;
     padding: 0.9rem 1.2rem;

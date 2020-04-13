@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../models/user';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ManagersService {
     private http: HttpClient
   ) { }
 
-  public getAllManagers(users: User[]) {
-    return this.http.get<User[]>(this.apiUrl);
+  public getAllManagers(users: User[], params: HttpParams) {
+    return this.http.get<User[]>(this.apiUrl, {params});
   }
 }
