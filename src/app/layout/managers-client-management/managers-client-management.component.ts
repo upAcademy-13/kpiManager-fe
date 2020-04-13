@@ -223,11 +223,10 @@ export class ManagersClientManagementComponent implements OnInit {
       this.id = row.id;
       this.http.delete(this.apiUrlUpdManagers + this.id).subscribe(data => {
         this.managerForm.reset();
-      
+
         
       },
         error => {
-          this.postData = error['error'];
         });
         await this.delay(300);
         this.getAllManagers();
@@ -237,10 +236,8 @@ export class ManagersClientManagementComponent implements OnInit {
       this.id = row.id;
       this.http.delete(this.apiUrlUpdClient + this.id).subscribe(data => {
         this.clientForm.reset();
-        
       },
         error => {
-          this.postData = error['error'];
         });
         await this.delay(300);
         this.getAllClients();
