@@ -20,7 +20,8 @@ export class StatisticsComponent implements OnInit {
   public allInteractions$:Observable<any>;
   public allUnities$:Observable<any>;
   public allBetween$:Observable<any[]>;
-
+  public allRevenueClient$:Observable<any[]>;
+  public allRevenueManager$:Observable<any[]>;
 
   constructor(private http: HttpClient,
     private data: DataService
@@ -30,15 +31,14 @@ export class StatisticsComponent implements OnInit {
 
 
   ngOnInit() {
-    // console.log("obj",this.obs);
-    // this.dataInteration$ = this.data.getAllData();
-
     this.allData$ = this.data.getAllData();    
     this.allWeek$ = this.data.getAllWeeks();
     this.allClients$ = this.data.getAllClients();
     this.allBManagers$ = this.data.getAllBManagers();
     this.allInteractions$ = this.data.getAllInteractions();
     this.allUnities$ = this.data.getAllUnities();
+    this.allRevenueClient$ = this.data.getAllRevenueClient();
+    this.allRevenueManager$ = this.data.getAllRevenueManager();
     
     // this.data.getAllData().subscribe(res => {
     //   console.log('AllData = ', res);
@@ -64,6 +64,13 @@ export class StatisticsComponent implements OnInit {
     //   console.log('ALLUnities = ', res);
     // });
 
+    this.data.getAllRevenueClient().subscribe(res => {
+       console.log('revenueClient = ', res);
+     });
+
+     this.data.getAllRevenueManager().subscribe(res => {
+      console.log('revenueManager = ', res);
+    });
   }
 
 

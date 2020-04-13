@@ -3,6 +3,7 @@ import { of, Observable } from 'rxjs';
 import { DataInteraction } from '../models/dataInteration';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 
+
 var httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json" }) }
 
 @Injectable({
@@ -43,4 +44,27 @@ export class DataService {
    return this.http.get<any>(this.apiUrl + 'interactions/allUnits');
  }
 
+ public getAllRevenueClient():Observable<any> {
+  let params = new HttpParams();
+  params = params.append('name', "Cliente Dois");
+  params = params.append('interaction', "contrato");
+
+  return this.http.get<any>(this.apiUrl + 'interactions/revenue/client',  {
+    params
+  });
 }
+
+public getAllRevenueManager():Observable<any> {
+  let params = new HttpParams();
+  params = params.append('name', "ManagerA");
+  params = params.append('interaction', "contrato")
+  return this.http.get<any>(this.apiUrl + 'interactions/revenue/manager', {
+    params
+  });
+}
+
+// interactions/revenue/manager?id=2&interaction=Contrato
+// interactions/revenue/client?id=1&interaction=Contrato
+// params = params.append('name', myselectWeek);
+// params = params.append('interaction', myselectUnit);
+ }

@@ -9,137 +9,132 @@
 
       <h1 class="form-title text-center ">STATISTICS </h1>
 
-      <div class="row">
-        <div class=" search col-lg-3">
-          <input class="search form-control" id="inputSearch" type='text' [(ngModel)]="inputSearch" placeholder='Search ...'
-            (keyup)='updateFilter($event)'>
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="col-sm-2 ">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1"></label>
-            <select  [(ngModel)]= "selectWeek" (change)='filter(true)' #myselectSemana class=" form-control selected " id="exampleFormControlSelect1">
-              <option value="">Week</option>
-              <option  value={{select}}  *ngFor="let select of dataWeek$ | async">{{select}} ª </option>
-            </select>
-          </div>
-        </div>
-   
-        <div class=" col-sm-2">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1"></label>
-            <select   [(ngModel)]= "selectUnit" (change)='filter(true)' #myselectUnidade class="form-control selected" id="exampleFormControlSelect1">
-              <option value="">Unit</option>
-              <option value={{select}} *ngFor="let select of dataUnities$ | async">{{select}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-sm-2 ">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1"></label>
-            <select [(ngModel)]= "selectClient" (change)='filter(true)' #myselectCliente class="form-control selected" id="exampleFormControlSelect1">
-              <option  value="">Client</option>
-              <option value={{select}}  *ngFor="let select of dataClients$ | async">{{select}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-sm-2">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1"></label>
-            <select [(ngModel)]= "selectBM" (change)='filter(true)' #myselectBM class="form-control selected" id="myselectBM">
-              <option  value="">Business Manager</option>
-              <option  value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}} </option>
-            </select>
-          </div>
-        </div>
-        <div class="col-sm-2 lastSel">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1"></label>
-            <select  [(ngModel)]= "selectInteraction" (change)='filter(true)' #myselectInteration class="form-control selected " id="myselectInteration">
-              <option value="">Interaction Type</option>
-              <option value={{select}} *ngFor="let select of dataInteractions$ | async">{{select}}</option>
-            </select>
-          </div>
-        </div>
-
-
-      </div>
-
-
-      <div>
-        <!-- <ngx-datatable #table class='prefix-css material striped' [limit]="5" [rows]='rows'
-          [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"
-          [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unit"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
-          [columnMode]="ColumnMode.force" [headerHeight]='50' [footerHeight]='50' [rowHeight]='"auto"' >  
-        </ngx-datatable> -->
-        <div>
-          <h3>
-            Server-side Paging
-          </h3>
-          <ngx-datatable
-            class="material" #table class='prefix-css material striped'
-            [rows]="rows"
-            [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unit"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'            [columnMode]="ColumnMode.force"
-            [sorts]="[{prop: 'name', dir: 'desc'}]"
-            [headerHeight]="50"
-            [footerHeight]="50"
-            [externalPaging]="true"
-            rowHeight="auto"
-            [count]="totalElements"
-            [offset]="page.pageNumber"
-            [limit]="page.size"
-            (page)="setPage($event)"
-          >
-          </ngx-datatable>
-        </div>
 
 
 
-          <div class="footer row" style=" padding: 5px 10px">
-            <div class="col-5">
-              <strong>Total interactions:</strong> {{totalElements}}
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="List">
+          <div class="row">
+            <div class=" search col-lg-3">
+              <input class="search form-control" id="inputSearch" type='text' [(ngModel)]="inputSearch"
+                placeholder='Search ...' (keyup)='updateFilter($event)'>
             </div>
-            <div class="col-4 offset-3 text-right">
-              <button id="btnRefresh" (click)="refreshTable()" class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Reset </button>
+
+          </div>
+          <div class="row">
+            <div class="col-sm-2 ">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1"></label>
+                <select [(ngModel)]="selectWeek" (change)='filter(true)' #myselectSemana class=" form-control selected "
+                  id="exampleFormControlSelect1">
+                  <option value="">Week</option>
+                  <option value={{select}} *ngFor="let select of dataWeek$ | async">{{select}} ª </option>
+                </select>
+              </div>
+            </div>
+
+            <div class=" col-sm-2">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1"></label>
+                <select [(ngModel)]="selectUnit" (change)='filter(true)' #myselectUnidade class="form-control selected"
+                  id="exampleFormControlSelect1">
+                  <option value="">Unit</option>
+                  <option value={{select}} *ngFor="let select of dataUnities$ | async">{{select}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-2 ">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1"></label>
+                <select [(ngModel)]="selectClient" (change)='filter(true)' #myselectCliente
+                  class="form-control selected" id="exampleFormControlSelect1">
+                  <option value="">Client</option>
+                  <option value={{select}} *ngFor="let select of dataClients$ | async">{{select}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1"></label>
+                <select [(ngModel)]="selectBM" (change)='filter(true)' #myselectBM class="form-control selected"
+                  id="myselectBM">
+                  <option value="">Business Manager</option>
+                  <option value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}} </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-2 lastSel">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1"></label>
+                <select [(ngModel)]="selectInteraction" (change)='filter(true)' #myselectInteration
+                  class="form-control selected " id="myselectInteration">
+                  <option value="">Interaction Type</option>
+                  <option value={{select}} *ngFor="let select of dataInteractions$ | async">{{select}}</option>
+                </select>
+              </div>
+            </div>
+
+
+          </div>
+          <div>
+            <div>
+              <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="rows"
+                [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unit"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
+                [columnMode]="ColumnMode.force" [sorts]="[{prop: 'name', dir: 'desc'}]" [headerHeight]="50"
+                [footerHeight]="50" [externalPaging]="true" rowHeight="auto" [count]="totalElements"
+                [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
+              </ngx-datatable>
+            </div>
+            <div class="footer row" style=" padding: 5px 10px">
+              <div class="col-5">
+                <strong>Total interactions:</strong> {{totalElements}}
+              </div>
+              <div class="col-4 offset-3 text-right">
+                <button id="btnRefresh" (click)="refreshTable()"
+                  class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Reset </button>
+              </div>
             </div>
           </div>
-      </div>
 
 
+        </mat-tab>
+        <mat-tab label="STATISTICS">
+          <mat-tab-group mat-align-tabs="end">
+            <mat-tab label="Client">
+              <div>
 
-      <!-- <ngx-datatable  #table class='material striped' [limit]="5" [rows]='rows ' [scrollbarV]="false" [sorts]="[{prop: 'name', dir: 'desc'}]"
-    [columnMode]="ColumnMode.force" [headerHeight]='50'
-      [footerHeight]='50' [rowHeight]='"auto"'>
-    <ngx-datatable-column name="Company">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        {{row.dateInteraction}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Unidade">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        {{row.unit["nameUnit"]}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Cliente">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        {{row.client["name"]}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Business Manager">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        {{row.person["name"]}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Tipo de interação">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        {{row.interactionType["interactionType"]}}
-      </ng-template>
-    </ngx-datatable-column>
-  </ngx-datatable> -->
+                <div class="col-sm-2 ">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1"></label>
+                      <option value="">Client</option>
+                      <option value={{select}} *ngFor="let select of dataClients$ | async">{{select}}</option>
+                  </div>
+                </div>
+                <div>
+                  <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="dataClients$ | async"
+                    [columns]='[{prop:"client.name", name:"Client"},{prop:"person.name", name:"Proposta Aceite"},
+                    {prop:"interactionType.interactionType",name:"Proposta Recusada"},{prop:"", name:"Eficiência"}]'
+                    [columnMode]="ColumnMode.force" [sorts]="[{prop: 'name', dir: 'desc'}]" [headerHeight]="50"
+                    [footerHeight]="50" [externalPaging]="true" rowHeight="auto" [count]="totalElements"
+                    [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
+                   </ngx-datatable> <!-- Colocar aqui uma propriedade -->
+                </div>
+                <div class="footer row" style=" padding: 5px 10px">
+                  <div class="col-5">
+                    <strong>Taxa de conversão:</strong> {{totalElements}}
+                  </div>
+                  <div class="col-4 offset-3 text-right">
+                    <button id="btnRefresh" (click)="refreshTable()"
+                      class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Reset </button>
+                  </div>
+                </div>
+              </div>  
+            </mat-tab>
+            <mat-tab label="Manager">  </mat-tab>
+          </mat-tab-group>
 
-
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>

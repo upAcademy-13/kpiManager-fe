@@ -32,6 +32,8 @@ export class TableComponent implements OnInit {
   @Input() dataInteractions$: Observable<any[]>;
   @Input() dataUnities$: Observable<any[]>;
   @Input() dataPagination$: Observable<Paginate>;
+  @Input() revenueClient$: Observable<any[]>;
+  @Input() revenueManager$: Observable<any[]>;
 
 
   ColumnMode = ColumnMode;
@@ -62,12 +64,20 @@ export class TableComponent implements OnInit {
     this.selectUnit = !!window.history.state.selectUnit ? window.history.state.selectUnit : '';
     this.selectWeek = !!window.history.state.selectWeek ? window.history.state.selectWeek : '';
     this.setPage({ offset: 0, limit: 10, count: 0 });
+    this.fetch(data => {
+      this.temp = [...data]
+    });
+    this.dataClients$.subscribe(res => {
+      console.log("LGOGOGOGOOGOG:",res);
+
+    });
+    
     console.log('ngOnInit - fim');
+
   }
 
     constructor(
     private http: HttpClient,
-    private data: DataService,
     private cdr: ChangeDetectorRef
   ) {
     this.page.pageNumber = 0;
@@ -76,6 +86,7 @@ export class TableComponent implements OnInit {
 
   refreshTable() {
     this.filterClearSelect();
+    this.inputSearch = '';
     this.filter(true);
   }
 
@@ -139,7 +150,6 @@ export class TableComponent implements OnInit {
   }
 
   filterClearSelect() {
-    this.inputSearch = '';
     this.selectBM = '';
     this.selectClient = '';
     this.selectWeek = '';
