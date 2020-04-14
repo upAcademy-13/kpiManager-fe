@@ -37,7 +37,7 @@ const routes: Routes = [
       {
         path: "clients&managers",
         component: ManagersClientManagementComponent,
-        canActivate: [PermissionsCOOGuard,PermissionCreateClientGuard]
+        canActivate: [PermissionCreateClientGuard ]
       },
       /*  {
         path: "",
