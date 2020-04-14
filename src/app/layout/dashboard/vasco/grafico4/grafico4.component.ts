@@ -18,7 +18,7 @@ export class Grafico4Component implements OnInit {
   chartElem: any;
   clients = [];
   interactions = [];
-  constructor(private router: Router, private dashboard: DashboardService) {}
+  constructor(private router: Router, private dashboard: DashboardService) { }
 
   ngOnInit(): void {
     this.dashboard.getAllClientNames().subscribe((data: any[]) => {
@@ -32,7 +32,7 @@ export class Grafico4Component implements OnInit {
 
   graphClickEvent(event) {
     console.log(event);
-    
+
     this.chartElem = this.myChart.getElementAtEvent(event);
     this.router.navigate(["/layout/statistics"], {
       state: { selectClient: this.chartElem[0]._model.label }
@@ -46,69 +46,82 @@ export class Grafico4Component implements OnInit {
   clientInteractionChart() {
     const colors = this.generateColor(this.clients.length);
     console.log(colors);
-    
-      this.myChart = new Chart("myChart4", {
-        type: "bar", // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-        data: {
-          labels: this.clients,
-          datasets: [
+
+    this.myChart = new Chart("myChart4", {
+      type: "bar", // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data: {
+        labels: this.clients,
+        datasets: [
+          {
+            data: this.interactions,
+
+            backgroundColor: colors,
+            borderColor: colors,
+            borderWidth: 1,
+            hoverBorderWidth: 3,
+            hoverBorderColor: colors
+          }
+        ]
+      },
+      options: {
+        hover: {
+          onHover: function (e) {
+            var el = document.getElementById("myChart4");
+            el.style.cursor = "pointer";
+            console.log(el);
+          }
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
             {
-              data: this.interactions,
-              //backgroundColor:'green',
-              backgroundColor: colors,
-              borderColor: colors,
-              borderWidth: 1,
-              hoverBorderWidth: 3,
-              hoverBorderColor: colors
+              ticks: {
+                stepSize: 1,
+                beginAtZero: true
+              }
             }
           ]
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  stepSize: 1,
-                  beginAtZero: true
-                }
-              }
-            ]
-          },
-          title: {
-            display: false,
-            text: "Client with most interactions",
-            fontSize: 25
-          },
-          legend: {
-            display: false,
-          },
-          layout: {
-            padding: {
-              left: 0,
-              right: 0,
-              bottom: 0,
-              top: 0
+        title: {
+          display: false,
+          text: "Client with most interactions",
+          fontSize: 25
+        },
+        legend: {
+          display: false,
+        },
+        layout: {
+          padding: {
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0
+          }
+        },
+        tooltips: {
+          enabled: true,
+          mode: 'single',
+          callbacks: {
+            label: function (tooltipItems, data) {
+              return tooltipItems.yLabel + ' : ' + "Click for more info";
             }
-          },
-          tooltips: {
-            enabled: true
           }
         }
-      });
-    }
-
-    generateColor(length) {
-      let data = [];
-      for (let index = 0; index < length; index++) {
-        var colors = {
-          r: Math.floor(200 + Math.random() * 55),
-          g: Math.floor(Math.random()*200),
-          b: Math.floor(Math.random()*85)
-        };
-        data.push(`rgba(${colors.r}, ${colors.g}, ${colors.b}, 0.8)`);
       }
-      return data;
-    }
+    });
   }
+
+  generateColor(length) {
+    let data = [];
+    for (let index = 0; index < length; index++) {
+      var colors = {
+        r: Math.floor(253 + Math.random() * 2),
+        g: Math.floor(50 + Math.random() * 161),
+        b: Math.floor(40 + Math.random() * 44)
+      };
+      data.push(`rgba(${colors.r}, ${colors.g}, ${colors.b}, 0.8)`);
+    }
+    return data;
+  }
+}
