@@ -44,6 +44,9 @@ export class Grafico4Component implements OnInit {
   }
 
   clientInteractionChart() {
+    const colors = this.generateColor(this.clients.length);
+    console.log(colors);
+    
       this.myChart = new Chart("myChart4", {
         type: "bar", // bar, horizontalBar, pie, line, doughnut, radar, polarArea
         data: {
@@ -52,29 +55,11 @@ export class Grafico4Component implements OnInit {
             {
               data: this.interactions,
               //backgroundColor:'green',
-              backgroundColor: [
-                "rgba(242, 102, 9, 0.8)",
-                "rgba(242, 122, 24,  0.8)",
-                "rgba(237, 154, 37,  0.8)",
-                "rgba(255, 175, 48,  0.8)",
-                "rgba(255, 192, 93,  0.8)"
-              ],
-              borderColor: [
-                "rgba(242, 102, 9, 1)",
-                "rgba(242, 122, 24, 1)",
-                "rgba(237, 154, 37, 1)",
-                "rgba(255, 175, 48, 1)",
-                "rgba(255, 192, 93, 1)"
-              ],
+              backgroundColor: colors,
+              borderColor: colors,
               borderWidth: 1,
               hoverBorderWidth: 3,
-              hoverBorderColor: [
-                "rgba(242, 102, 9, 1)",
-                "rgba(242, 122, 24, 1)",
-                "rgba(237, 154, 37, 1)",
-                "#rgba(255, 175, 48, 1)",
-                "#rgba(255, 192, 93, 1)"
-              ]
+              hoverBorderColor: colors
             }
           ]
         },
@@ -112,5 +97,18 @@ export class Grafico4Component implements OnInit {
           }
         }
       });
+    }
+
+    generateColor(length) {
+      let data = [];
+      for (let index = 0; index < length; index++) {
+        var colors = {
+          r: Math.floor(200 + Math.random() * 55),
+          g: Math.floor(Math.random()*200),
+          b: Math.floor(Math.random()*85)
+        };
+        data.push(`rgba(${colors.r}, ${colors.g}, ${colors.b}, 0.8)`);
+      }
+      return data;
     }
   }
