@@ -13,6 +13,9 @@ import { CreateUserComponent } from './createUser/createUser.component';
 import { LayoutFormComponent } from './layout-form/layout-form.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ManagersClientManagementComponent } from './managers-client-management/managers-client-management.component';
+import { ModalModule } from 'ngx-bootstrap/modal/ngx-bootstrap-modal';
+
 
 
 @NgModule({
@@ -21,7 +24,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     LayoutNavBarComponent,
     CreateUserComponent,
     LayoutFormComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ManagersClientManagementComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     FormsModule,
     NgxDatatableModule,
     BsDatepickerModule.forRoot(),
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    ModalModule.forRoot()
   ]
 })
 

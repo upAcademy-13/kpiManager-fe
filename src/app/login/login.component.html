@@ -16,7 +16,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="addon-wrapping"><i class="fas fa-user"></i></span>
                 </div>
-                <input type="text" class="form-control input-style" placeholder="your username" aria-describedby="addon-wrapping" name="username" [(ngModel)]="user.username">
+                <input type="text" class="form-control input-style" placeholder="your username" (keydown)="keyDownFunction($event)" aria-describedby="addon-wrapping" name="username" [(ngModel)]="user.username">
               </div> 
         </div>
     </div>
@@ -26,7 +26,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="addon-wrapping"><i class="fas fa-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control input-style" placeholder="your password" aria-describedby="addon-wrapping" name="password" [(ngModel)]="user.password">
+                    <input type="password" class="form-control input-style" placeholder="your password" (keydown)="keyDownFunction($event)" aria-describedby="addon-wrapping" name="password" [(ngModel)]="user.password">
                   </div> 
             </div>
     </div>
