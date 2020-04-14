@@ -103,8 +103,8 @@ export class Grafico4Component implements OnInit {
       let data = [];
       for (let index = 0; index < length; index++) {
         var colors = {
-          r: Math.floor(200 + Math.random() * 55),
-          g: Math.floor(Math.random()*200),
+          r: Math.floor(10 + Math.random() * 230),
+          g: Math.floor(Math.random()*255),
           b: Math.floor(Math.random()*85)
         };
         data.push(`rgba(${colors.r}, ${colors.g}, ${colors.b}, 0.8)`);

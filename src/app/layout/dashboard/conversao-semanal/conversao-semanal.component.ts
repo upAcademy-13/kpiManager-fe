@@ -29,11 +29,13 @@ export class ConversaoSemanalComponent implements OnInit {
         this.contractsCount.push(contracts.contracts);
       });
       this.dbService.countAcceptedContratsPerWeek().subscribe((data1: any[]) => {
+        console.log("all contracts",this.contractsCount);
         console.log(data1);
         
         data1.forEach((contracts) => {
           this.acceptedContractsCount.push(contracts.contracts);
         });
+        console.log("accepted contracts",this.acceptedContractsCount);
         this.chartit();
       });
     });
