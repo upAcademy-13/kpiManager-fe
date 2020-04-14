@@ -114,7 +114,7 @@
                       <option *ngFor="let int of interactionTypes$ | async ; let i = index"
                         value="{{int.id}}+{{int.interactionType}}">{{int.interactionType}}</option>
                     </select>
-                    <input *ngIf ="selectType =='2+Aprovação'" [(ngModel)]="contractValue" name="contractValue" placeholder="Digite o valor do contrato" pattern="[0-9]*" type="text" size="35">
+                    <input type="number" *ngIf ="selectType =='2+Aprovacao'" [(ngModel)]="contractValue" name="contractValue" placeholder="Digite o valor do contrato" pattern="[0-9]*" type="text" size="35">
                   </div>
 
                 </div>
