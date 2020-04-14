@@ -104,7 +104,24 @@
                 </mat-card-content>
               </mat-card>
             </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="2" [rowspan]="2">
+              <mat-card class="dashboard-card">
+                <mat-card-header style="text-align: center; justify-content: space-evenly">
+                  <mat-card-title
+                    [routerLink]="['/layout/dashboard/table-client']"
+                  >
+                  Top 5 Potential Revenue Clients
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                  <table-client></table-client>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
+
           </mat-grid-list>
+
           <!-- <div class="container">
             <div class="row">
               <div class="col-sm-12 col-md-6">

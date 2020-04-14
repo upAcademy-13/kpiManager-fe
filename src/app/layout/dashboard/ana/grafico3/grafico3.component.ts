@@ -44,7 +44,7 @@ export class Grafico3Component implements OnInit {
     this.chartElem = this.myChart.getElementAtEvent(event);
     this.router.navigate(["/layout/statistics"], {
       state: {
-        selectManager: this.chartElem[0]._model.label,
+        selectBM: this.chartElem[0]._model.label,
         selectWeek: this.selected,
       },
     });
