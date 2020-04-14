@@ -71,6 +71,8 @@ export class Grafico3Component implements OnInit {
 
   getDataforGraph(week) {
     this.dashboard.getAllManagers(week).subscribe((data: any[]) => {
+      console.log(data);
+      
       data.forEach((cvPerManager) => {
         this.managers.push(cvPerManager.manager);
         this.cvs.push(cvPerManager.cvNumber);
