@@ -21,7 +21,7 @@
     pointer-events: none;
     
   }
-.central-container{
+.central-container-table{
     width: 87%; 
     margin-top: 100px; 
     margin-left: auto;
@@ -98,7 +98,7 @@ label{
     margin-top: 4% !important;
    }
 .col-sm-2{
-    margin-right: 30px;
+    margin-right: 50px;
 }
 
 .selected{
@@ -124,22 +124,129 @@ font-size: 1rem;
   }
 
 
-  @media (min-width: 950px) and (max-width: 1200px){
+  @media (min-width: 950px) and (max-width: 1127px){
     .col-sm-2{
-        margin-right: 22px!important;
+        margin-right: 20px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      font-size: 0.8rem!important;
+      padding: 1%;
     }
   }
+  @media (min-width: 1127px) and (max-width: 1300px){
+    .col-sm-2{
+      margin-right: 29px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      font-size: 1rem!important;
+      padding: 1%;
+    }
+  }
+  @media (min-width: 1300px) and (max-width: 1600px){
+    .col-sm-2{
+      margin-right: 29px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      font-size: 1rem!important;
+      padding: 1%;
+    }
+  }
+  @media (min-width: 1600px) and (max-width: 2400px){
+    .col-sm-2{
+      margin-right: 29px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      font-size: 1rem!important;
+      padding: 1%;
+    }
+  }
+  @media (min-width:855px) and (max-width: 950px){
+    .col-sm-2{
+        margin-right:18px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      font-size: 0.8rem!important;
+      padding: 1%;
+    }
+  }
+
   @media (min-width:800px) and (max-width: 950px){
     .col-sm-2{
         margin-right:18px!important;
     }
+    .prefix-css .datatable-header-cell {
+      font-size: 0.7rem!important;
+      padding: 1%;
+    }
+    .prefix-css .datatable-body-cell  {
+      font-size: 0.8rem!important;
+    }
+    .selected{
+      font-size: 0.8rem !important;
+    }
+  
   }
-  @media (min-width:659px) and (max-width: 800px){
+  @media (min-width:629px) and (max-width: 800px){
     .col-sm-2{
         margin-right:13px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      font-size: 0.6rem!important;
+      padding: 1%;
+    }
+    .prefix-css .datatable-body-cell  {
+      font-size: 0.7rem!important;
+    }
+    .selected{
+      font-size: 0.7rem !important;
+    }
+    .col-sm-2:last-child{
+      margin-right: 0!important;
+    }
+  }
+
+  @media (min-width:320px) and (max-width: 667px){
+    .col-sm-2{
+        margin-right:13px!important;
+    }
+    .prefix-css .datatable-header-cell {
+      font-size: 0.7rem!important;
+    
+    }
+    .prefix-css .datatable-body-cell  {
+      font-size: 0.7rem!important;
+    }
+    .selected{
+      font-size: 0.7rem !important;
+    }
+  
+    .container-100{
+      width: 153%;
     }
   }
 
   .my-btn-orange {background-color:#e46310}
 
+  .mat-tab-group.mat-primary .mat-ink-bar {background-color: #e46310}
+
   
+
+th, td{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important; 
+font-size: 1rem!important;
+}
+.cabecalho{
+  background-color:#e46310!important;
+  font-size: 1.2rem!important;
+  color: #fff;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important; 
+}
+.tableCM{
+  margin-top: 3%;
+  
+}
+.mat-tab-label .mat-tab-label-content {
+ 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
+    font-size: 1.1rem !important;
+}

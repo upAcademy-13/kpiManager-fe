@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TableComponent } from './components/table/table.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    MatTabsModule
   ],
   exports:[
     TableComponent,
