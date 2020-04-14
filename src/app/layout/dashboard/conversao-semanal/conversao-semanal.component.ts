@@ -23,6 +23,7 @@ export class ConversaoSemanalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.dbService.countAllContratsPerWeek().subscribe((data: any[]) => {
       data.forEach((contracts) => {
         this.weeks.push(contracts.week);

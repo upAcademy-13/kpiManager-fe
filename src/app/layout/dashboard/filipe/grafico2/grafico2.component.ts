@@ -22,6 +22,7 @@ export class Grafico2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.dbService.getAllInteractionTypes().subscribe((data: any[]) => {
       data.forEach((interactionType) => {
         this.interactionTypes.push(interactionType.interactions);
@@ -50,7 +51,7 @@ export class Grafico2Component implements OnInit {
     const colors = this.generateColor(this.interactionTypes.length);
 
     this.myChart = new Chart("myChart", {
-      type: "bar",
+      type: "horizontalBar",
       data: {
         labels: this.interactionTypes,
         datasets: [

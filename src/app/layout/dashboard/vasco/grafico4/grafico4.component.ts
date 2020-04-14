@@ -21,6 +21,7 @@ export class Grafico4Component implements OnInit {
   constructor(private router: Router, private dashboard: DashboardService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.dashboard.getAllClientNames().subscribe((data: any[]) => {
       data.forEach(clients => {
         this.clients.push(clients.client);

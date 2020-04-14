@@ -32,7 +32,7 @@ export class Grafico1Component implements OnInit {
     return this.router.url === '/layout/dashboard/grafico1';
   }
   ngOnInit(): void {
-
+    window.scrollTo(0, 0);
     this.ds.getAllUnits().subscribe(dados => {
       dados.forEach(unidades => {
         this.colunas.push(unidades.unit);

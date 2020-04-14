@@ -15,9 +15,9 @@
     </div>
   </div>
   <div class="container d-flex justify-content-center">
-    <select class="form-control" placeholder="Week" [(value)]="selected" style="width: 120px;"
+    <select class="form-control mb-2" placeholder="Week" [(value)]="selected" style="width: 108px;"
       (change)="changeWeek($event.target.value)">
-      <option *ngFor="let week of weeks" [value]="week">Semana {{ week }}</option>
+      <option *ngFor="let week of weeks" [value]="week">Week {{ week }}</option>
     </select>
   </div>
 </div>

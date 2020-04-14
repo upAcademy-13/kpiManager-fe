@@ -33,6 +33,7 @@ export class Grafico3Component implements OnInit {
   constructor(private dashboard: DashboardService, private router: Router) { }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.getDataWeek();
   }
 
