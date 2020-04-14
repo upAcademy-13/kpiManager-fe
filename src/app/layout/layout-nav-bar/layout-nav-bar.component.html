@@ -15,8 +15,8 @@
         <li class="nav-item mr-4" *ngIf="tokenInfo['role'] == 'director'">
           <a class="nav-link" href="#"  [routerLink]="['/layout/statistics']" >Statistics</a>
         </li>
-        <li class="nav-item mr-4">
-          <a class="nav-link" href="#" [routerLink]="['/layout/dashboard']" routerLinkActive="active" >Dashboard</a>
+        <li class="nav-item mr-4" *ngIf="tokenInfo['role'] == 'director'">
+          <a class="nav-link" href="#" [routerLink]="['/layout/dashboard']">Dashboard</a>
         </li>
         <li class="nav-item mr-4" *ngIf="tokenInfo['role'] == 'SuperUser'">
           <a class="nav-link" href="#" [routerLinkActive]="['active']" [routerLink]="['/layout/create']">Create User</a>

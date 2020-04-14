@@ -1,47 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { DashboardService } from 'src/app/core/services/dashboard.service';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { DashboardService } from "src/app/core/services/dashboard.service";
+import { BreakpointObserver } from "@angular/cdk/layout";
 import { Chart } from "chart.js";
-import { BrowserTransferStateModule } from '@angular/platform-browser';
+import { BrowserTransferStateModule } from "@angular/platform-browser";
 
 @Component({
-  selector: 'conversao-semanal',
-  templateUrl: './conversao-semanal.component.html',
-  styleUrls: ['./conversao-semanal.component.scss']
+  selector: "conversao-semanal",
+  templateUrl: "./conversao-semanal.component.html",
+  styleUrls: ["./conversao-semanal.component.scss"],
 })
 export class ConversaoSemanalComponent implements OnInit {
-
   myChart: any;
   weeks = [];
   contractsCount = [];
-  interviewsCount = [];
+  acceptedContractsCount = [];
   chartElem: any;
   breakpoint: any;
   constructor(
     private router: Router,
     private dbService: DashboardService,
-    private breakpointObserver: BreakpointObserver
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.dbService.countAllContratsPerWeek().subscribe((data: any[]) => {
-
-      data.forEach((interaction) => {
-        this.weeks.push(interaction.week);
-        this.contractsCount.push(interaction.contracts);
+      data.forEach((contracts) => {
+        this.weeks.push(contracts.week);
+        this.contractsCount.push(contracts.contracts);
       });
-      this.dbService.countAllInterviewsPerWeek().subscribe((data1: any[]) => {
-        data1.forEach((interview) => {
-          this.interviewsCount.push(interview.interviews)
-        })
+      this.dbService.countAcceptedContratsPerWeek().subscribe((data1: any[]) => {
+        console.log(data1);
+        
+        data1.forEach((contracts) => {
+          this.acceptedContractsCount.push(contracts.contracts);
+        });
         this.chartit();
-      })
-      
-
+      });
     });
-
-
   }
 
   displayRoute() {
@@ -53,7 +48,6 @@ export class ConversaoSemanalComponent implements OnInit {
   }
 
   chartit() {
-
     this.myChart = new Chart("chartContracts", {
       type: "line",
       data: {
@@ -62,7 +56,7 @@ export class ConversaoSemanalComponent implements OnInit {
           {
             label: "Signed Contracts",
             fill: false,
-            data: this.contractsCount,
+            data: this.acceptedContractsCount,
             // backgroundColor: [
             //   /*    "rgba(255, 99, 132, 0.5)",
             //   "rgba(54, 162, 235, 0.5)",
@@ -122,11 +116,10 @@ export class ConversaoSemanalComponent implements OnInit {
               // "#rgba(255, 175, 48, 1)",
               // "#rgba(255, 192, 93, 1)",
             ],
-
           },
           {
-            data: this.interviewsCount,
-            label: "Interviews",
+            data: this.contractsCount,
+            label: "All Contracts",
             fill: false,
             // backgroundColor: [
             //   /*    "rgba(255, 99, 132, 0.5)",
@@ -148,7 +141,7 @@ export class ConversaoSemanalComponent implements OnInit {
             //   "rgba(255, 192, 93,  0.8)",
             // ],
             borderColor: [
-              "rgb(128,128,128)"
+              "rgb(128,128,128)",
               // "rgba(255, 99, 132, 1)",
               // "rgba(242, 102, 9, 1)",
               // "rgba(242, 122, 24, 1)",
@@ -159,7 +152,7 @@ export class ConversaoSemanalComponent implements OnInit {
             borderWidth: 2,
             hoverBorderWidth: 3,
             hoverBorderColor: [
-              "rgb(128,128,128)"
+              "rgb(128,128,128)",
               // "rgba(255, 99, 132, 1)",
               // "rgba(242, 102, 9, 1)",
               // "rgba(242, 122, 24, 1)",
@@ -167,7 +160,6 @@ export class ConversaoSemanalComponent implements OnInit {
               // "#rgba(255, 175, 48, 1)",
               // "#rgba(255, 192, 93, 1)",
             ],
-
           },
         ],
       },
@@ -176,7 +168,7 @@ export class ConversaoSemanalComponent implements OnInit {
         maintainAspectRatio: false,
         legend: {
           display: true,
-          position: "top"
+          position: "top",
         },
         scales: {
           yAxes: [

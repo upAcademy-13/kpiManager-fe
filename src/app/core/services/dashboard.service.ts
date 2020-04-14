@@ -51,6 +51,33 @@ export class DashboardService {
             weeks.map((week) =>
               this.http
                 .get(
+                  "http://127.0.0.1:8080/kpiManager/api/interactions/count/allContratsPerWeek?week=" +
+                    week
+                )
+                .pipe(
+                  map((contracts) => {
+                    return { week, contracts };
+                  })
+                )
+            )
+          )
+        )
+      );
+  }
+
+  public countAcceptedContratsPerWeek() {
+    return this.http
+      .get<any>("http://127.0.0.1:8080/kpiManager/api/interactions/allWeeks")
+      .pipe(
+        map(weeks => {
+          return weeks.sort((a, b) => {return a-b});
+        })
+      ) .pipe(
+        switchMap((weeks: any[]) =>
+          forkJoin(
+            weeks.map((week) =>
+              this.http
+                .get(
                   "http://127.0.0.1:8080/kpiManager/api/interactions/count/contratsPerWeek?week=" +
                     week
                 )
@@ -63,6 +90,10 @@ export class DashboardService {
           )
         )
       );
+  }
+
+  public getTop5PotentialRevenue() {
+    return this.http.get("http://127.0.0.1:8080/kpiManager/api/clients/top5PotentialRevenue");
   }
 
   ////////////////////
