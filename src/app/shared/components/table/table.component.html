@@ -98,13 +98,13 @@
 
 
         </mat-tab>
-        <mat-tab label="STATISTICS">
+        <mat-tab label="Statistics">
           <mat-tab-group mat-align-tabs="end">
             <mat-tab label="Client">
-              <div>
+              <div class="tableCM">
                 <table class="table">
                   <thead>
-                    <tr>
+                    <tr class="cabecalho">
                       <th scope="col">Clients</th>
                       <th scope="col">Accepted Contracts</th>
                       <th scope="col">Rejected Contracts</th>
@@ -122,15 +122,15 @@
                 </table>
 
                 <!-- <div>
-                  <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="teste"
-                    [columns]='[{prop:"teste[0][0]", name:"Client"},{prop:"person.name", name:"Proposta Aceite"},
-                    {prop:"interactionType.interactionType",name:"Proposta Recusada"},{prop:"", name:"Eficiência"}]'
+                  <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="aux3"
+                    [columns]='[{prop:"client.client", name:"Client"},{prop:"person.name", name:"Accepted Contracts"},
+                    {prop:"interactionType.interactionType",name:"Rejected Contracts"},{prop:"", name:"Success Rate"}]'
                     [columnMode]="ColumnMode.force" [sorts]="[{prop: 'name', dir: 'desc'}]" [headerHeight]="50"
                     [footerHeight]="50" [externalPaging]="true" rowHeight="auto" [count]="totalElements"
                     [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
-                   </ngx-datatable>  Colocar aqui uma propriedade -->
+                   </ngx-datatable>  Colocar aqui uma propriedade 
     
-                <!-- </div> --> 
+                </div>  -->
 
 
                   <!-- <div class="col-4 offset-3 text-right">
@@ -142,10 +142,10 @@
             <mat-tab label="Manager"> 
             
               
-              <div>
+              <div class="tableCM">
                 <table class="table">
                   <thead>
-                    <tr>
+                    <tr class="cabecalho">
                       <th scope="col">Business Managers</th>
                       <th scope="col">Accepted Contracts</th>
                       <th scope="col">Rejected Contracts</th>

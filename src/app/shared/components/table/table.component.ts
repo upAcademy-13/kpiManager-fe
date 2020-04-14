@@ -58,7 +58,7 @@ export class TableComponent implements OnInit {
     count: 0,
   };
 
-  teste = [];
+  arr = [];
   array = [];
   arrayManager = [];
   taxaClient;
@@ -81,8 +81,8 @@ export class TableComponent implements OnInit {
       this.temp = [...data]
     });
     this.revenueClient$.subscribe(res => {
-      this.teste = [...res];
-      console.log("revenueClient$:", this.teste);
+      this.arr = [...res];
+      console.log("revenueClient$:", this.arr);
 
     });
     console.log('ngOnInit - fim');
@@ -132,7 +132,7 @@ export class TableComponent implements OnInit {
     this.filterClient$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter/client');
     this.filterClient$.subscribe((res) => {
       this.array = [...res];
-      console.log("teste", this.array);
+      console.log("array clientes", this.array);
       //this.table.offset = 0;
       this.cdr.detectChanges();
       this.conversionArray('client');
@@ -145,7 +145,7 @@ export class TableComponent implements OnInit {
     this.filterManager$ = this.http.get<any[]>(this.apiUrl + 'interactions/filter/manager');
     this.filterManager$.subscribe((res) => {
       this.arrayManager = [...res];
-      console.log("teste", this.arrayManager);
+      console.log("array manager", this.arrayManager);
       //this.table.offset = 0;
       this.cdr.detectChanges();
       this.conversionArray('businessManager');
