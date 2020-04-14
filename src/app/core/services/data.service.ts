@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { DataInteraction } from '../models/dataInteration';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 
 var httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json" }) }
@@ -25,7 +26,12 @@ export class DataService {
   }
 
   public getAllWeeks():Observable<any> {
-    return this.http.get<any>(this.apiUrl + 'interactions/allWeeks');
+    return this.http.get<any>(this.apiUrl + 'interactions/allWeeks')
+    .pipe(
+      map(weeks => {
+        return weeks.sort((a, b) => {return a-b});
+      })
+    );
   }
 
   public getAllClients():Observable<any> {

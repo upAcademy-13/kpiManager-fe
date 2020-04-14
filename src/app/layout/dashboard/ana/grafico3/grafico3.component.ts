@@ -60,6 +60,7 @@ export class Grafico3Component implements OnInit {
 
   getDataWeek() {
     this.dashboard.getAllWeeks().subscribe((allWeeks: any[]) => {
+      /* allWeeks.sort((a, b) => {return a-b}); */
       allWeeks.forEach((res) => this.weeks.push(res));
       console.log(this.weeks);
       let lastWeek = this.weeks.length - 1;
