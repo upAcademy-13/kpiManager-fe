@@ -19,7 +19,7 @@ export class Grafico2Component implements OnInit {
     private router: Router,
     private dbService: DashboardService,
     private breakpointObserver: BreakpointObserver
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.dbService.getAllInteractionTypes().subscribe((data: any[]) => {
@@ -47,6 +47,8 @@ export class Grafico2Component implements OnInit {
   }
 
   chartit() {
+    const colors = this.generateColor(this.interactionTypes.length);
+
     this.myChart = new Chart("myChart", {
       type: "bar",
       data: {
@@ -54,69 +56,32 @@ export class Grafico2Component implements OnInit {
         datasets: [
           {
             data: this.interactionsCount,
-            backgroundColor: [
-              /*    "rgba(255, 99, 132, 0.5)",
-              "rgba(54, 162, 235, 0.5)",
-              "rgba(255, 206, 86, 0.5)",
-              "rgba(246, 8, 12, 0.5)",
-              "rgba(153, 102, 255, 0.5)",
-              "rgba(255, 159, 64, 0.5)",
-              "rgba(33, 246, 33, 0.5)",
-              "rgba(194, 30, 30, 0.5)",
-              "rgba(112, 56, 4, 0.5)",
-              "rgba(28, 28, 246, 0.5)",
-              "rgba(235, 122, 9, 0.5)",
-              "rgba(8, 246, 127, 0.5)", */
-              "rgba(242, 102, 9, 0.8)",
-              "rgba(242, 122, 24,  0.8)",
-              "rgba(237, 154, 37,  0.8)",
-              "rgba(255, 175, 48,  0.8)",
-              "rgba(255, 192, 93,  0.8)",
-            ],
-            borderColor: [
-              /*    "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(246, 8, 12, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(33, 246, 33, 1)",
-              "rgba(194, 30, 30, 1)",
-              "rgba(112, 56, 4, 1)",
-              "rgba(28, 28, 246, 1)",
-              "rgba(235, 122, 9, 1)",
-              "rgba(8, 246, 127, 1)", */
-              "rgba(242, 102, 9, 1)",
-              "rgba(242, 122, 24, 1)",
-              "rgba(237, 154, 37, 1)",
-              "rgba(255, 175, 48, 1)",
-              "rgba(255, 192, 93, 1)",
-            ],
+            backgroundColor:
+              colors,
+            borderColor: colors,
             borderWidth: 1,
             hoverBorderWidth: 3,
-            hoverBorderColor: [
-              /* "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(246, 8, 12, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(33, 246, 33, 1)",
-              "rgba(194, 30, 30, 1)",
-              "rgba(112, 56, 4, 1)",
-              "rgba(28, 28, 246, 1)",
-              "rgba(235, 122, 9, 1)",
-              "rgba(8, 246, 127, 1)", */
-              "rgba(242, 102, 9, 1)",
-              "rgba(242, 122, 24, 1)",
-              "rgba(237, 154, 37, 1)",
-              "#rgba(255, 175, 48, 1)",
-              "#rgba(255, 192, 93, 1)",
-            ],
+            hoverBorderColor: colors,
           },
         ],
       },
       options: {
+        hover: {
+          onHover: function (e) {
+            var el = document.getElementById("myChart");
+            el.style.cursor = "pointer";
+            console.log(el);
+          }
+        },
+        tooltips: {
+          enabled: true,
+          mode: 'single',
+          callbacks: {
+            label: function (tooltipItems, data) {
+              return tooltipItems.yLabel + ' : ' + "Click for more info";
+            }
+          }
+        },
         responsive: true,
         maintainAspectRatio: false,
         legend: {
@@ -134,5 +99,17 @@ export class Grafico2Component implements OnInit {
         },
       },
     });
+  }
+  generateColor(length) {
+    let data = [];
+    for (let index = 0; index < length; index++) {
+      var colors = {
+        r: Math.floor(253 + Math.random() * 2),
+        g: Math.floor(50 + Math.random() * 161),
+        b: Math.floor(40 + Math.random() * 44)
+      };
+      data.push(`rgba(${colors.r}, ${colors.g}, ${colors.b}, 0.8)`);
+    }
+    return data;
   }
 }

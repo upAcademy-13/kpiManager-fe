@@ -30,7 +30,7 @@ export class Grafico3Component implements OnInit {
   myChart: any;
   selected = "";
 
-  constructor(private dashboard: DashboardService, private router: Router) {}
+  constructor(private dashboard: DashboardService, private router: Router) { }
 
   ngOnInit() {
     this.getDataWeek();
@@ -73,7 +73,7 @@ export class Grafico3Component implements OnInit {
   getDataforGraph(week) {
     this.dashboard.getAllManagers(week).subscribe((data: any[]) => {
       console.log(data);
-      
+
       data.forEach((cvPerManager) => {
         this.managers.push(cvPerManager.manager);
         this.cvs.push(cvPerManager.cvNumber);
@@ -83,6 +83,9 @@ export class Grafico3Component implements OnInit {
   }
 
   createChart(managers: any[], cvs: any[]) {
+    const colors = this.generateColor(this.cvs.length);
+
+
     this.myChart = new Chart("cvChart", {
       type: "horizontalBar",
       data: {
@@ -90,33 +93,31 @@ export class Grafico3Component implements OnInit {
         datasets: [
           {
             data: cvs,
-            backgroundColor: [
-              "rgba(242, 102, 9, 0.8)",
-              "rgba(242, 122, 24,  0.8)",
-              "rgba(237, 154, 37,  0.8)",
-              "rgba(255, 175, 48,  0.8)",
-              "rgba(255, 192, 93,  0.8)",
-            ],
-            borderColor: [
-              "rgba(242, 102, 9, 1)",
-              "rgba(242, 122, 24, 1)",
-              "rgba(237, 154, 37, 1)",
-              "rgba(255, 175, 48, 1)",
-              "rgba(255, 192, 93, 1)",
-            ],
+            backgroundColor: colors,
+            borderColor: colors,
             borderWidth: 1,
             hoverBorderWidth: 3,
-            hoverBorderColor: [
-              "rgba(242, 102, 9, 1)",
-              "rgba(242, 122, 24, 1)",
-              "rgba(237, 154, 37, 1)",
-              "#rgba(255, 175, 48, 1)",
-              "#rgba(255, 192, 93, 1)",
-            ],
+            hoverBorderColor: colors,
           },
         ],
       },
       options: {
+        hover: {
+          onHover: function (e) {
+            var el = document.getElementById("cvChart");
+            el.style.cursor = "pointer";
+            console.log(el);
+          }
+        },
+        tooltips: {
+          enabled: true,
+          mode: 'single',
+          callbacks: {
+            label: function (tooltipItems, data) {
+              return tooltipItems.xLabel + ' : ' + "Click for more info";
+            }
+          }
+        },
         responsive: true,
         maintainAspectRatio: false,
         legend: {
@@ -134,5 +135,18 @@ export class Grafico3Component implements OnInit {
         },
       },
     });
+  }
+
+  generateColor(length) {
+    let data = [];
+    for (let index = 0; index < length; index++) {
+      var colors = {
+        r: Math.floor(253 + Math.random() * 2),
+        g: Math.floor(50 + Math.random() * 161),
+        b: Math.floor(40 + Math.random() * 44)
+      };
+      data.push(`rgba(${colors.r}, ${colors.g}, ${colors.b}, 0.8)`);
+    }
+    return data;
   }
 }

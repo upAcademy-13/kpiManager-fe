@@ -1,12 +1,8 @@
 <div class="container-fluid">
   <div *ngIf="displayRoute()" class="container-fluid justify-content-center">
     <div class="row d-flex justify-content-center" style="margin-top: 114px;">
-      <button
-        class="btn btn-primary-outline mr-2"
-        style="background-color: #e46310; color: white;"
-        mat-raised-button
-        [routerLink]="['/layout/dashboard/']"
-      >
+      <button class="btn btn-primary-outline mr-2" style="background-color: #e46310; color: white;" mat-raised-button
+        [routerLink]="['/layout/dashboard/']">
         Back
       </button>
       <h1 class="ml-2">Number of sent CV's per manager</h1>
@@ -19,13 +15,8 @@
     </div>
   </div>
   <div class="container d-flex justify-content-center">
-    <select
-      class="form-control"
-      placeholder="Week"
-      [(value)]="selected"
-      style="width: 120px;"
-      (change)="changeWeek($event.target.value)"
-    >
+    <select class="form-control" placeholder="Week" [(value)]="selected" style="width: 120px;"
+      (change)="changeWeek($event.target.value)">
       <option *ngFor="let week of weeks" [value]="week">Semana {{ week }}</option>
     </select>
   </div>
