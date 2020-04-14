@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div *ngIf="displayRoute()" class="container-fluid justify-content-center">
+        <div class="row d-flex justify-content-center" style="margin-top: 114px;">
+            <button class="btn btn-primary-outline mr-2" style="background-color: #e46310; color: white;"
+                mat-raised-button [routerLink]="['/layout/dashboard/']">
+                Back
+            </button>
+            <h1 class="ml-2 mb-3">Top 5 Potential Revenue Clients</h1>
+        </div>
+    </div>
+    <div>
+        <table class="table mt-3">
+            <thead>
+                <tr class="cabecalho">
+                    <th scope="col">Client</th>
+                    <th scope="col">Potential Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        cliente 1
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<!-- <table class="table">
+    <thead>
+        <tr class="cabecalho">
+            <th scope="col">Client</th>
+            <th scope="col">Potential Revenue</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let test of aux3">
+<td>{{test.client}}</td>
+<td>{{test.accepted}}</td>
+<td>{{test.rejected}}</td>
+<td>{{test.conversion}} %</td>
+</tr>
+        <tr>
+            <td>
+                cliente 1
+            </td>
+        </tr>
+
+    </tbody>
+</table> -->
