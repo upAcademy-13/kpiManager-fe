@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, NgModule, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, NgModule, ViewChild, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ClientsService } from 'src/app/core/services/clients.service';
 import { Client } from 'src/app/core/models/client';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
@@ -66,6 +66,7 @@ export class ManagersClientManagementComponent implements OnInit {
     this.page.pageNumber = 0;
     this.managerForm = new FormGroup({
       id: new FormControl(''),
+      email: new FormControl(''),
       name: new FormControl('', Validators.required),
       unit: new FormGroup(
         {
@@ -99,6 +100,7 @@ else{
     if(toFirstPage){
       this.pageInfo.offset = 0;
       this.table.offset = 0;
+      this.search.nativeElement.value ="";
     }
     
     let httpParams = new HttpParams();
@@ -126,7 +128,9 @@ else{
     if(toFirstPage){
       this.pageInfo.offset = 0;
       this.table.offset = 0;
+      this.search.nativeElement.value ="";
     }
+    
     let httpParams = new HttpParams();
     let pageNum = this.pageInfo.offset * this.pageInfo.limit;
   httpParams = httpParams.append('startIndex', pageNum.toString()); 
@@ -245,12 +249,12 @@ else{
 }
 
 //Remove row
+@ViewChild("search") search: ElementRef;
   public async remove(row) {
     if (this.isManager == true) {
       this.id = row.id;
       this.http.delete(this.apiUrlUpdManagers + this.id).subscribe(data => {
         this.managerForm.reset();
-
         
       },
         error => {
@@ -286,11 +290,11 @@ else{
     this.isEdit = true;
     this.isCreate = false;
     this.lgModal.show();
-
     if (this.isManager == true) {
       this.currentType = 'Manager'
       this.managerForm.patchValue({
         id: row.id,
+        email: row.email,
         name: row.name,
         nipc: row.nipc,
         unit: row.unit

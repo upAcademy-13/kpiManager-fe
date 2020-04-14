@@ -17,9 +17,13 @@ export class PermissionCreateClientGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.tokenInfo['role'] == "director" || this.tokenInfo['role'] == "SuperUser") {
+      if (this.tokenInfo['role'] == "SuperUser") {
         return true;
-      } else {
+      } 
+      else if(this.tokenInfo['role'] == "director"){
+        return true;
+      }
+      else{
         this.router.navigate(['layout']);
       }
   }
