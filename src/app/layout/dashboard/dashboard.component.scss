@@ -2,17 +2,26 @@
   margin: 20px;
 }
 
+body {
+  height: 95vh;
+}
+
 .dashboard-card {
   position: absolute;
-  top: 15px;
+  top: 0px;
   left: 15px;
   right: 15px;
   bottom: 15px;
-  -webkit-box-shadow: 9px 4px 11px -1px rgba(77,76,77,1);
-  -moz-box-shadow: 9px 4px 11px -1px rgba(77,76,77,1);
+  -webkit-box-shadow: 9px 4px 11px -1px rgba(77, 76, 77, 1);
+  -moz-box-shadow: 9px 4px 11px -1px rgba(77, 76, 77, 1);
   box-shadow: 10px 10px 5px grey;
   border: solid #817f7f;
   border-width: 2px;
+}
+
+.mat-grid-tile {
+  top: -10px;
+  font-size: 1vw !important;
 }
 
 .more-button {
@@ -21,13 +30,17 @@
   right: 10px;
 }
 
+.mat-card {
+  display: inline-block;
+}
+
 .dashboard-card-content {
   text-align: center;
 }
 
 .container-100 {
   width: 100%;
-  min-height: 100vh;
+  min-height: 85vh;
   background: #e6e6e6;
   padding: 20px;
   /* z-index: -2;
@@ -48,6 +61,7 @@
 }
 .central-container {
   width: 90%;
+  height: 85%;
   margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
@@ -85,3 +99,19 @@
 .contact100-form-symbol img {
   max-width: 49px;
 }
+
+@media (max-width: 1000px) {
+ .mat-card-title {
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.9vw;
+  }
+}
+@media (min-width: 1000px) {
+ .mat-card-title {
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.2vw;
+  }
+}
+

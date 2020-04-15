@@ -12,17 +12,14 @@ import { Page } from 'src/app/core/models/Page';
 
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  selector: "app-table",
+  templateUrl: "./table.component.html",
+  styleUrls: ["./table.component.scss"],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
-
 export class TableComponent implements OnInit {
-
-  @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
+  @ViewChild(DatatableComponent, { static: true }) table: DatatableComponent;
 
   @Input() filtro$: Observable<Paginate>;
   @Input() data$: Observable<any[]>;
@@ -99,6 +96,9 @@ export class TableComponent implements OnInit {
   }
 
 
+ 
+
+
   refreshTable() {
     this.filterClearSelect();
     this.inputSearch = '';
@@ -107,7 +107,7 @@ export class TableComponent implements OnInit {
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', '  http://127.0.0.1:8080/kpiManager/api/interactions/all');
+    req.open("GET", "  http://127.0.0.1:8080/kpiManager/api/interactions/all");
     req.onload = () => {
       cb(JSON.parse(req.response));
     };
@@ -119,9 +119,14 @@ export class TableComponent implements OnInit {
     this.filterClearSelect();
     const val = event.target.value.toLowerCase();
     const temp = this.temp.filter(function (d) {
-      return d.person.name.toLowerCase().indexOf(val) !== -1 || d.client.name.toLowerCase().indexOf(val) !== -1 ||
-        d.unit.nameUnit.toLowerCase().indexOf(val) !== -1 || d.dateInteraction.toLowerCase().indexOf(val) !== -1 ||
-        d.interactionType.interactionType.toLowerCase().indexOf(val) !== -1 || !val;
+      return (
+        d.person.name.toLowerCase().indexOf(val) !== -1 ||
+        d.client.name.toLowerCase().indexOf(val) !== -1 ||
+        d.unit.nameUnit.toLowerCase().indexOf(val) !== -1 ||
+        d.dateInteraction.toLowerCase().indexOf(val) !== -1 ||
+        d.interactionType.interactionType.toLowerCase().indexOf(val) !== -1 ||
+        !val
+      );
     });
     this.rows = temp;
     this.table.offset = 0;

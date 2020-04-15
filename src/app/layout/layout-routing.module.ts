@@ -17,6 +17,7 @@ const routes: Routes = [
     children: [
       {
         path: "dashboard",
+        canActivate:[PermissionStatisticsGuard],
         loadChildren: () =>
           import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
       },
@@ -44,7 +45,7 @@ const routes: Routes = [
         redirectTo: "layoutform",
         pathMatch: "full"
       }, */
-      { path: "", redirectTo: "dashboard", pathMatch: "full" },
+      { path: "", redirectTo: "layoutform", pathMatch: "full" },
     ],
   },
 ];

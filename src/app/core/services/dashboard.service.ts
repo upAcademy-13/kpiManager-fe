@@ -1,13 +1,100 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, Input, Output } from "@angular/core";
 import { forkJoin } from "rxjs";
 import { switchMap, map } from "rxjs/operators";
+import { Grafico3Component } from "src/app/layout/dashboard/ana/grafico3/grafico3.component";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class DashboardService {
   constructor(public http: HttpClient) {}
+
+  public countAllInterviewsPerWeek() {
+    return this.http
+      .get<any>("http://127.0.0.1:8080/kpiManager/api/interactions/allWeeks")
+      .pipe(
+        map(weeks => {
+          return weeks.sort((a, b) => {return a-b});
+        })
+      )
+      .pipe(
+        switchMap((weeks: any[]) =>
+          forkJoin(
+            weeks.map((week) =>
+              this.http
+                .get(
+                  "http://127.0.0.1:8080/kpiManager/api/interactions/count/interviewsPerWeek?week=" +
+                    week
+                )
+                .pipe(
+                  map((interviews) => {
+                    return { week, interviews };
+                  })
+                )
+            )
+          )
+        )
+      );
+  }
+
+  public countAllContratsPerWeek() {
+    return this.http
+      .get<any>("http://127.0.0.1:8080/kpiManager/api/interactions/allWeeks")
+      .pipe(
+        map(weeks => {
+          return weeks.sort((a, b) => {return a-b});
+        })
+      ) .pipe(
+        switchMap((weeks: any[]) =>
+          forkJoin(
+            weeks.map((week) =>
+              this.http
+                .get(
+                  "http://127.0.0.1:8080/kpiManager/api/interactions/count/allContratsPerWeek?week=" +
+                    week
+                )
+                .pipe(
+                  map((contracts) => {
+                    return { week, contracts };
+                  })
+                )
+            )
+          )
+        )
+      );
+  }
+
+  public countAcceptedContratsPerWeek() {
+    return this.http
+      .get<any>("http://127.0.0.1:8080/kpiManager/api/interactions/allWeeks")
+      .pipe(
+        map(weeks => {
+          return weeks.sort((a, b) => {return a-b});
+        })
+      ) .pipe(
+        switchMap((weeks: any[]) =>
+          forkJoin(
+            weeks.map((week) =>
+              this.http
+                .get(
+                  "http://127.0.0.1:8080/kpiManager/api/interactions/count/contratsPerWeek?week=" +
+                    week
+                )
+                .pipe(
+                  map((contracts) => {
+                    return { week, contracts };
+                  })
+                )
+            )
+          )
+        )
+      );
+  }
+
+  public getTop5PotentialRevenue() {
+    return this.http.get("http://127.0.0.1:8080/kpiManager/api/clients/top5PotentialRevenue");
+  }
 
   ////////////////////
   // Funções Micael //
@@ -18,9 +105,9 @@ export class DashboardService {
       .pipe(
         switchMap((units: any[]) =>
           forkJoin(
-            units.map(unit =>
+            units.map((unit) =>
               this.countAllInteractionsPerUnit(unit).pipe(
-                map(interaction => {
+                map((interaction) => {
                   return { unit, interaction };
                 })
               )
@@ -40,7 +127,8 @@ export class DashboardService {
   //Apenas usar para preencher filtros da tabela, não necessário para gráficos
   public getAllInteractionsPerUnit(unit: String) {
     return this.http.get(
-      "http://127.0.0.1:8080/kpiManager/api/interactions/allUnitsFilter/" + unit
+      "http://127.0.0.1:8080/kpiManager/api/interactions/allUnitiesFilter/" +
+        unit
     );
   }
 
@@ -53,9 +141,9 @@ export class DashboardService {
       .pipe(
         switchMap((interactionTypes: any[]) =>
           forkJoin(
-            interactionTypes.map(interactions =>
+            interactionTypes.map((interactions) =>
               this.countAllInteractionsPerInteractionType(interactions).pipe(
-                map(count => {
+                map((count) => {
                   return { interactions, count };
                 })
               )
@@ -84,20 +172,32 @@ export class DashboardService {
   // Funções Ana //
   /////////////////
 
-  public getAllManagers() {
-    return this.http.get(
-      "http://127.0.0.1:8080/kpiManager/api/interactions/allBManagers"
+  public getAllWeeks() {
+    return this.http.get<any>(
+      "http://127.0.0.1:8080/kpiManager/api/interactions/allWeeks"
     ).pipe(
-      switchMap((managers: any[]) => forkJoin(
-        managers.map(manager => this.countAllCvsPerWeekPerManager(manager, "2020")
-        .pipe(
-          map(cvNumber => {
-            return {manager, cvNumber}
-          })
-        ))
-      ))
-    )
-    
+      map(weeks => {
+        return weeks.sort((a, b) => {return a-b});
+      })
+    );
+  }
+
+  public getAllManagers(week: String) {
+    return this.http
+      .get("http://127.0.0.1:8080/kpiManager/api/interactions/allBManagers")
+      .pipe(
+        switchMap((managers: any[]) =>
+          forkJoin(
+            managers.map((manager) =>
+              this.countAllCvsPerWeekPerManager(manager, week).pipe(
+                map((cvNumber) => {
+                  return { manager, cvNumber };
+                })
+              )
+            )
+          )
+        )
+      );
   }
 
   public countAllCvsPerWeekPerManager(managerName: String, week: String) {
@@ -108,7 +208,6 @@ export class DashboardService {
         week
     );
   }
-
 
   //Apenas usar para preencher filtros da tabela, não necessário para gráficos
   public getAllCvsPerManagerPerWeek(managerName: String, week: String) {
@@ -130,9 +229,9 @@ export class DashboardService {
       .pipe(
         switchMap((clients: any[]) =>
           forkJoin(
-            clients.map(client =>
+            clients.map((client) =>
               this.countAllInteractionsPerClient(client).pipe(
-                map(interactions => {
+                map((interactions) => {
                   return { client, interactions };
                 })
               )

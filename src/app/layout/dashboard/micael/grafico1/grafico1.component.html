@@ -1,11 +1,24 @@
 <div class="container-fluid">
-  <div class="d-flex flex-row justify-content-center">
-    <div
-      class="chart-container responsive"
-      (click)="graphClickEvent($event)"
-      style="margin-top: 8rem!important; height:50vw; width:50vw; display: relative;"
-    >
-      <canvas id="grafico1"></canvas>
+  <div *ngIf="displayRoute()" class="container-fluid justify-content-center">
+    <div class="row d-flex justify-content-center" style="margin-top: 114px;">
+      <button
+        class="btn btn-primary-outline mr-2"
+        style="background-color: #e46310; color: white;"
+        mat-raised-button
+        [routerLink]="['/layout/dashboard/']"
+      >
+        Back
+      </button>
+      <h1 class="ml-2">Number of interactions per business unit</h1>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <div class="chart-container responsive">
+      <canvas
+        class="responsive"
+        id="grafico1"
+        (click)="graphClickEvent($event)"
+      ></canvas>
     </div>
   </div>
 </div>

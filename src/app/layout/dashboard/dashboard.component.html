@@ -18,7 +18,7 @@
   </head>
   <body>
     <div class="container-100">
-      <div class="central-container">
+      <div class="central-container ">
         <span class="contact100-form-symbol">
           <img
             src="https://i.imgur.com/dNTBE8A.png"
@@ -27,15 +27,29 @@
           />
         </span>
         <h1 class="form-title text-center">DASHBOARD</h1>
-        <div class="grid-container">
-          <h1 class="mat-h1"></h1>
-          <mat-grid-list cols="2" rowHeight="350px">
-            <mat-grid-tile [colspan]="1" [rowspan]="2">
+           <mat-grid-list [cols]="breakpoint" rowHeight="35vh" (window:resize)="onResize($event)">
+
+            <mat-grid-tile [colspan]="breakpoint" [rowspan]="1">
+              <mat-card class="dashboard-card" style="text-align: center;">
+                <mat-card-header style="text-align: center; justify-content: space-evenly">
+                  <mat-card-title
+                    [routerLink]="['/layout/dashboard/conversao-semanal']"
+                  >
+                  Signed contracts per week
+                </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                  <conversao-semanal></conversao-semanal>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-card class="dashboard-card" style="text-align: center;">
                 <mat-card-header style="text-align: center; justify-content: space-evenly">
                   <mat-card-title
                     [routerLink]="['/layout/dashboard/grafico1']"
-                    style="cursor: pointer; text-align: center; "
                   >
                     Number of interactions per business unit
                   </mat-card-title>
@@ -46,12 +60,11 @@
               </mat-card>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="2">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-card class="dashboard-card">
                 <mat-card-header style="text-align: center; justify-content: space-evenly">
                   <mat-card-title
                     [routerLink]="['/layout/dashboard/grafico2']"
-                    style="cursor: pointer;"
                   >
                     Number of interactions per interaction type
                   </mat-card-title>
@@ -62,12 +75,11 @@
               </mat-card>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="2">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-card class="dashboard-card">
                 <mat-card-header style="text-align: center; justify-content: space-evenly">
                   <mat-card-title
                     [routerLink]="['/layout/dashboard/grafico3']"
-                    style="cursor: pointer;"
                   >
                     Number of sent CV's per manager
                   </mat-card-title>
@@ -78,12 +90,11 @@
               </mat-card>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="2">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-card class="dashboard-card">
                 <mat-card-header style="text-align: center; justify-content: space-evenly">
                   <mat-card-title
                     [routerLink]="['/layout/dashboard/grafico4']"
-                    style="cursor: pointer;"
                   >
                     Interactions per client
                   </mat-card-title>
@@ -93,24 +104,22 @@
                 </mat-card-content>
               </mat-card>
             </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="breakpoint" [rowspan]="2">
+              <mat-card class="dashboard-card" style="height: 47vh;">
+                <mat-card-header style="text-align: center; justify-content: space-evenly">
+                  <mat-card-title
+                    [routerLink]="['/layout/dashboard/table-client']"
+                  >
+                  Top 5 Potential Revenue Clients
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                  <table-client></table-client>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
           </mat-grid-list>
-        </div>
-        <script
-          src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-          crossorigin="anonymous"
-        ></script>
-        <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-          crossorigin="anonymous"
-        ></script>
-        <script
-          src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-          crossorigin="anonymous"
-        ></script>
-        <!--nova-->
       </div>
     </div>
   </body>
