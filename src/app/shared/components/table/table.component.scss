@@ -239,9 +239,11 @@ font-size: 1rem!important;
   background-color:#e46310!important;
   font-size: 1.2rem!important;
   color: #fff;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important; 
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
+  text-align: center;
 }
 .tableCM{
+  text-align: center;
   margin-top: 3%;
   
 }
@@ -249,4 +251,8 @@ font-size: 1rem!important;
  
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
     font-size: 1.1rem !important;
+}
+
+.mat-tab-body-content {
+  overflow: hidden !important;
 }

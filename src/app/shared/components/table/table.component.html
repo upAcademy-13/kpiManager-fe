@@ -32,7 +32,16 @@
                 </select>
               </div>
             </div>
-
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1"></label>
+                <select [(ngModel)]="selectBM" (change)='filter(true)' #myselectBM class="form-control selected"
+                  id="myselectBM">
+                  <option value="">Business Manager</option>
+                  <option value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}} </option>
+                </select>
+              </div>
+            </div>
             <div class=" col-sm-2">
               <div class="form-group">
                 <label for="exampleFormControlSelect1"></label>
@@ -53,16 +62,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <label for="exampleFormControlSelect1"></label>
-                <select [(ngModel)]="selectBM" (change)='filter(true)' #myselectBM class="form-control selected"
-                  id="myselectBM">
-                  <option value="">Business Manager</option>
-                  <option value={{select}} *ngFor="let select of dataBManagers$ | async">{{select}} </option>
-                </select>
-              </div>
-            </div>
+
             <div class="col-sm-2 lastSel">
               <div class="form-group">
                 <label for="exampleFormControlSelect1"></label>
@@ -79,7 +79,7 @@
           <div>
             <div>
               <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="rows"
-                [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"unit.nameUnit", name:"Unit"},{prop:"client.name", name:"Client"},{prop:"person.name", name:"Business Manager"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
+                [columns]='[{prop:"dateInteraction", name:"Week"},{prop:"person.name", name:"Business Manager"},{prop:"unit.nameUnit", name:"Unit"},{prop:"client.name", name:"Client"},{prop:"interactionType.interactionType",name:"Interaction Type"}]'
                 [columnMode]="ColumnMode.force" [sorts]="[{prop: 'name', dir: 'desc'}]" [headerHeight]="50"
                 [footerHeight]="50" [externalPaging]="true" rowHeight="auto" [count]="totalElements"
                 [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
@@ -101,8 +101,8 @@
         <mat-tab label="Statistics">
           <mat-tab-group mat-align-tabs="end">
             <mat-tab label="Client">
-              <div class="tableCM">
-                <table class="table">
+              <div class="tableCM table-responsive-sm">
+                <table class="table table-striped">
                   <thead>
                     <tr class="cabecalho">
                       <th scope="col">Clients</th>
@@ -122,13 +122,13 @@
                 </table>
 
                 <!-- <div>
-                  <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="aux3"
+                  <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="rows"
                     [columns]='[{prop:"client.client", name:"Client"},{prop:"person.name", name:"Accepted Contracts"},
                     {prop:"interactionType.interactionType",name:"Rejected Contracts"},{prop:"", name:"Success Rate"}]'
                     [columnMode]="ColumnMode.force" [sorts]="[{prop: 'name', dir: 'desc'}]" [headerHeight]="50"
                     [footerHeight]="50" [externalPaging]="true" rowHeight="auto" [count]="totalElements"
                     [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
-                   </ngx-datatable>  Colocar aqui uma propriedade 
+                   </ngx-datatable>
     
                 </div>  -->
 
@@ -142,16 +142,11 @@
             <mat-tab label="Manager"> 
             
               
-              <div class="tableCM">
-                <table class="table">
-                  <thead>
-                    <tr class="cabecalho">
-                      <th scope="col">Business Managers</th>
-                      <th scope="col">Accepted Contracts</th>
-                      <th scope="col">Rejected Contracts</th>
-                      <th scope="col">Success Rate</th>
-                    </tr>
-                  </thead>
+              <div class="tableCM table-responsive-sm">
+                <table class="table table-striped">
+                  <tr class="cabecalho">
+                    <th *ngFor="let column of col" (click)="sort([column])">{{column}}</th>
+                </tr>
                   <tbody>
                     <tr *ngFor="let test of aux4">
                       <td>{{test.businessManager}}</td>
@@ -161,29 +156,11 @@
                     </tr>
                   </tbody>
                 </table>
-
-                <!-- <div>
-                  <ngx-datatable class="material" #table class='prefix-css material striped' [rows]="teste"
-                    [columns]='[{prop:"teste[0][0]", name:"Client"},{prop:"person.name", name:"Proposta Aceite"},
-                    {prop:"interactionType.interactionType",name:"Proposta Recusada"},{prop:"", name:"Eficiência"}]'
-                    [columnMode]="ColumnMode.force" [sorts]="[{prop: 'name', dir: 'desc'}]" [headerHeight]="50"
-                    [footerHeight]="50" [externalPaging]="true" rowHeight="auto" [count]="totalElements"
-                    [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
-                   </ngx-datatable>  Colocar aqui uma propriedade -->
-    
-                <!-- </div> --> 
-                  <!-- <div class="col-4 offset-3 text-right">
-                    <button id="btnRefresh" (click)="refreshTable()"
-                      class="btn btn-outline my-btn-orange text-white m-2 my-sm-1"> Reset </button>
-                  </div> -->
                 </div>
             </mat-tab>
 
-
-
-            
+ 
           </mat-tab-group>
-
         </mat-tab>
       </mat-tab-group>
     </div>
