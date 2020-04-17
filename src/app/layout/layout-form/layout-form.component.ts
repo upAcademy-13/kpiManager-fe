@@ -155,7 +155,6 @@ export class LayoutFormComponent implements OnInit {
       let formVisible = document.getElementById('formVisible');
       formVisible.removeAttribute('class');
       formVisible.setAttribute('class', 'central-container');
-
     }
 
   }
@@ -174,7 +173,7 @@ export class LayoutFormComponent implements OnInit {
       choosenInteraction.className =
         "custom-select my-1 mr-sm-2 animated bounce error ng-untouched ng-pristine ng-valid";
     } else {
-      
+      console.log(this.currentUser)
       this.interactionTemp = {
         
         client: {
@@ -589,7 +588,7 @@ export class LayoutFormComponent implements OnInit {
   getInteractionsByFilters() {
 
     this.interactionTypeRow = [];
-
+    console.log(this.currentUser.role);
     let params = new HttpParams();
 
     params = params.append('sel0', !!this.numWeek ? this.numWeek : null); // Para não ir nenhum filtro undefined e sim null
@@ -604,7 +603,7 @@ export class LayoutFormComponent implements OnInit {
 
     } else {
       params = params.append('sel1', this.currentUser.unit.nameUnit);
-      params = params.append('sel3', this.currentUser.username);
+      params = params.append('sel3', this.currentUser.name);
     }
 
     params = params.append('sel2', null); // Pelos vistos precisam de ir a null
@@ -614,7 +613,7 @@ export class LayoutFormComponent implements OnInit {
 
     this.interactionService.getAllInteractionsFilter(params).subscribe((inter: object[]) => {
       this.interactionTypeRow = [...inter];
-      this.updateTableHeader()
+      this.updateTableHeader();
       console.log(this.interactionTypeRow);
     });
 
