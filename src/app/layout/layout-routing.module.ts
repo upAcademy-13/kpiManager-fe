@@ -45,7 +45,7 @@ const routes: Routes = [
         redirectTo: "layoutform",
         pathMatch: "full"
       }, */
-      { path: "", redirectTo: "layoutform", pathMatch: "full" },
+      { path: "", redirectTo: "statistics", pathMatch: "full" },
     ],
   },
 ];

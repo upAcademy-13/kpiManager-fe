@@ -130,6 +130,7 @@ export class TableComponent implements OnInit {
     });
     this.rows = temp;
     this.table.offset = 0;
+    this.totalElements = temp.length;
     console.log('passou', this.rows);
   }
 
@@ -187,7 +188,8 @@ export class TableComponent implements OnInit {
       params
     });
     this.filtro$.subscribe((res: Paginate) => {
-      this.rows = [...res.elements];
+      this.rows = [...res.elements]
+      // this.rows = this.temp;
       console.log(this.rows);
       this.totalElements = res.totalElements;
       //this.table.offset = 0;
@@ -285,7 +287,13 @@ export class TableComponent implements OnInit {
       }
     })
     aux2.forEach(elem => {
-      const conversion = elem.rejected==undefined ? 100 : elem.accepted ==undefined ? 0 : elem.conversion;
+      const conversion = elem.rejected == undefined ? 100 : elem.accepted == undefined ? 0 : elem.conversion;
+      if(elem.rejected == undefined) {
+        elem.rejected = " 0 ";
+      }
+      if(elem.accepted == undefined)
+        elem.accepted = " 0 ";
+
       if (varType == "client") {
         this.aux3.push({...elem, conversion: conversion});
       } else {
@@ -293,7 +301,28 @@ export class TableComponent implements OnInit {
       }
     })
   }
-  
+ 
+  col = ["Business Manager", "Accepted Contracts", "Rejected Contracts", "Success Rate"];
+  sort(colName) {
+    console.log("propCol = ",colName);
+    if(colName == "Business Manager"){
+      colName = "businessManager";
+    }
+    if(colName == "Accepted Contracts"){
+      colName = "accepted";
+    }
+    if(colName == "Rejected Contracts"){
+      colName = "rejected";
+    }
+    if(colName == "Success Rate"){
+      colName = "conversion";
+    }
+    
+
+    this.aux4.sort((a, b) => a[colName] > b[colName] ? 1 : a[colName] < b[colName] ? -1 : 0)
+    console.log("aux4Sorted = ",this.aux4);
+    
+}
 }
 
 
